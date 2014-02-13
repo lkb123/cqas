@@ -9,6 +9,13 @@
 			parent::__construct();
 			$this->load->library('unit_test');
 			$this->waitingList = new WaitingList();
+			
+			for($i = 1000; $i < 1999; $i++) {
+				$rightNumber = $i;
+				$id_number = "2010-" . strval($rightNumber);
+				$this->waitingList->append($id_number);
+			}
+
 		}
 
 		/**
@@ -16,16 +23,10 @@
 		 * waitinglist has 4 entries, thus the countEntries function should
 		 * return 4
 		 */
-		public function waitingListHas4Entries() {
-			$this->waitingList->append('2010-1730');
-			$this->waitingList->append('2006-1555');
-			$this->waitingList->append('2010-6855');
-			$this->waitingList->append('2010-1532');
-			
+		public function waitingListHasNEntries() {
 			$result = $this->waitingList->countEntries();
-			$expected = 4;
+			$expected = 999;
 			$this->unit->run($result, $expected);
-			$this->waitingList->clearList();
 			$this->load->view('test');
 		}
 
@@ -35,8 +36,34 @@
 		 * return 0
 		 */
 		public function waitingListHas0Entries() {
+			$this->waitingList->clearList();	//ensure that waiting list is empty
 			$result = $this->waitingList->countEntries();
 			$expected = 0;
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+
+		/**
+		 * Test Case 2.1 test
+		 * check the priority number printed
+		 * the waiting list has 999 entries
+		 */
+		public function generatePriorityNumberWith999Entries() {
+			$result = $this->waitingList->generatePriorityNumber();
+			$expected = 999;
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+
+		/**
+		 * Test Case 2.1 test
+		 * check the priority number printed
+		 * the waiting list has more than999 entries
+		 */
+		public function generatePriorityNumberWithMoreThan999Entries() {
+			$this->waitingList->append('2011-0061');
+			$result = $this->waitingList->generatePriorityNumber();
+			$expected = 1;
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
