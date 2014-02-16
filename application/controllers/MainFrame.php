@@ -1,4 +1,5 @@
 <?php
+	
 	include("/classes/Student.php");
 	class MainFrame extends CI_Controller {
 		private $student;
