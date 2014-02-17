@@ -10,6 +10,7 @@
 			$this->load->library('unit_test');
 			$this->waitingList = new WaitingList();
 			
+			
 			for($i = 1000; $i < 1999; $i++) {
 				$rightNumber = $i;
 				$id_number = "2010-" . strval($rightNumber);
