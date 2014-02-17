@@ -10,7 +10,7 @@
 			$this->load->library('unit_test');
 			$this->waitingList = new WaitingList();
 			
-			for($i = 1000; $i < 1999; $i++) {
+			for($i = 1000; $i < 199; $i++) {	//generate 999 entries
 				$rightNumber = $i;
 				$id_number = "2010-" . strval($rightNumber);
 				$this->waitingList->append($id_number);
@@ -47,17 +47,17 @@
 		 * Test Case 2 test
 		 * check the priority number printed
 		 * the waiting list at first has 999 entries
-		 * the waiting list then has 1000 entries, thus the priority number loops back
-		 * to 1
+		 * thus the priority number loops back
+		 * to 1 and so on
 		 */
-		public function generatePriorityNumberWithMoreThanOrEqualTo999Entries() {
+		public function generatePriorityNumberWithMoreThan999Entries() {
 			$result = $this->waitingList->generatePriorityNumber();
-			$expected = 999;
+			$expected = 1;
 			$this->unit->run($result, $expected);
 
 			$this->waitingList->append('2011-0061');
 			$result = $this->waitingList->generatePriorityNumber();
-			$expected = 1;
+			$expected = 2;
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
@@ -66,6 +66,7 @@
 		 * Test Case 2 test
 		 * check the priority number printed
 		 * the waiting list has 1 entry
+		 * the priority number generated is 1
 		*/
 		public function generatePriorityNumberWithLessThan999Entries() {
 			$this->waitingList->clearList();
@@ -98,24 +99,17 @@
 		 * Test on retrieving the 10th and 50th student respectively in the waiting list
 		 */
 		
-		public function retrieveNthStudentInTheWaitingListWithException() {
+		public function retrieveNthStudentInTheWaitingListWithException($n) {
 			$this->waitingList->clearList();
 
 			try {
-				$student10 = $this->waitingList->retrieveAStudent(10);
+				$student = $this->waitingList->retrieveAStudent($n);
 				echo $this->unit->run(0,1); //fail
 			} catch(Exception $e) {
-				$student10Expected = 'Error: the number of entries in the waiting list is less than 10';
-				$this->unit->run($e->getMessage(), $student10Expected); 
+				$studentExpected = 'Error: the number of entries in the waiting list is less than ' . $n;
+				$this->unit->run($e->getMessage(), $studentExpected); 
 			}
 
-			try {
-				$student50 = $this->waitingList->retrieveAStudent(50);
-				echo $this->unit->run(0,1); //fail
-			} catch(Exception $e) {
-				$student50Expected = 'Error: the number of entries in the waiting list is less than 50';
-				$this->unit->run($e->getMessage(), $student50Expected); 
-			}
 			$this->load->view('test');
 		}
 		

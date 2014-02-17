@@ -4,9 +4,11 @@
 	class WaitingList {
 
 		private $list;
+		private $priorityNumber;
 
 		public function __construct() {
 			$this->list = array();
+			$this->priorityNumber = 1;
 		}
 
 		public function append($id_number) {
@@ -22,10 +24,9 @@
 		}
 
 		public function generatePriorityNumber() {
-			$priorityNumber = $this->countEntries();
-			if($priorityNumber <= 999)
-				return $priorityNumber;
-			return $priorityNumber % 999;
+			if($this->priorityNumber > 999)
+				$this->priorityNumber = 0;
+			return $this->priorityNumber++;
 		}
 
 		public function retrieveAStudent($n) {
