@@ -65,15 +65,20 @@
 		/**
 		 * Test Case 2 test
 		 * check the priority number printed
-		 * the waiting list has 1 entry
-		 * the priority number generated is 1
+		 * the priority number generated is 1 and so on
 		*/
 		public function generatePriorityNumberWithLessThan999Entries() {
 			$this->waitingList->clearList();
 			$this->waitingList->append('2010-1730');
-			$result = $this->waitingList->generatePriorityNumber();
-			$expected = 1;
-			$this->unit->run($result, $expected);
+			$result1 = $this->waitingList->generatePriorityNumber();
+			$expected1 = 1;
+
+			$this->waitingList->append('2010-6855');
+			$result2 = $this->waitingList->generatePriorityNumber();
+			$expected2 = 2;
+
+			$this->unit->run($result1, $expected1);
+			$this->unit->run($result2, $expected2);			
 			$this->load->view('test');
 		}
 
