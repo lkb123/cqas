@@ -14,7 +14,7 @@
 			for($i = 1000; $i < 1999; $i++) {
 				$rightNumber = $i;
 				$id_number = "2010-" . strval($rightNumber);
-				$this->waitingList->append($id_number);
+				$this->waitingList->append(array($id_number, '09058943510'));
 			}
 
 		}
@@ -56,7 +56,7 @@
 			$expected = 999;
 			$this->unit->run($result, $expected);
 
-			$this->waitingList->append('2011-0061');
+			$this->waitingList->append(array('2011-0061', '09058943510'));
 			$result = $this->waitingList->generatePriorityNumber();
 			$expected = 1;
 			$this->unit->run($result, $expected);
@@ -70,7 +70,7 @@
 		*/
 		public function generatePriorityNumberWithLessThan999Entries() {
 			$this->waitingList->clearList();
-			$this->waitingList->append('2010-1730');
+			$this->waitingList->append(array('2010-1730', '09058943510'));
 			$result = $this->waitingList->generatePriorityNumber();
 			$expected = 1;
 			$this->unit->run($result, $expected);
@@ -87,8 +87,8 @@
 
 				$student10Expected = "2010-1010";
 				$student50Expected = "2010-1050";
-				$this->unit->run($student10, $student10Expected);
-				$this->unit->run($student50, $student50Expected);
+				$this->unit->run($student10[0], $student10Expected);
+				$this->unit->run($student50[0], $student50Expected);
 				$this->load->view('test');
 			} catch(Exception $e) {
 				$this->unit->run(0, 1); //fail

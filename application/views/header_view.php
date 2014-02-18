@@ -8,5 +8,5 @@
 		<meta name ="author" content="Sherwin Cabili">
 		
 		<br />
-		<p> HEAD </p>
+		<p> Cashier Queuing Alert System </p>
 	</head>

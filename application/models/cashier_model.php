@@ -13,15 +13,11 @@ class cashier_model extends CI_Model {
 	public function isInDatabase($idNumber)
 	{
 	
-		$query = $this->db->query("	SELECT *
+		$query = $this->db->query("	SELECT studphone
 									FROM student
-									WHERE stud_id = '$idNumber'
+									WHERE studid = '$idNumber'
 									");
-									
-		if($query->num_rows() == 0)
-			return FALSE;
-		else
-			return TRUE;
+		return $query;
 	}
 	
 }

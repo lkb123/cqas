@@ -1,7 +1,8 @@
 	<body>
 
-		<form action=<?php echo site_url('classes/cashier/encode'); ?> method=post>
+		<form action=<?php echo site_url('mainframe/encode'); ?> method=post>
 		<table border=0>
+		<p><?php echo validation_errors();?></p>
 		<tr>
 			<td>Student ID Number:</td>
 			<td><input type=text name="idNumber" /></td>

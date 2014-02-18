@@ -1,6 +1,6 @@
 	<footer>
 		<br />
-		<p> FOOT </p>
+		<p> -------------------- </p>
 	</footer>
 
 </html>

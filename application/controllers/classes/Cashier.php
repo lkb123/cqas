@@ -2,24 +2,31 @@
 	
 class Cashier {
 	
-
+	private $CI;
+	
 	 public function __construct() {
-		$CI =& get_instance();
-		$CI->load->model('cashier_model','cm');
+		$this->CI =& get_instance();
+		$this->CI->load->model('cashier_model','CM');
 
 	 }
 
-	 public function encode($idNumber){
-		echo strlen($idNumber)."---";
-		if( strlen($idNumber) != 4  || preg_match("/[^0-9]/", $idNumber))
-			return 0;
-		else
-			return 1;
+	 public function validID($idNumber){
+			if(preg_match("/^([0-9]{4})-([0-9]{4})$/", $idNumber))
+				return 1;
+			else
+				return 0;
 	 }
 	 
-	 public function idNumberExist($idNumber){
-		$result = $CI->cm->isInDatabase($idNumber);
-		return $result;
+	 public function getPhoneNumber($idNumber){
+	 
+		$result = $this->CI->CM->isInDatabase($idNumber);
+		$resultdata = $result->row();
+		
+		if($result->num_rows() == 0)
+			return FALSE;
+		else
+			return $resultdata->studphone;
 	 }
-	
+	 
+
  }
