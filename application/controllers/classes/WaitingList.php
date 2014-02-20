@@ -36,8 +36,8 @@
 				throw new Exception('Error: the number of entries in the waiting list is less than 50');
 
 			return $this->list[$n];
+		
 		}
-
 	}
 
 ?>
