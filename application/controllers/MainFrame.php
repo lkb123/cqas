@@ -1,5 +1,7 @@
 <?php
-	include("/classes/Student.php");
+	
+	include 'classes/Student.php';
+	
 	class MainFrame extends CI_Controller {
 		private $student;
 
@@ -11,4 +13,7 @@
 			echo getcwd();
 		}
 		
+		public function index() {
+			echo 'hello world';
+		}
 	}
