@@ -13,6 +13,8 @@
 
 		public function append($id_number) {
 			$this->list[] = $id_number;
+			
+			//echo var_dump($id_number);
 		}
 
 		public function countEntries() {
