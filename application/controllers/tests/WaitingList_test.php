@@ -118,21 +118,4 @@
 			$this->load->view('test');
 		}
 		
-		/**
-		 * Test Case 5 test
-		 * check the waiting list if empty
-		 * retrieve student information
-		*/
-		public function waitingListIsEmpty() {
-			$this->waitingList->clearList();	//ensure that waiting list is empty
-			$result = $this->waitingList->countEntries();
-			$expected = 0;
-			$this->unit->run($result, $expected);
-			$this->load->view('test');
-		}
-		
-		public function studentInfoTest(){
-		
-		}
-		
 	}
