@@ -1,5 +1,5 @@
 <?php
-	include '/../classes/WaitingList.php';
+	include(dirname(getcwd() . '/application/controllers/classes') . '/WaitingList.php');
 
 	class WaitingList_test extends CI_Controller {
 
