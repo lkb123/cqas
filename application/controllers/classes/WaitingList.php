@@ -1,5 +1,5 @@
 <?php
-	//include '/../exceptions/WaitingListException.php';
+	
 	
 	class WaitingList {
 
