@@ -12,6 +12,8 @@
 
 		public function append($id_number) {
 			$this->list[] = $id_number;
+			
+			//echo var_dump($id_number);
 		}
 
 		public function countEntries() {
@@ -35,8 +37,8 @@
 				throw new Exception('Error: the number of entries in the waiting list is less than 50');
 
 			return $this->list[$n];
+		
 		}
-
 	}
 
 ?>

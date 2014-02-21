@@ -1,5 +1,5 @@
 <?php
-	include '/../classes/WaitingList.php';
+	include('../classes/WaitingList.php');
 
 	class WaitingList_test extends CI_Controller {
 
@@ -10,10 +10,11 @@
 			$this->load->library('unit_test');
 			$this->waitingList = new WaitingList();
 			
-			for($i = 1000; $i < 199; $i++) {	//generate 999 entries
+
+			for($i = 1000; $i < 1999; $i++) {
 				$rightNumber = $i;
 				$id_number = "2010-" . strval($rightNumber);
-				$this->waitingList->append($id_number);
+				$this->waitingList->append(array($id_number, '09058943510'));
 			}
 
 		}
@@ -55,7 +56,7 @@
 			$expected = 1;
 			$this->unit->run($result, $expected);
 
-			$this->waitingList->append('2011-0061');
+			$this->waitingList->append(array('2011-0061', '09058943510'));
 			$result = $this->waitingList->generatePriorityNumber();
 			$expected = 2;
 			$this->unit->run($result, $expected);
@@ -69,16 +70,10 @@
 		*/
 		public function generatePriorityNumberWithLessThan999Entries() {
 			$this->waitingList->clearList();
-			$this->waitingList->append('2010-1730');
-			$result1 = $this->waitingList->generatePriorityNumber();
-			$expected1 = 1;
-
-			$this->waitingList->append('2010-6855');
-			$result2 = $this->waitingList->generatePriorityNumber();
-			$expected2 = 2;
-
-			$this->unit->run($result1, $expected1);
-			$this->unit->run($result2, $expected2);			
+			$this->waitingList->append(array('2010-1730', '09058943510'));
+			$result = $this->waitingList->generatePriorityNumber();
+			$expected = 1;
+			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
 
@@ -92,8 +87,8 @@
 
 				$student10Expected = "2010-1010";
 				$student50Expected = "2010-1050";
-				$this->unit->run($student10, $student10Expected);
-				$this->unit->run($student50, $student50Expected);
+				$this->unit->run($student10[0], $student10Expected);
+				$this->unit->run($student50[0], $student50Expected);
 				$this->load->view('test');
 			} catch(Exception $e) {
 				$this->unit->run(0, 1); //fail
