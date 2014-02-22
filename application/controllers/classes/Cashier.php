@@ -12,9 +12,9 @@ class Cashier {
 
 	 public function validID($idNumber){
 			if(preg_match("/^([0-9]{4})-([0-9]{4})$/", $idNumber))
-				return 1;
+				return True;
 			else
-				return 0;
+				return False;
 	 }
 	 
 	 public function getPhoneNumber($idNumber){
@@ -28,5 +28,9 @@ class Cashier {
 			return $resultdata->studphone;
 	 }
 	 
+	 public function idNumberExist($idNumber) {
+	 	$result = $this->CI->CM->isInDatabase($idNumber);
+	 	return $result;
+	 }
 
  }

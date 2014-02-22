@@ -12,8 +12,6 @@
 
 		public function append($id_number) {
 			$this->list[] = $id_number;
-			
-			//echo var_dump($id_number);
 		}
 
 		public function countEntries() {
@@ -27,7 +25,7 @@
 		public function generatePriorityNumber() {
 			if($this->priorityNumber > 999)
 				$this->priorityNumber = 0;
-			return $this->priorityNumber++;
+			return $this->priorityNumber;
 		}
 
 		public function retrieveAStudent($n) {
@@ -37,8 +35,19 @@
 				throw new Exception('Error: the number of entries in the waiting list is less than 50');
 
 			return $this->list[$n];
-		
 		}
+		/*
+			Created by Sherwin, for test cases 5
+		*/
+		
+		public function getCurrentlyServedStudent(){
+			//return $this->list[1];
+		}
+		
+		public function getNextWaitingStudent(){
+			//return $this->list[2];
+		}
+		
 	}
 
 ?>
