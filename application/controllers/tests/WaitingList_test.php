@@ -2,7 +2,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	include('../classes/WaitingList.php');
+=======
+	include('../classes/WaitingList.php');
+>>>>>>> 69f840c8d18345c1e9cc8a5351448f5d31ae6469
 =======
 	include('../classes/WaitingList.php');
 >>>>>>> 69f840c8d18345c1e9cc8a5351448f5d31ae6469
