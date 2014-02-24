@@ -3,30 +3,32 @@
 	class WaitingList {
 
 		private $list;
-		private $priorityNumber;
+		static $priorityNumber = 1;
+		private $CI;
 
 		public function __construct() {
 			$this->list = array();
-			$this->priorityNumber = 1;
+			$this->CI = &get_instance();
+			$this->CI->load->model('waitinglist_model', 'WM');
+			date_default_timezone_set("Asia/Manila"); 
 		}
 
 		public function append($id_number) {
-			$this->list[] = $id_number;
+			$pNumber = $this->generatePriorityNumber(); //generate priority number
+			$timeAdded = date('Y-m-d H:i:s');	//get the current time
+			$this->CI->WM->addStudent($id_number, $pNumber, $timeAdded);
 		}
 
 		public function countEntries() {
-			return count($this->list);
+			$count = $this->CI->WM->countAllEntries();
+			return $count;
 		}
 
 		public function clearList() {
 			$this->list = array();
 		}
 
-		public function generatePriorityNumber() {
-			if($this->priorityNumber > 999)
-				$this->priorityNumber = 0;
-			return $this->priorityNumber;
-		}
+		
 
 		public function retrieveAStudent($n) {
 			if($n == 10 && $this->countEntries() < 10)
@@ -47,7 +49,16 @@
 		public function getNextWaitingStudent(){
 			//return $this->list[2];
 		}
+
+
+		/*
+		 * Private methods
+		 */
+
+		private function generatePriorityNumber() {
+			if(self::$priorityNumber > 999)
+				self::$priorityNumber = 0;
+			return self::$priorityNumber++;
+		}
 		
 	}
-
-?>

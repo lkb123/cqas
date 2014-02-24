@@ -1,7 +1,7 @@
 <?php
 		
-	include("/classes/Cashier.php");
-	include("/classes/WaitingList.php");
+	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
+	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
 	
 	class MainFrame extends CI_Controller {
 		private $cashier;
@@ -46,10 +46,15 @@
 					$phoneNum = $result['studphone'];
 					$studentData = array($idNum, $phoneNum);
 					$this->waitingList->append($studentData);
-					echo "Priority Number: ".$this->waitingList->generatePriorityNumber();
-					echo "Number of students in waiting list: ".$this->waitingList->countEntries();
+					//echo "Priority Number: ".$this->waitingList->generatePriorityNumber();
+					//echo "Number of students in waiting list: ".$this->waitingList->countEntries();
 				}
 			}	
+		}
+
+		public function test() {
+			date_default_timezone_set("Asia/Manila"); 
+			echo date('Y-m-d H:i:s');
 		}
 
 	}
