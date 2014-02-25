@@ -3,12 +3,13 @@
 	class WaitingList {
 
 		private $list;
-		static $priorityNumber = 1;
+		static $priorityNumber;
 		private $CI;
 
 		public function __construct() {
 			$this->list = array();
 			$this->CI = &get_instance();
+			self::$priorityNumber = 1;
 			$this->CI->load->model('waitinglist_model', 'WM');
 			date_default_timezone_set("Asia/Manila"); 
 		}
@@ -60,7 +61,7 @@
 
 		private function generatePriorityNumber() {
 			if(self::$priorityNumber > 999)
-				self::$priorityNumber = 0;
+				self::$priorityNumber = 1;
 			return self::$priorityNumber++;
 		}
 		

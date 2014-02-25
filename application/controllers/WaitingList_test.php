@@ -12,10 +12,8 @@
 			$this->waitingList = new WaitingList();
 		}
 
-		public function init() {
-			$this->waitingList->append('2010-1730');
-			$this->waitingList->append('2010-1234');
-			$this->waitingList->append('2010-6855');
+		public function init($idNumber) {
+			$this->waitingList->append($idNumber);
 		}
 
 		/**
