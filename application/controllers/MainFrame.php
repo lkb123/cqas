@@ -1,5 +1,5 @@
-<?php
-		
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
 	

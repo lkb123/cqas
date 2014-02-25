@@ -21,22 +21,25 @@
 
 		public function countEntries() {
 			$count = $this->CI->WM->countAllEntries();
-			return $count;
+			return $count['studentcount'];
 		}
 
 		public function clearList() {
-			$this->list = array();
+			$this->CI->WM->clearWaitingList();
 		}
 
+		public function retrieveAStudent($idNumber) {
+			$entry = $this->CI->WM->getStudent($idNumber);
+			return $entry->row();
+		}
 		
 
-		public function retrieveAStudent($n) {
-			if($n == 10 && $this->countEntries() < 10)
-				throw new Exception('Error: the number of entries in the waiting list is less than 10');
-			if($n == 50 && $this->countEntries() < 50)
-				throw new Exception('Error: the number of entries in the waiting list is less than 50');
-
-			return $this->list[$n];
+		public function retrieveNthStudent($n) {
+			
+			if($n > $this->countEntries() && $n <= 999)
+				throw new Exception('Error: the number of entries in the waiting list is less than ' .  $n);
+			$result = $this->CI->WM->retrieveNthEntry($n)->row();
+			return $result;
 		}
 		/*
 			Created by Sherwin, for test cases 5
