@@ -3,14 +3,13 @@
 	class WaitingList {
 
 		private $list;
-		static $priorityNumber;
 		private $CI;
 
 		public function __construct() {
 			$this->list = array();
 			$this->CI = &get_instance();
-			self::$priorityNumber = 1;
 			$this->CI->load->model('waitinglist_model', 'WM');
+			$this->CI->load->helper('cookie');
 			date_default_timezone_set("Asia/Manila"); 
 		}
 
@@ -60,9 +59,21 @@
 		 */
 
 		private function generatePriorityNumber() {
-			if(self::$priorityNumber > 999)
-				self::$priorityNumber = 1;
-			return self::$priorityNumber++;
+			//var_dump($this->CI->input->cookie('pnumber', TRUE));
+			$pnumber = $this->CI->input->cookie('pnumber', TRUE);
+			if($pnumber > 999)
+				$pnumber = 0;
+			$result = $pnumber + 1;
+			$cookie_settings = array(
+				'name'   => 'pnumber',
+                'value'  => "$result",
+                'expire' =>  100000,
+                'secure' => false
+				);
+			$this->CI->input->set_cookie($cookie_settings);
+			//echo '';
+			//var_dump($result);
+			return $result;
 		}
 		
 	}

@@ -9,14 +9,19 @@
 
 		public function __construct() {
 			parent::__construct();
-			$this->load->helper('url');
-			$this->load->helper(array('url', 'form', 'html'));
-			//$this->load->library('form_validation');
+			$this->load->helper(array('url', 'form', 'html', 'cookie'));
 			$this->cashier = new Cashier();
-			$this->waitingList = new WaitingList();		
+			$this->waitingList = new WaitingList();
 		}
 		
-		public function index(){ 				
+		public function index(){
+			$cookie_settings = array(
+				'name'   => 'pnumber',
+                'value'  => '0',
+                'expire' =>  100000,
+                'secure' => false
+				);			
+			$this->input->set_cookie($cookie_settings);	 				
 			$this->load->view('templates/header_view');
 			$this->load->view('home');
 			$this->load->view('templates/footer_view');	
@@ -31,8 +36,7 @@
 
 		
 		public function encode(){
-			//$this->form_validation->set_rules('idNumber','ID NUMBER','trim|required|min_length[9]|max_length[9]');
-			$idNumber = $this->input->post('idNumber');
+			$idNumber = $this->input->post('idNumber', TRUE);
 			if(! $this->cashier->validId($idNumber)) {
 				$this->studentIndex('encode_view', 'Please input ID Number again');
 			}else{
@@ -43,7 +47,7 @@
 				}else {
 					$this->waitingList->append($idNumber);
 					$pNumber = $this->waitingList->retrieveAStudent($idNumber);
-					$this->studentIndex('add_student_success', $pNumber->prioritynumber);
+					$this->studentIndex('add_student_success', $this->input->cookie('pnumber') + 1);
 				}
 			}	
 		}
@@ -51,6 +55,18 @@
 		public function test() {
 			date_default_timezone_set("Asia/Manila"); 
 			echo date('Y-m-d H:i:s');
+		}
+
+		public function printCookie($name) {
+			var_dump($this->input->cookie($name));
+			
+			$cookie_settings = array(
+				'name'   => 'pnumber',
+                'value'  => '2',
+                'expire' =>  '100000',
+                'secure' => false
+				);			
+			$this->input->set_cookie($cookie_settings);
 		}
 
 	}

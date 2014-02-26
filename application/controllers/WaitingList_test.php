@@ -9,10 +9,22 @@
 		public function __construct() {
 			parent::__construct();
 			$this->load->library('unit_test');
+			$this->load->helper('cookie');
 			$this->waitingList = new WaitingList();
 		}
 
-		public function init($idNumber) {
+		public function init() {
+			$cookie_settings = array(
+				'name'   => 'pnumber',
+                'value'  => '0',
+                'expire' =>  100000,
+                'secure' => false
+				);			
+			echo 'done';
+			$this->input->set_cookie($cookie_settings);	
+		}
+
+		public function addID($idNumber) {
 			$this->waitingList->append($idNumber);
 		}
 

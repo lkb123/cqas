@@ -11,4 +11,4 @@
 
 	<br><br>
 	<a href=<?php echo site_url() . '/MainFrame/studentIndex/encode_view' ?>>Enter more ID Numbers </a> <br>
-	<a href="">Close application </a> <br>
+	<a href=<?php echo site_url() . '/MainFrame/index' ?>>Reset Priority Number to 0 </a> <br>
