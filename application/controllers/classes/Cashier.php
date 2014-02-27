@@ -22,10 +22,12 @@ class Cashier {
 		$result = $this->CI->CM->isInDatabase($idNumber);
 		$resultdata = $result->row();
 		
-		if($result->num_rows() == 0)
+		if($result->num_rows() == 0)//idnumber not in database
 			return FALSE;
+		elseif(empty($resultdata))//idnumber in database but no cell number
+			return NULL;
 		else
-			return $resultdata->studphone;
+			return $resultdata->studphone;			
 	 }
 	 
  }
