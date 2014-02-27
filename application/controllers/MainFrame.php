@@ -1,7 +1,7 @@
-<?php
-		
-	include("/classes/Cashier.php");
-	include("/classes/WaitingList.php");
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
+	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
 	
 	class MainFrame extends CI_Controller {
 		private $cashier;
@@ -9,14 +9,19 @@
 
 		public function __construct() {
 			parent::__construct();
-			$this->load->helper('url');
-			$this->load->helper(array('url', 'form', 'html'));
-			//$this->load->library('form_validation');
+			$this->load->helper(array('url', 'form', 'html', 'cookie'));
 			$this->cashier = new Cashier();
-			$this->waitingList = new WaitingList();		
+			$this->waitingList = new WaitingList();
 		}
 		
-		public function index(){ 				
+		public function index(){
+			$cookie_settings = array(
+				'name'   => 'pnumber',
+                'value'  => '0',
+                'expire' =>  100000,
+                'secure' => false
+				);			
+			$this->input->set_cookie($cookie_settings);	 				
 			$this->load->view('templates/header_view');
 			$this->load->view('home');
 			$this->load->view('templates/footer_view');	
@@ -31,25 +36,40 @@
 
 		
 		public function encode(){
-			//$this->form_validation->set_rules('idNumber','ID NUMBER','trim|required|min_length[9]|max_length[9]');
-
-			if(! $this->cashier->validId($this->input->post('idNumber'))) {
+			$idNumber = $this->input->post('idNumber', TRUE);
+			if(! $this->cashier->validId($idNumber)) {
 				$this->studentIndex('encode_view', 'Please input ID Number again');
-				//issue: I want to display the message as second argument, pero di mugawas sa html page
 			}else{
-				$query = $this->cashier->idNumberExist($this->input->post('idNumber'));
-				$result = $query->row_array();	//expected only 1 result
-				if(empty($result)) {
+				$query = $this->cashier->idNumberExist($idNumber);
+				if($query === false) {
 					echo "ID number Not in database";
-				}else {
-					$idNum = $this->input->post('idNumber');
-					$phoneNum = $result['studphone'];
-					$studentData = array($idNum, $phoneNum);
-					$this->waitingList->append($studentData);
-					echo "Priority Number: ".$this->waitingList->generatePriorityNumber();
-					echo "Number of students in waiting list: ".$this->waitingList->countEntries();
+				}
+				elseif(empty($query)){
+					echo "ID number not in database, please provide ID number";
+				}
+				else {
+					$this->waitingList->append($idNumber);
+					$pNumber = $this->waitingList->retrieveAStudent($idNumber);
+					$this->studentIndex('add_student_success', $this->input->cookie('pnumber') + 1);
 				}
 			}	
+		}
+
+		public function test() {
+			date_default_timezone_set("Asia/Manila"); 
+			echo date('Y-m-d H:i:s');
+		}
+
+		public function printCookie($name) {
+			var_dump($this->input->cookie($name));
+			
+			$cookie_settings = array(
+				'name'   => 'pnumber',
+                'value'  => '2',
+                'expire' =>  '100000',
+                'secure' => false
+				);			
+			$this->input->set_cookie($cookie_settings);
 		}
 
 	}

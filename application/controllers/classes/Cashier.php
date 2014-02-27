@@ -1,5 +1,5 @@
 <?php   if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-	
+//nclude('home/louie/lappstack-5.4.23-0/apache2/htdocs/cqas/application/controllers/classes/WaitingList.php');
 class Cashier {
 	
 	private $CI;
@@ -17,20 +17,19 @@ class Cashier {
 				return False;
 	 }
 	 
-	 public function getPhoneNumber($idNumber){
+	 public function idNumberExist($idNumber){
 	 
 		$result = $this->CI->CM->isInDatabase($idNumber);
 		$resultdata = $result->row();
 		
-		if($result->num_rows() == 0)
+		if($result->num_rows() == 0)//idnumber not in database
 			return FALSE;
+		elseif(empty($resultdata))//idnumber in database but no cell number
+			return NULL;
 		else
-			return $resultdata->studphone;
+			return $resultdata->studphone;			
 	 }
 	 
-	 public function idNumberExist($idNumber) {
-	 	$result = $this->CI->CM->isInDatabase($idNumber);
-	 	return $result;
-	 }
-
  }
+ 
+ ?>
