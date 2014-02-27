@@ -36,10 +36,10 @@
 			$this->load->view('test'); 	
 		}
 		
-		//Test 1.3 if idNumber is id the database return false
-		public function idIsInDatabase(){
+		//Test 1.3 if idNumber is not in the database return false
+		public function idNumberExist(){
 		
-			$result = $this->cashier->getPhoneNumber('2010-431');
+			$result = $this->cashier->getPhoneNumber('2010-1111');
 			$expected = false;
 			$this->unit->run($result, $expected);
 			$this->load->view('test'); 
@@ -47,7 +47,7 @@
 		}
 		
 		//Test 1.4 if idNumber is in database return phoneNumber
-		public function idIsInDatabase1(){
+		public function idNumberExist(){
 		
 			$result = $this->cashier->getPhoneNumber('2010-1234');
 			$expected = "09059366722";
@@ -55,7 +55,5 @@
 			$this->load->view('test'); 
 			
 		}
-
 		
-	
 	}

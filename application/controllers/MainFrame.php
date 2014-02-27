@@ -41,10 +41,13 @@
 				$this->studentIndex('encode_view', 'Please input ID Number again');
 			}else{
 				$query = $this->cashier->idNumberExist($idNumber);
-				$result = $query->row_array();	//expected only 1 result
-				if(empty($result)) {
+				if($query === false) {
 					echo "ID number Not in database";
-				}else {
+				}
+				elseif(empty($query)){
+					echo "ID number not in database, please provide ID number";
+				}
+				else {
 					$this->waitingList->append($idNumber);
 					$pNumber = $this->waitingList->retrieveAStudent($idNumber);
 					$this->studentIndex('add_student_success', $this->input->cookie('pnumber') + 1);

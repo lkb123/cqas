@@ -17,7 +17,7 @@ class Cashier {
 				return False;
 	 }
 	 
-	 public function getPhoneNumber($idNumber){
+	 public function idNumberExist($idNumber){
 	 
 		$result = $this->CI->CM->isInDatabase($idNumber);
 		$resultdata = $result->row();
@@ -28,9 +28,6 @@ class Cashier {
 			return $resultdata->studphone;
 	 }
 	 
-	 public function idNumberExist($idNumber) {
-	 	$result = $this->CI->CM->isInDatabase($idNumber);
-	 	return $result;
-	 }
-
  }
+ 
+ ?>

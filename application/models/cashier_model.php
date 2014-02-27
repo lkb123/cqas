@@ -8,7 +8,7 @@ class cashier_model extends CI_Model {
 	}
 	
 
-	//query if idNumber is in the database , return boolean
+	//query if idNumber is in the database , return id number
 	public function isInDatabase($idNumber)
 	{
 	
@@ -20,4 +20,4 @@ class cashier_model extends CI_Model {
 	}
 	
 }
-
+?>
