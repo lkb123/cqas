@@ -69,7 +69,7 @@
 		
 		//Test 3.5 if phoneNumber format is valid return 1
 		public function phoneIsValid(){
-			$result = $this->cashier->validPhoneNumber('09234552996');
+			$result = $this->cashier->validPhoneNumber('+639264552996');
 			$expected = TRUE;
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
