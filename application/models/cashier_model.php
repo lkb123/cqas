@@ -9,8 +9,7 @@ class cashier_model extends CI_Model {
 	
 
 	//query if idNumber is in the database , return id number
-	public function isInDatabase($idNumber)
-	{
+	public function isInDatabase($idNumber){
 	
 		$query = $this->db->query("	SELECT studphone
 									FROM student
