@@ -30,6 +30,23 @@ class Cashier {
 			return $resultdata->studphone;			
 	 }
 	 
+	 public function validPhoneNumber($phoneNumber){
+			if(preg_match("/^((0926|0915|0917))([0-9]{7})$/", $phoneNumber))
+				return True;
+			else
+				return False;
+	 }
+	//change student subscribed to TRUE
+	 public function subscribeStudent($idNumber){
+		$this->CI->CM->subscribeStudent($idNumber);
+	 }
+	 //Return boolean 
+	 public function isSubscribed($idNumber){
+		$result = $this->CI->CM->isSubscribed($idNumber);
+		$resultdata = $result->row();
+		return $resultdata->subscribed;
+	 }
+	 
  }
  
  ?>

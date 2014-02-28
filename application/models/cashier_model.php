@@ -19,5 +19,19 @@ class cashier_model extends CI_Model {
 		return $query;
 	}
 	
+	public function subscribeStudent($idNumber){
+		$this->db->query("UPDATE waitinglist
+						  SET subscribed = TRUE
+						  WHERE studid ='$idNumber'
+						  ");
+	}
+		
+	public function isSubscribed($idNumber){
+		$query = $this->db->query("	SELECT subscribed
+									FROM waitinglist
+									WHERE studid = '$idNumber'
+									");
+		return $query;
+	}
 }
 ?>

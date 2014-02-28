@@ -42,7 +42,7 @@
 			$result = $this->cashier->idNumberExist('2010-1111');
 			$expected = false;
 			$this->unit->run($result, $expected);
-			$this->load->view('test'); 
+			$this->load->view('test');
 			
 		}
 		
@@ -67,4 +67,29 @@
 			
 		}
 		
+		//Test 3.5 if phoneNumber format is valid return 1
+		public function phoneIsValid(){
+			$result = $this->cashier->validPhoneNumber('09234552996');
+			$expected = TRUE;
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+		
+		//test 3.3 if student select to subscribed, mark student as subscribed
+		
+		public function studentIsSubscribed(){
+			$this->cashier->subscribeStudent('2005-1555');
+			$result = $this->cashier->isSubscribed('2005-1555');
+			$expected = 't';
+			$this->unit->run($result, $expected);
+			$this->load->view('test');	
+		}
+		//test 3.4 if student select not to subscribed, student is not marked as subscribed
+		public function studentIsSubscribed1(){
+			$result = $this->cashier->isSubscribed('2005-1555');
+			$expected = 'f';
+			$this->unit->run($result, $expected);
+			$this->load->view('test');	
+		}
+	
 	}
