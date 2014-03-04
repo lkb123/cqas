@@ -3,7 +3,7 @@
 	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
 	
-	class MainFrame extends CI_Controller {
+	class mainframe extends CI_Controller {
 		private $cashier;
 		private $waitingList;
 
@@ -27,7 +27,7 @@
 			$this->load->view('templates/footer_view');	
 		}
 
-		public function studentIndex($page, $message = '') {
+		public function studentIndex($page, $message = '', $messageType = '') {
 			$data['message'] = $message;
 			$this->load->view('templates/header_view', $data);
 			$this->load->view('student/' . $page, $data);
@@ -38,7 +38,7 @@
 		public function encode(){
 			$idNumber = $this->input->post('idNumber', TRUE);
 			if(! $this->cashier->validId($idNumber)) {
-				$this->studentIndex('encode_view', 'Please input ID Number again');
+				$this->studentIndex('encode_view', 'Error: Please input ID Number again', 'Error');
 			}else{
 				$query = $this->cashier->idNumberExist($idNumber);
 				if($query === false) {
@@ -48,28 +48,13 @@
 					echo "ID number not in database, please provide ID number";
 				}
 				else {
+					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
 					$this->waitingList->append($idNumber);
-					$pNumber = $this->waitingList->retrieveAStudent($idNumber);
-					$this->studentIndex('add_student_success', $this->input->cookie('pnumber') + 1);
+					if($subscribe)
+						$this->cashier->subscribeStudent($idNumber);
+					$this->studentIndex('encode_view', $this->input->cookie('pnumber') + 1);
 				}
 			}	
-		}
-
-		public function test() {
-			date_default_timezone_set("Asia/Manila"); 
-			echo date('Y-m-d H:i:s');
-		}
-
-		public function printCookie($name) {
-			var_dump($this->input->cookie($name));
-			
-			$cookie_settings = array(
-				'name'   => 'pnumber',
-                'value'  => '2',
-                'expire' =>  '100000',
-                'secure' => false
-				);			
-			$this->input->set_cookie($cookie_settings);
 		}
 
 	}

@@ -10,5 +10,5 @@
 	</div>
 
 	<br><br>
-	<a href=<?php echo site_url() . '/MainFrame/studentIndex/encode_view' ?>>Enter more ID Numbers </a> <br>
-	<a href=<?php echo site_url() . '/MainFrame/index' ?>>Reset Priority Number to 0 </a> <br>
+	<a href=<?php echo site_url() . '/mainframe/studentIndex/encode_view' ?>>Enter more ID Numbers </a> <br>
+	<a href=<?php echo site_url() . '/mainframe/index' ?>>Reset Priority Number to 0 </a> <br>
