@@ -2,11 +2,11 @@
 
 	class WaitingList {
 
-		private $list;
+		//private $list;
 		private $CI;
 
 		public function __construct() {
-			$this->list = array();
+			//$this->list = array();
 			$this->CI = &get_instance();
 			$this->CI->load->model('waitinglist_model', 'WM');
 			$this->CI->load->helper('cookie');

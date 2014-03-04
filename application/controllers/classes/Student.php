@@ -9,7 +9,7 @@
 			$this->CI->load->model('student_model','SM');
 		}
 		
-		public function isInDatabase($idNumber){
-		
+		public function updateStudPhone($idNumber, $newCell) {
+			$this->CI->SM->updateStudCell($idNumber, $newCell);
 		}
 	}

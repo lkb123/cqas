@@ -3,12 +3,12 @@
 	
 	class Student_test extends CI_Controller {
 
-		private $cashier;
+		private $student;
 
 		public function __construct() {
 			parent::__construct();
 			$this->load->library('unit_test');
-			$this->cashier = new Cashier();
+			$this->student = new Student();
 		}
 
 	}

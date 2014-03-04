@@ -115,6 +115,13 @@
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
+
+		public function phoneIsValid2() {
+			$result = $this->cashier->validPhoneNumber('09053101557');
+			$expected = TRUE;
+			$this->unit->run($result, $expected);
+			$this->load->view('test');	
+		}
 		
 		//Test 3.5 if phoneNumber format is valid return 1
 		public function phoneIsValid1(){

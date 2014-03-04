@@ -70,5 +70,9 @@ class student_model extends CI_Model {
 									");
 		return $query;
 	}
+
+	public function updateStudCell($idNumber, $newCell) {
+		$this->db->query("UPDATE student SET studphone = '$newCell' WHERE studid = '$idNumber'");
+	}
 }
 

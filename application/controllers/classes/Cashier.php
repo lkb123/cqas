@@ -37,7 +37,7 @@ class Cashier {
 	 
 	 //checks if phoneNumber is valid
 	 public function validPhoneNumber($phoneNumber){
-			if(preg_match("/^(09|\+639)(26|15|27)([0-9]{7})$/", $phoneNumber))
+			if(preg_match("/^(09|\+639)(26|15|27|05)([0-9]{7})$/", $phoneNumber))
 				return True;
 			else
 				return False;
