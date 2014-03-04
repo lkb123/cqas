@@ -55,7 +55,7 @@
 					//if id number is not in the database
 					$this->studentIndex('encode_view', 'Error: ID Number not in the database', 'Error');
 				}
-				else if($query === "") {
+				/*else if($query === "") {
 					//if idnumber is in database but no cell number
 					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
 					$stud_cookie = array(
@@ -63,17 +63,32 @@
                 		'value'  => $idNumber,
                 		'expire' =>  100000,
                 		'secure' => false
-					);			
+					);	
 
 					$this->input->set_cookie($stud_cookie);	
 					$this->studentIndex('add_cell_number');
-				}
+					}
+				}*/
 				else {
 					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
 					$this->waitingList->append($idNumber);	//append student to waiting list
 					if($subscribe)
 						$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
 					$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
+					
+					if($query === "") {
+						$stud_cookie = array(
+						'name'   => 'idnumber',
+                		'value'  => $idNumber,
+                		'expire' =>  100000,
+                		'secure' => false
+						);	
+
+						$this->input->set_cookie($stud_cookie);	
+						$this->studentIndex('add_cell_number');
+						return;
+					}
+
 					$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
 				}
 			}	
@@ -86,9 +101,7 @@
 
 			if($this->cashier->validPhoneNumber($cellNumber)) {
 				$this->student->updateStudPhone($idNumber, $cellNumber);
-				$this->waitingList->append($idNumber);
-				$this->cashier->subscribeStudent($idNumber);
-				$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
+				$pnumber = $this->input->cookie('pnumber');	//get priority number
 				delete_cookie('idnumber');
 				$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
 			}
