@@ -37,7 +37,7 @@
 			$this->load->view('templates/footer_view');		
 		}
 
-		public function cashierIndex($page, $message = '') {
+		public function cashierIndex($page, $message = '', $messageType = '') {
 			$data['message'] = $message;
 			$this->load->view('templates/header_view', $data);
 			$this->load->view('cashier/' . $page, $data);
@@ -55,20 +55,6 @@
 					//if id number is not in the database
 					$this->studentIndex('encode_view', 'Error: ID Number not in the database', 'Error');
 				}
-				/*else if($query === "") {
-					//if idnumber is in database but no cell number
-					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
-					$stud_cookie = array(
-						'name'   => 'idnumber',
-                		'value'  => $idNumber,
-                		'expire' =>  100000,
-                		'secure' => false
-					);	
-
-					$this->input->set_cookie($stud_cookie);	
-					$this->studentIndex('add_cell_number');
-					}
-				}*/
 				else {
 					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
 					$this->waitingList->append($idNumber);	//append student to waiting list
@@ -77,16 +63,23 @@
 					$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
 					
 					if($query === "") {
-						$stud_cookie = array(
-						'name'   => 'idnumber',
-                		'value'  => $idNumber,
-                		'expire' =>  100000,
-                		'secure' => false
-						);	
+						//if id number in database but no cellphone number
+						if($subscribe) {
+							$stud_cookie = array(
+							'name'   => 'idnumber',
+	                		'value'  => $idNumber,
+	                		'expire' =>  100000,
+	                		'secure' => false
+							);	
 
-						$this->input->set_cookie($stud_cookie);	
-						$this->studentIndex('add_cell_number');
-						return;
+							$this->input->set_cookie($stud_cookie);	
+							$this->studentIndex('add_cell_number');
+							return;
+						}
+						else {
+							$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
+							return;
+						}
 					}
 
 					$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");

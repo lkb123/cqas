@@ -17,3 +17,5 @@
 		<br>
 		<input type="submit" value="submit" />
 	</form>
+
+	<a href="">Just do not subscribe</a> <br>
