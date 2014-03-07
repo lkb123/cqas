@@ -5,5 +5,6 @@ CREATE TABLE student (
     givenname varchar(50),
     middlename varchar(20),
     course varchar(70),
-    college varchar(40)
+    college varchar(40),
+    valid boolean default true /* validity of the student to be added to the waiting list */
 );
