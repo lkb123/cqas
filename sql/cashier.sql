@@ -4,5 +4,6 @@ CREATE TABLE cashier (
 	password varchar(15) NOT NULL,
 	lastname varchar(20),
     givenname varchar(50),
-    middlename varchar(20)
+    middlename varchar(20),
+    loggedin boolean default false
 );
