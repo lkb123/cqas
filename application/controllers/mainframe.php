@@ -24,7 +24,18 @@
                 'expire' =>  100000,
                 'secure' => false
 				);			
-			$this->input->set_cookie($cookie_settings);	 				
+
+
+			$this->input->set_cookie($cookie_settings);	
+
+			$cashier_cookie = array (
+					'name'   => 'cashierId',
+		            'value'  => 'false',
+		            'expire' =>  100000,
+		            'secure' => false
+					);
+			$this->input->set_cookie($cashier_cookie);
+
 			$this->load->view('templates/header_view');
 			$this->load->view('home');
 			$this->load->view('templates/footer_view');	
@@ -56,33 +67,38 @@
 					$this->studentIndex('encode_view', 'Error: ID Number not in the database', 'Error');
 				}
 				else {
-					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
-					$this->waitingList->append($idNumber);	//append student to waiting list
-					if($subscribe)
-						$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
-					$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
-					
-					if($query === "") {
-						//if id number in database but no cellphone number
-						if($subscribe) {
-							$stud_cookie = array(
-							'name'   => 'idnumber',
-	                		'value'  => $idNumber,
-	                		'expire' =>  100000,
-	                		'secure' => false
-							);	
+					if($this->student->studentIsValid($idNumber) === "t") { //check if student is valid to be added to the waiting list
+						$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
+						$this->waitingList->append($idNumber);	//append student to waiting list
+						$this->student->updateStudentValidity($idNumber, false);
+						if($subscribe)
+							$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
+						$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
+						
+						if($query === "") {
+							//if id number in database but no cellphone number
+							if($subscribe) {
+								$stud_cookie = array(
+								'name'   => 'idnumber',
+		                		'value'  => $idNumber,
+		                		'expire' =>  100000,
+		                		'secure' => false
+								);	
 
-							$this->input->set_cookie($stud_cookie);	
-							$this->studentIndex('add_cell_number');
-							return;
+								$this->input->set_cookie($stud_cookie);	
+								$this->studentIndex('add_cell_number');
+								return;
+							}
+							else {
+								$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
+								return;
+							}
 						}
-						else {
-							$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
-							return;
-						}
+
+						$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
 					}
-
-					$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
+					else 
+						$this->studentIndex('encode_view', "Error: Pending transactions to the cashier available", 'Error');
 				}
 			}	
 		}
@@ -100,6 +116,56 @@
 			}
 			else {
 				$this->studentIndex('add_cell_number', 'Invalid Cellphone Number. Please enter again');
+			}
+		}
+
+		public function login() {
+			$cashierId = $this->input->post('cashierid');
+			$password = $this->input->post('cashierpass');
+
+			$status = $this->cashier->login($cashierId, $password);
+			if($this->input->cookie('cashierId') != false) {
+				if($status) {
+					$cashier_cookie = array (
+						'name'   => 'cashierId',
+			            'value'  => $cashierId,
+			            'expire' =>  100000,
+			            'secure' => false
+						);
+
+						$this->input->set_cookie($cashier_cookie);
+						$this->cashierIndex('cashier_home');
+				}
+				else {
+					$this->cashierIndex('cashier_login', 'Error: Invalid ID number or password', 'Error');
+				}
+			}
+			else {
+				$this->cashierIndex('cashier_login');
+			}
+		}
+
+		public function logout() {
+			$cashierId = $this->input->cookie('cashierId');
+			$status = $this->cashier->logout($cashierId);
+			if($this->input->cookie('cashierId') != false) {
+				if($status) {
+					$cashier_cookie = array (
+						'name'   => 'cashierId',
+			            'value'  => 'false',
+			            'expire' =>  100000,
+			            'secure' => false
+						);
+
+						$this->input->set_cookie($cashier_cookie);
+						$this->cashierIndex('cashier_login');
+				}
+				else {
+					$this->cashierIndex('cashier_login');
+				}
+			}
+			else {
+				$this->cashierIndex('cashier_login');
 			}
 		}
 

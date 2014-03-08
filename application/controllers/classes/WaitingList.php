@@ -71,8 +71,6 @@
                 'secure' => false
 				);
 			$this->CI->input->set_cookie($cookie_settings);
-			//echo '';
-			//var_dump($result);
 			return $result;
 		}
 		
