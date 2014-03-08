@@ -2,19 +2,16 @@
 
 	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
-	include(basename(dirname('classes/Student.php')) . '/Student.php');
 	
 	class mainframe extends CI_Controller {
 		private $cashier;
 		private $waitingList;
-		private $student;
 
 		public function __construct() {
 			parent::__construct();
 			$this->load->helper(array('url', 'form', 'html', 'cookie'));
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
-			$this->student = new Student();
 		}
 		
 		public function index(){
@@ -37,12 +34,6 @@
 			$this->load->view('templates/footer_view');		
 		}
 
-		public function cashierIndex($page, $message = '', $messageType = '') {
-			$data['message'] = $message;
-			$this->load->view('templates/header_view', $data);
-			$this->load->view('cashier/' . $page, $data);
-			$this->load->view('templates/footer_view');		
-		}
 		
 		public function encode(){
 			$idNumber = $this->input->post('idNumber', TRUE);
@@ -50,57 +41,20 @@
 				$this->studentIndex('encode_view', 'Error: Please input ID Number again', 'Error');
 			}else{
 				$query = $this->cashier->idNumberExist($idNumber);
-				//var_dump($query);
-				if($query === FALSE){
-					//if id number is not in the database
-					$this->studentIndex('encode_view', 'Error: ID Number not in the database', 'Error');
+				if($query === false) {
+					echo "ID number Not in database";
+				}
+				elseif(empty($query)){
+					echo "ID number not in database, please provide ID number";
 				}
 				else {
 					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
-					$this->waitingList->append($idNumber);	//append student to waiting list
+					$this->waitingList->append($idNumber);
 					if($subscribe)
-						$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
-					$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
-					
-					if($query === "") {
-						//if id number in database but no cellphone number
-						if($subscribe) {
-							$stud_cookie = array(
-							'name'   => 'idnumber',
-	                		'value'  => $idNumber,
-	                		'expire' =>  100000,
-	                		'secure' => false
-							);	
-
-							$this->input->set_cookie($stud_cookie);	
-							$this->studentIndex('add_cell_number');
-							return;
-						}
-						else {
-							$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
-							return;
-						}
-					}
-
-					$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
+						$this->cashier->subscribeStudent($idNumber);
+					$this->studentIndex('encode_view', $this->input->cookie('pnumber') + 1);
 				}
 			}	
-		}
-
-
-		public function encodeWithCellNumber() {
-			$cellNumber = $this->input->post('cellNumber');
-			$idNumber = $this->input->cookie('idnumber');
-
-			if($this->cashier->validPhoneNumber($cellNumber)) {
-				$this->student->updateStudPhone($idNumber, $cellNumber);
-				$pnumber = $this->input->cookie('pnumber');	//get priority number
-				delete_cookie('idnumber');
-				$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
-			}
-			else {
-				$this->studentIndex('add_cell_number', 'Invalid Cellphone Number. Please enter again');
-			}
 		}
 
 	}
