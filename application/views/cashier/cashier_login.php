@@ -17,7 +17,7 @@
 	<form method = "post" action = <?php echo site_url() . '/mainframe/login' ?>>
 		Cashier ID: <input type="text" name = "cashierid" />
 		<br>
-		Password; <input type="password" name="cashierpass" />
+		Password: <input type="password" name="cashierpass" />
 		<br>
 		<input type="submit" value="login" />
 	</form>
