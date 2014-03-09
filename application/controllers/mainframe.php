@@ -17,6 +17,7 @@
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
 			$this->alertSms = new AlertSms();
+			$this->message = new Message();
 		}
 		
 		public function index(){
