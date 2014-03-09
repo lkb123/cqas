@@ -19,11 +19,7 @@
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
 			$this->alertSms = new AlertSms();
-<<<<<<< HEAD
-			$this->message = new Message();
-=======
 			$this->student = new Student();
->>>>>>> 4b9a906ba7eba61d7a532b6026c86d072d1be926
 		}
 		
 		public function index(){
