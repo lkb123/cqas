@@ -45,6 +45,13 @@
 			$this->load->view('templates/footer_view');		
 		}
 
+		public function cashierIndex($page, $message = '', $messageType = '') {
+			$data['message'] = $message;
+			$this->load->view('templates/header_view', $data);
+			$this->load->view('cashier/' . $page, $data);
+			$this->load->view('templates/footer_view');		
+		}
+
 		
 		public function encode(){
 			$idNumber = $this->input->post('idNumber', TRUE);
