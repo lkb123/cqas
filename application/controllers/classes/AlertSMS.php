@@ -1,7 +1,8 @@
 <?php
 
 	class AlertSms{
-	
+		
+		
 		public function __construct(){
 		}
 		
@@ -28,15 +29,17 @@
 				103	Invalid Options
 				104	Gateway Down
 		*/
-		public function sendSmsAlertTo($number, $message, $from){
+		
+		public function sendSmsAlertTo($number, $message){
 		
 			$fields = array();
 			$fields["api"] = "pLPaajYNqmmYAkFzBpsU"; //depende sa account
-			$fields["number"] = $number; //safe use 63
+			$fields["number"] = $number; //safe use 63, string ni dapat
 			$fields["message"] = $message;
-			$fields["from"] = $from;
+			$fields["from"] = "CASHIER";
 			$fields_string = http_build_query($fields);
-			$outbound_endpoint = "http://api.semaphore.co/api/sms"
+			$outbound_endpoint = "http://api.semaphore.co/api/sms";
+			
 			$ch = curl_init();
 			curl_setopt($ch, CURLOPT_URL, $outbound_endpoint);
 			curl_setopt($ch,CURLOPT_POST, count($fields));
@@ -45,8 +48,9 @@
 			$output = curl_exec($ch);
 			curl_close($ch);
 			
-			return $output
+			return $output;
 		}
+		
 	}
 
 ?>

@@ -2,19 +2,26 @@
 
 	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
+	include(basename(dirname('classes/AlertSMS.php')) . '/AlertSMS.php');
+	include(basename(dirname('classes/Message.php')) . '/Message.php');
 	
 	class mainframe extends CI_Controller {
 		private $cashier;
 		private $waitingList;
+		private $alertSms;
+		private $message;
 
 		public function __construct() {
 			parent::__construct();
 			$this->load->helper(array('url', 'form', 'html', 'cookie'));
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
+			$this->alertSms = new AlertSms();
 		}
 		
 		public function index(){
+		
+			
 			$cookie_settings = array(
 				'name'   => 'pnumber',
                 'value'  => '0',
