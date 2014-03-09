@@ -2,4 +2,4 @@
 
 	Where to head next? <br>
 	<a href=<?php echo site_url() . '/mainframe/studentIndex/encode_view' ?>>Student Page</a>
-	<a href=<?php echo site_url() . '/mainframe/cashierIndex/cashier_login' ?>>Cashier Page</a>
+	<a href="cashier_login_view.php" >Cashier Page</a>
