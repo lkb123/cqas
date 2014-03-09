@@ -2,19 +2,16 @@
 
 	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
-	include(basename(dirname('classes/Student.php')) . '/Student.php');
 	
 	class mainframe extends CI_Controller {
 		private $cashier;
 		private $waitingList;
-		private $student;
 
 		public function __construct() {
 			parent::__construct();
 			$this->load->helper(array('url', 'form', 'html', 'cookie'));
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
-			$this->student = new Student();
 		}
 		
 		public function index(){
@@ -48,12 +45,6 @@
 			$this->load->view('templates/footer_view');		
 		}
 
-		public function cashierIndex($page, $message = '', $messageType = '') {
-			$data['message'] = $message;
-			$this->load->view('templates/header_view', $data);
-			$this->load->view('cashier/' . $page, $data);
-			$this->load->view('templates/footer_view');		
-		}
 		
 		public function encode(){
 			$idNumber = $this->input->post('idNumber', TRUE);
@@ -61,10 +52,11 @@
 				$this->studentIndex('encode_view', 'Error: Please input ID Number again', 'Error');
 			}else{
 				$query = $this->cashier->idNumberExist($idNumber);
-				//var_dump($query);
-				if($query === FALSE){
-					//if id number is not in the database
-					$this->studentIndex('encode_view', 'Error: ID Number not in the database', 'Error');
+				if($query === false) {
+					echo "ID number Not in database";
+				}
+				elseif(empty($query)){
+					echo "ID number not in database, please provide ID number";
 				}
 				else {
 					if($this->student->studentIsValid($idNumber) === "t") { //check if student is valid to be added to the waiting list
@@ -99,10 +91,14 @@
 					}
 					else 
 						$this->studentIndex('encode_view', "Error: Pending transactions to the cashier available", 'Error');
+					$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
+					$this->waitingList->append($idNumber);
+					if($subscribe)
+						$this->cashier->subscribeStudent($idNumber);
+					$this->studentIndex('encode_view', $this->input->cookie('pnumber') + 1);
 				}
 			}	
 		}
-
 
 		public function encodeWithCellNumber() {
 			$cellNumber = $this->input->post('cellNumber');
@@ -168,5 +164,4 @@
 				$this->cashierIndex('cashier_login');
 			}
 		}
-
 	}
