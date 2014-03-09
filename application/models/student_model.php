@@ -74,5 +74,16 @@ class student_model extends CI_Model {
 	public function updateStudCell($idNumber, $newCell) {
 		$this->db->query("UPDATE student SET studphone = '$newCell' WHERE studid = '$idNumber'");
 	}
+
+	public function getValidity($idNumber) {
+		return $this->db->query("SELECT valid FROM student WHERE studid = '$idNumber'");
+	}
+
+	public function updateValidity($idNumber, $value) {
+		if($value)
+			$this->db->query("UPDATE student SET valid = TRUE WHERE studid = '$idNumber'");
+		else
+			$this->db->query("UPDATE student SET valid = FALSE WHERE studid = '$idNumber'");
+	}
 }
 
