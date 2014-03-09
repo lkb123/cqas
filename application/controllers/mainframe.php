@@ -58,7 +58,10 @@
 		public function cashierIndex($page, $message = '', $messageType = '') {
 			$data['message'] = $message;
 			$this->load->view('templates/header_view', $data);
-			$this->load->view('cashier/' . $page, $data);
+			if($this->input->cookie('cashierId') == false)
+				$this->load->view('cashier/cashier_home', $data);
+			else
+				$this->load->view('cashier/' . $page, $data);
 			$this->load->view('templates/footer_view');		
 		}
 
