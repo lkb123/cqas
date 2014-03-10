@@ -10,8 +10,9 @@
 			$this->CI = &get_instance();
 			$this->CI->load->model('waitinglist_model', 'WM');
 			$this->CI->load->helper('cookie');
-			date_default_timezone_set("Asia/Manila"); 
+			date_default_timezone_set("Asia/Manila");		
 		}
+
 
 		public function append($id_number) {
 			$pNumber = $this->generatePriorityNumber(); //generate priority number

@@ -17,7 +17,7 @@
 	<form method = "post" action = "cashier_home.php">
 		Cashier ID: <input type="text" name = "cashierid" />
 		<br>
-		Password; <input type="password" name="cashierpass" />
+		Password: <input type="password" name="cashierpass" />
 		<br>
 		<input type="submit" value="login" />
 	</form>
