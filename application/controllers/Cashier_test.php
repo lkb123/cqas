@@ -130,5 +130,12 @@
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
+
+		public function loginCashier($cashierId, $password, $expect) {
+			$result = $this->cashier->login($cashierId, $password);
+			$expected = ($expect == "true" ? TRUE :  FALSE);
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
 	
 	}
