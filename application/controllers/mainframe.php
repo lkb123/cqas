@@ -72,8 +72,10 @@
 			$this->load->view('templates/footer_view');		
 		}
 
-		public function cashierServe($page, $studentCount, $currentStudent = '') {
+		public function cashierServe($page, $studentCount = '', $currentStudent = '') {
+			$data['count'] = 9;
 			$this->load->view('templates/header_view', $data);
+			$this->load->view('cashier/' . $page, $data);
 			$this->load->view('templates/footer_view');	
 		}
 
@@ -115,10 +117,11 @@
 
 								$this->input->set_cookie($stud_cookie);	
 								$this->studentIndex('add_cell_number');
-								return;
+								return;	//end function
 							}
 							else {
 								//if wala nag subscribe, dretso ra i add sa waiting list
+								
 								$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
 								return;	//end function
 							}
