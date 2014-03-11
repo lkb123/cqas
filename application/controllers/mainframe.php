@@ -16,6 +16,7 @@
 		public function __construct() {
 			parent::__construct();
 			$this->load->helper(array('url', 'form', 'html', 'cookie'));
+			$this->load->library('session');
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
 			$this->alertSms = new AlertSms();
@@ -58,9 +59,11 @@
 		public function cashierIndex($page, $message = '', $messageType = '') {
 			$data['message'] = $message;
 			$this->load->view('templates/header_view', $data);
-			if($this->input->cookie('cashierId') == false)
-				$this->load->view('cashier/cashier_home', $data);
+			if(! $this->session->userdata('cashierSessionId'))
+				//if no session exist, redirect cashier to login page
+				$this->load->view('cashier/cashier_login', $data);
 			else
+				//if session exist, adto bisag asa gusto sa cashier
 				$this->load->view('cashier/' . $page, $data);
 			$this->load->view('templates/footer_view');		
 		}
@@ -150,10 +153,11 @@
 			$password = $this->input->post('cashierpass');
 
 			$status = $this->cashier->login($cashierId, $password);
-			if($this->input->cookie('cashierId') == false) {
-				//if no cookie exist
+			//var_dump($status);
+			if(! $this->session->userdata('cashierSessionId')) {
+				//if no session exist
 				if($status) {
-					$cashier_cookie = array (
+					/*$cashier_cookie = array (
 						'name'   => 'cashierId',
 			            'value'  => $cashierId,
 			            'expire' =>  100000,
@@ -161,9 +165,15 @@
 						);
 
 						$this->input->set_cookie($cashier_cookie);
+					*/
+						$cashier_session = array(
+							'cashierSessionId' => $cashierId
+							);
+						$this->session->set_userdata($cashier_session);
 						$this->cashierIndex('cashier_home');
 				}
 				else {
+					//mali either ang cashier id or password
 					$this->cashierIndex('cashier_login', 'Error: Invalid ID number or password', 'Error');
 				}
 			}
@@ -177,7 +187,7 @@
 		 * Cashier logout
 		 */
 		public function logout() {
-			$cashierId = $this->input->cookie('cashierId');
+			/*$cashierId = $this->input->cookie('cashierId');
 			$status = $this->cashier->logout($cashierId);
 			if($this->input->cookie('cashierId') != false) {
 				//if cookie exist
@@ -199,6 +209,8 @@
 			else {
 				//if no cookie exist
 				$this->cashierIndex('cashier_login');
-			}
+			}*/
+			$this->session->sess_destroy();
+			$this->cashierIndex('cashier_login');
 		}
 	}

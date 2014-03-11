@@ -61,7 +61,6 @@ class Cashier {
 	 		return FALSE;
 
 	 	if($result['password'] == $password) {
-	 		$this->CI->CM->updateLoggedIn($cashierId, TRUE);
 	 		return TRUE;
 	 	}
 	 	else {
@@ -69,14 +68,15 @@ class Cashier {
 	 	}
 	 }
 
+	 /*
 	 public function logout($cashierId) {
 	 	$result = $this->CI->CM->getCashier($cashierId)->row_array();
 	 	if(count($result) == 0)
 	 		return FALSE;
 
-	 	$this->CI->CM->updateLoggedIn($cashierId, FALSE);
 	 	return TRUE;
 	 }
+	 */
 	 
  }
  

@@ -1,10 +1,12 @@
-<!DOCTYPE html>
-	<html>
-	<title>Cashier Login</title>
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
-	</head>
-	<body>
+
+		<font color = "red">
+		<?php 
+			if($message == '')
+				echo '';
+			else
+				echo $message;
+		?>
+		</font>
 		<link rel="stylesheet" href="css/bootstrap.css"/>
 		<link rel="stylesheet" href="css/bootstrap.min.css"/>
 		<div class="container">    
@@ -18,16 +20,16 @@
 
 							<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
-							<form action=<?php echo site_url() . '/mainframe/login' ?> id="loginform" class="form-horizontal" role="form">
+							<form method = post action=<?php echo site_url() . '/mainframe/login' ?> id="loginform" class="form-horizontal" role="form">
                                     
 								<div style="margin-bottom: 25px" class="input-group">
 											<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-											<input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username">                                        
+											<input id="login-username" type="text" class="form-control" name="cashierid" value="" placeholder="username">                                        
 										</div>
                                 
 								<div style="margin-bottom: 25px" class="input-group">
 											<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-											<input id="login-password" type="password" class="form-control" name="password" placeholder="password">
+											<input id="login-password" type="password" class="form-control" name="cashierpass" placeholder="password">
 										</div>
 
 
@@ -49,5 +51,4 @@
 					</div>    
 			</div> 
 		</div>
-	</body>
     

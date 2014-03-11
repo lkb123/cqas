@@ -5,5 +5,4 @@ CREATE TABLE cashier (
 	lastname varchar(20),
     givenname varchar(50),
     middlename varchar(20),
-    loggedin boolean default false
 );

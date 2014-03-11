@@ -32,18 +32,6 @@ class cashier_model extends CI_Model {
 		return $query;
 	}
 
-	public function updateLoggedIn($cashierId, $value) {
-		if($value)
-			$query = $this->db->query("UPDATE cashier SET loggedin = TRUE where cashierid = '$cashierId'");
-		else
-			$query = $this->db->query("UPDATE cashier SET loggedin = FALSE where cashierid = '$cashierId'");
-	}
-
-	public function getLoggedin($cashierId) {
-		$query = $this->db->query("SELECT loggedin FROM cashier WHERE cashierid = '$cashiedId'");
-		return $query;
-	}
-
 	public function getCashier($cashierId) {
 		$query = $this->db->query("SELECT * FROM cashier WHERE cashierid = '$cashierId'");
 		return $query;
