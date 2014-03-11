@@ -7,7 +7,11 @@
 	<a href=<?php echo site_url() . '/mainframe/logout' ?>> Logout </a>
 
 	<br>
-	
+
 	Number of Students to be served:
-	<?php echo $count; ?>
+	<?php 
+
+	echo $count; 
+	//var_dump($count);
+	?>
 	

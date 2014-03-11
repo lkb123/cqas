@@ -73,7 +73,17 @@
 		}
 
 		public function cashierServe($page, $studentCount = '', $currentStudent = '') {
-			$data['count'] = 9;
+			$count = $this->waitingList->countEntries();
+								
+								$count_cookie = array(
+								'name'   => 'countstudents',
+		                		'value'  => $count,
+		                		'expire' =>  100000,
+		                		'secure' => false
+								);	
+
+			$this->input->set_cookie($count_cookie);	
+			$data['count'] = $this->input->cookie('countstudents');
 			$this->load->view('templates/header_view', $data);
 			$this->load->view('cashier/' . $page, $data);
 			$this->load->view('templates/footer_view');	
@@ -121,7 +131,6 @@
 							}
 							else {
 								//if wala nag subscribe, dretso ra i add sa waiting list
-								
 								$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
 								return;	//end function
 							}
