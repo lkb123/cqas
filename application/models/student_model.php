@@ -71,12 +71,12 @@ class student_model extends CI_Model {
 		return $query;
 	}
 
-	public function updateStudCell($idNumber, $newCell) {
-		$this->db->query("UPDATE student SET studphone = '$newCell' WHERE studid = '$idNumber'");
-	}
-
 	public function getValidity($idNumber) {
 		return $this->db->query("SELECT valid FROM student WHERE studid = '$idNumber'");
+	}
+
+	public function updateStudCell($idNumber, $newCell) {
+		$this->db->query("UPDATE student SET studphone = '$newCell' WHERE studid = '$idNumber'");
 	}
 
 	public function updateValidity($idNumber, $value) {
@@ -85,5 +85,6 @@ class student_model extends CI_Model {
 		else
 			$this->db->query("UPDATE student SET valid = FALSE WHERE studid = '$idNumber'");
 	}
+
 }
 

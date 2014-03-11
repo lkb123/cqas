@@ -67,16 +67,6 @@ class Cashier {
 	 		return FALSE;
 	 	}
 	 }
-
-	 /*
-	 public function logout($cashierId) {
-	 	$result = $this->CI->CM->getCashier($cashierId)->row_array();
-	 	if(count($result) == 0)
-	 		return FALSE;
-
-	 	return TRUE;
-	 }
-	 */
 	 
  }
  

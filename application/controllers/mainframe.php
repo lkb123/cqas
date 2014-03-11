@@ -62,10 +62,19 @@
 			if(! $this->session->userdata('cashierSessionId'))
 				//if no session exist, redirect cashier to login page
 				$this->load->view('cashier/cashier_login', $data);
-			else
+			else {
 				//if session exist, adto bisag asa gusto sa cashier
-				$this->load->view('cashier/' . $page, $data);
+				if($page === 'cashier_login')
+					$this->load->view('cashier/cashier_home', $data);
+				else
+					$this->load->view('cashier/' . $page, $data);
+			}
 			$this->load->view('templates/footer_view');		
+		}
+
+		public function cashierServe($page, $studentCount, $currentStudent = '') {
+			$this->load->view('templates/header_view', $data);
+			$this->load->view('templates/footer_view');	
 		}
 
 		/*

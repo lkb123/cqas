@@ -16,6 +16,8 @@
 							<div class="panel-title">Cashier Login</div>
 						</div>     
 
+						<a href=<?php echo site_url() . '/mainframe/index' ?>> Home </a>
+						
 						<div style="padding-top:30px" class="panel-body" >
 
 							<div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>

@@ -1,5 +1,5 @@
 <?php
-	include("/../classes/Student.php");
+	include(basename(dirname('classes/Student.php')) . '/Student.php');
 	
 	class Student_test extends CI_Controller {
 
@@ -10,5 +10,7 @@
 			$this->load->library('unit_test');
 			$this->student = new Student();
 		}
+
+		
 
 	}

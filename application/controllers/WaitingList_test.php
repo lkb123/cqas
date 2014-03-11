@@ -28,8 +28,19 @@
 			$this->waitingList->append($idNumber);
 		}
 		
-		
 
+		/*
+		 *	refactored:
+		 *	waitingListHasNEntries()
+		 *  waitingListHas0Entries()
+		 */
+		public function countEntriesInWaitingList($expected) {
+			$result = $this->waitingList->countEntries();
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+
+		//deprecated
 		/**
 		 * Test Case 4.1 test
 		 * counts the number of entries in the waiting list
@@ -42,6 +53,7 @@
 			$this->load->view('test');
 		}
 
+		//deprecated
 		/**
 		 * Test Case 4.2 test
 		 * when the waiting list has no entries
