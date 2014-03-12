@@ -23,7 +23,7 @@
         </div>
         <div class="col-md-10">
                 <div class="panel">
-                    <img class="pic img-circle" src="http://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/twDq00QDud4/s120-c/photo.jpg" alt="...">
+                    <img class="pic img-circle" src="<?php echo base_url();?>img/defaultpic.jpg" alt="...">
                     <div class="name"><small>Sherwin Gwapo</small></div>
                 </div>
                 

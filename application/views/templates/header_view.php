@@ -14,6 +14,5 @@
 
 	<body>
 	<header>
-		<br />
-		<p> Cashier Queuing Alert System </p>
+		<br></br>
 	</header>
