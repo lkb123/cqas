@@ -5097,6 +5097,12 @@ button.close {
   -webkit-overflow-scrolling: touch;
   outline: 0;
 }
+
+.modal, aria-labelledby="myModalLabel"{
+  role:dialog;
+  aria-hidden:true;
+}
+
 .modal.fade .modal-dialog {
   -webkit-transition: -webkit-transform .3s ease-out;
      -moz-transition:    -moz-transform .3s ease-out;
@@ -5993,51 +5999,73 @@ body {
       -webkit-transform:rotate(45deg);
     box-shadow:2px 2px 10px rgba(0,0,0,0.8);
   }
-<<<<<<< HEAD
- 
-=======
+
+  /* css for cashier profile page */
+  .pic
+  {
+       margin-top:50px; 
+       width:120px;
+       margin-left:50px;
+       margin-bottom:-60px;
+  }
+
+  .panel
+  {
+      background-image:url("http://autoimagesize.com/wp-content/uploads/2014/01/rainbow-aurora-background-wallpaper-colour-images-rainbow-background.jpg"); 
+  }
+
+  .name
+  {
+      position:absolute;
+      padding-left:200px;
+      font-size:30px;
+  }
+
+  .dropdown
+  {
+      position:absolute;
+  }
+
+  .change
+  {
+   position:relative; 
+   bottom:20px;
+   padding:1px;
+   color:white;
+   text-decoration:none;
+  }
+
+
+  .change:hover
+  {
+   text-decoration:none;
+   background-color:black;
+   color:white;
+
+  }
+
+  /**......................*/
+  .modal .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+.modal .modal-header .btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.modal .modal-footer {
+  border-top: none;
+  padding: 0;
+}
+.modal .modal-footer .btn-group > .btn:first-child {
+  border-bottom-left-radius: 0;
+}
+.modal .modal-footer .btn-group > .btn:last-child {
+  border-top-right-radius: 0;
 }
 
-/* css for cashier profile page */
-.pic
-{
-     margin-top:50px; 
-     width:120px;
-     margin-left:50px;
-     margin-bottom:-60px;
-}
-
-.panel
-{
-    background-image:url("http://autoimagesize.com/wp-content/uploads/2014/01/rainbow-aurora-background-wallpaper-colour-images-rainbow-background.jpg"); 
-}
-
-.name
-{
-    position:absolute;
-    padding-left:200px;
-    font-size:30px;
-}
-
-.dropdown
-{
-    position:absolute;
-}
-
-.change
-{
- position:relative; 
- bottom:20px;
- padding:1px;
- color:white;
- text-decoration:none;
-}
-
-
-.change:hover
-{
- text-decoration:none;
- background-color:black;
- color:white;
->>>>>>> cc11e4bb53d14e9efb1e81f9a5a7e737f57fee2d
 }

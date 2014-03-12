@@ -1,4 +1,3 @@
-
 	<font color = "red">
 	<?php 
 			if($message == '')
@@ -16,4 +15,4 @@
 	<br><br>
 	<a href=<?php echo site_url() . '/mainframe/index' ?>>Reset Priority Number to 0 </a> <br>
 	</form>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
