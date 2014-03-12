@@ -171,7 +171,6 @@
 		public function login() {
 			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
-
 			$status = $this->cashier->login($cashierId, $password);
 			//var_dump($status);
 			if(! $this->session->userdata('cashierSessionId')) {

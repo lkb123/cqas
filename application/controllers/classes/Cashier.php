@@ -60,7 +60,7 @@ class Cashier {
 	 	if(count($result) == 0)
 	 		return FALSE;
 
-	 	if($result['password'] == $password) {
+	 	if($result['cashierpass'] == $password) {
 	 		return TRUE;
 	 	}
 	 	else {
