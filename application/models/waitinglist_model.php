@@ -24,7 +24,7 @@
 		}
 		//count sa mga nag queue for the current date
 		public function countAllEntries() {
-			$query = "Select COUNT(studid) As studentcount From waitinglist Where and dateadded = current_date";
+			$query = "Select COUNT(studid) As studentcount From waitinglist Where dateadded = current_date";
 			return $this->db->query($query)->row_array();
 		}	
 
