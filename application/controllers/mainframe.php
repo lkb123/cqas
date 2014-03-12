@@ -104,12 +104,11 @@
 					$this->studentIndex('encode_view', 'Error: ID Number not in the database', 'Error');
 				}
 				else {
-					if($this->student->studentIsValid($idNumber) === "t") { 
+					if($this->waitingList->studentIsValid($idNumber) == true) { 
 						//check if student is valid to be added to the waiting list
 
 						$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
 						$this->waitingList->append($idNumber);	//append student to waiting list
-						$this->student->updateStudentValidity($idNumber, false);
 						if($subscribe)
 							$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
 						$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number

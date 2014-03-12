@@ -127,5 +127,13 @@
 			//$this->unit->run($result, $expected);
 			//$this->load->view('test');
 		}
+
+		//check if student is Valid to be added in waitingList
+		public function isStudentValidToQueue(){
+			$result = $this->waitingList->studentIsValid('2010-1111');
+			$expected = false;
+			$this->unit->run($result, $expected);
+			$this->load->view('test');	
+		}
 		
 	}

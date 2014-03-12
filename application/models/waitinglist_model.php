@@ -7,25 +7,26 @@
 			$this->load->database();
 		}
 		
-		public function addStudent($idNumber, $priorityNumber, $timeAdded) {
-			$query = "insert into waitinglist(studid, prioritynumber, timestampadded) values ('$idNumber', $priorityNumber, '$timeAdded')";
+
+		public function addStudent($idNumber, $priorityNumber) {
+			$query = "insert into waitinglist(studid, prioritynumber, dateadded,timeadded) values ('$idNumber', $priorityNumber, current_date, localtime)";
 			return $this->db->query($query);
 		}
-
+		//count sa na served na for the current date
 		public function countUnServedEntries() {
-			$query = "Select COUNT(*) As studentcount From waitinglist Where served = false";
+			$query = "Select COUNT(*) As studentcount From waitinglist Where served = false and dateadded = current_date";
 			return $this->db->query($query)->row_array();
 		}
-
+		//count sa wala pa na serve for the current date
 		public function countServedEntries() {
-			$query = "Select COUNT(*) As studentcount From waitinglist Where served = true";
+			$query = "Select COUNT(*) As studentcount From waitinglist Where served = true and dateadded = current_date";
 			return $this->db->query($query)->row_array();
 		}
-
+		//count sa mga nag queue for the current date
 		public function countAllEntries() {
-			$query = "Select COUNT(studid) As studentcount From waitinglist";
+			$query = "Select COUNT(studid) As studentcount From waitinglist Where and dateadded = current_date";
 			return $this->db->query($query)->row_array();
-		}
+		}	
 
 		public function clearWaitingList() {
 			$query = "Delete From waitinglist";
@@ -41,4 +42,13 @@
 			$query = "Select studid From waitinglist Where prioritynumber = $n Order By timestampadded";
 			return $this->db->query($query);
 		}
+
+		public function getValidity($idNumber) {
+			$query = $this->db->query(" SELECT * 
+										FROM waitinglist 
+										WHERE studid = '$idNumber' AND dateadded = current_date and served = false
+										");
+			return $query;
+		}
+
 	}

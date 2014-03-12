@@ -10,13 +10,13 @@
 			$this->CI = &get_instance();
 			$this->CI->load->model('waitinglist_model', 'WM');
 			$this->CI->load->helper('cookie');
-			date_default_timezone_set("Asia/Manila");		
+			//date_default_timezone_set("Asia/Manila"); dili man tingale ta need mag timezone		
 		}
 
 
 		public function append($id_number) {
 			$pNumber = $this->generatePriorityNumber(); //generate priority number
-			$timeAdded = date('Y-m-d H:i:s');	//get the current time
+			//$timeAdded = date('Y-m-d H:i:s');	giwala na nako ni kay pwede ra man sa query deretso
 			$this->CI->WM->addStudent($id_number, $pNumber, $timeAdded);
 		}
 
@@ -42,9 +42,6 @@
 			$result = $this->CI->WM->retrieveNthEntry($n)->row();
 			return $result;
 		}
-		/*
-			Created by Sherwin, for test cases 5
-		*/
 		
 		public function getCurrentlyServedStudent(){
 			//return $this->list[1];
@@ -52,6 +49,15 @@
 		
 		public function getNextWaitingStudent(){
 			//return $this->list[2];
+		}
+
+		public function studentIsValid($idNumber) {
+			$query = $this->CI->WM->getValidity($idNumber);
+			
+			if($query->num_rows() == 0)
+				return true;
+			else
+				return false;
 		}
 
 
