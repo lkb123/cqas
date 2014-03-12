@@ -1,4 +1,3 @@
-
 	<font color = "red">
 	<?php 
 			if($message == '')
@@ -7,7 +6,6 @@
 				echo $message;
 	?>
 	</font>
-
 	<form method=post action=<?php echo site_url() . '/mainframe/encode' ?>>
 	ID Number: 
 	<input type=text name="idNumber" />
@@ -17,10 +15,4 @@
 
 	<br><br>
 	<a href=<?php echo site_url() . '/mainframe/index' ?>>Reset Priority Number to 0 </a> <br>
-
-	<script>
-
-	</script>
-
-
 	</form>
