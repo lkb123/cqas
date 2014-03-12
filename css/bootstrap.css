@@ -5784,6 +5784,7 @@ button.close {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
+
 /* for cashier login page css */
 body {
   padding-top: 40px;
@@ -5992,4 +5993,5 @@ body {
       -webkit-transform:rotate(45deg);
     box-shadow:2px 2px 10px rgba(0,0,0,0.8);
   }
+ 
 }

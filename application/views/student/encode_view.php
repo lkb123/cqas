@@ -1,3 +1,4 @@
+
 	<font color = "red">
 	<?php 
 			if($message == '')
@@ -12,7 +13,7 @@
 	<input type="checkbox" name="subscribe" value="true" />Subscribe to Alert System
 	<br>	
 	<input type=submit value="submit" />
-
 	<br><br>
 	<a href=<?php echo site_url() . '/mainframe/index' ?>>Reset Priority Number to 0 </a> <br>
 	</form>
+
