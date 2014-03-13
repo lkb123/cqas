@@ -1,3 +1,5 @@
+		
+	<div class = "container">
 		<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 		  TEST MODAL
 		</button>
@@ -24,12 +26,15 @@
 	<font color = "red">
 
 	<br><br>
+	
+	<div class="alert alert-danger">
 	<?php 
 			if($message == '')
 				echo '';
 			else
 				echo $message;
 	?>
+	</div>
 	</font>
 	<form method=post action=<?php echo site_url() . '/mainframe/encode' ?>>
 	ID Number: 
@@ -40,3 +45,6 @@
 	<br><br>
 	<a href=<?php echo site_url() . '/mainframe/index' ?>>Reset Priority Number to 0 </a> <br>
 	</form>
+
+
+	</div>
