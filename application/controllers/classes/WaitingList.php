@@ -17,7 +17,7 @@
 		public function append($id_number) {
 			$pNumber = $this->generatePriorityNumber(); //generate priority number
 			//$timeAdded = date('Y-m-d H:i:s');	giwala na nako ni kay pwede ra man sa query deretso
-			$this->CI->WM->addStudent($id_number, $pNumber, $timeAdded);
+			$this->CI->WM->addStudent($id_number, $pNumber);
 		}
 
 		public function countEntries() {
