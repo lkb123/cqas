@@ -9,7 +9,7 @@
 		
 
 		public function addStudent($idNumber, $priorityNumber) {
-			$query = "insert into waitinglist(studid, prioritynumber, dateadded,timeadded) values ('$idNumber', $priorityNumber, current_date, localtime)";
+			$query = "insert into waitinglist(studid, prioritynumber, dateadded, timeadded) values ('$idNumber', $priorityNumber, current_date, localtime(0))";
 			return $this->db->query($query);
 		}
 		//count sa na served na for the current date
