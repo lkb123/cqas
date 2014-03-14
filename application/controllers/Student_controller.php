@@ -3,7 +3,7 @@
 	include(basename(dirname('classes/Student.php')) . '/Student.php');
 	include(basename(dirname('classes/Cashier.php')) . '/Cashier.php');
 	
-	class Student_test extends CI_Controller {
+	class Student extends CI_Controller {
 
 		private $student;
 		private $cashier;

@@ -1,5 +1,6 @@
 		
 	<div class = "container">
+
 		<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 		  TEST MODAL
 		</button>
@@ -21,7 +22,7 @@
 			  </div>
 			</div>
 		  </div>
-		</div>	
+		</div>
 
 	<font color = "red">
 
@@ -45,6 +46,4 @@
 	<br><br>
 	<a href=<?php echo site_url() . '/mainframe/index' ?>>Reset Priority Number to 0 </a> <br>
 	</form>
-
-
 	</div>
