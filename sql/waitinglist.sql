@@ -4,8 +4,10 @@ CREATE TABLE waitinglist (
 	dateadded date NOT NULL,
 	timeadded time NOT NULL,
 	dateserved date default null,
-	timeserved time NOT NULL,
+	timeserved time,
+	subscribe boolean default false,
 	served boolean default false,
+	serving boolean default false,
 	primary key(studid, dateadded, timeadded),
 	foreign key(studid) references student(studid) on update cascade on delete cascade
 );
