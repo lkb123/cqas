@@ -16,7 +16,7 @@
 		  </div>
 		  <div class="col-sm-6 col-md-4" style="width:250px;padding:5px">
 		    <div class="thumbnail">
-		      <img src="<?php echo base_url();?>img/cashier.png" alt="Cashier Image" style="height:128px;">
+		      <img src="<?php echo base_url();?>img/cashier.png" alt="Cashier Image" style="height:129px;">
 		      <div class="caption">
 		        <h3>Cashier</h3>
 		        <p><a data-toggle="modal" data-target=".bs-example-modal-sm" class="btn btn-primary" role="button">Start Serving</a></p>
