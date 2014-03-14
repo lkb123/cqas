@@ -61,9 +61,9 @@
 		}
 
 		public function retrieveFifteenStudents() {
-			$data['query_result'] = $this->CI->WM->getFifteenStudents();
-			//echo var_dump($data['query_result']);
-			return $data;
+			$data = $this->CI->WM->getFifteenStudents();
+			//echo var_dump($data->result_array());
+			return $data->result_array();
 		}
 
 		/*
