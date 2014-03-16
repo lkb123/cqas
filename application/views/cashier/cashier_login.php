@@ -1,4 +1,4 @@
-
+<div class="container">
 		<font color = "red">
 		<?php 
 			if($message == '')
@@ -19,11 +19,11 @@
 </div>
 			
 
-<div class="container">
+
 	<div class="row">
     	<div class="container" id="formContainer">
 
-          <form action="<?php echo site_url('mainframe/login');?>"class="form-signin" id="login" role="form" method="post">
+          <form action="<?php echo site_url('mainframe/login');?>"class="form-signin" role="form" method="post">
             <h3 class="form-signin-heading">Cashier Login</h3>
             <input type="text" class="form-control" name="cashierid" id="cashierid" placeholder="Username" required autofocus>
             <input type="password" class="form-control" name="cashierpass" id="cashierpass" placeholder="Password" required>

@@ -94,6 +94,7 @@
 		 */
 		public function encode(){
 			$idNumber = $this->input->post('idNumber', TRUE);
+
 			if(! $this->cashier->validId($idNumber)) {
 				$this->studentIndex('encode_view', 'Error: Please input ID Number again', 'Error');
 			}else{
@@ -169,6 +170,7 @@
 		 * Cashier login
 		 */
 		public function login() {
+
 			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
 			$status = $this->cashier->login($cashierId, $password);
