@@ -303,3 +303,23 @@
     box-shadow:2px 2px 10px rgba(0,0,0,0.8);
   }
 }
+
+/*
+* ALERT QUEUE UI
+*
+*/
+
+.queueAlert{
+
+width:288px;
+margin:0 auto;
+position:relative;
+z-index:1;
+
+-moz-perspective: 800px;
+-webkit-perspective: 800px;
+perspective: 800px;
+
+}
+
+/* END OF ALERT QUEUE UI*/

@@ -1,15 +1,25 @@
 		
 <div class = "container">
-
+  
+  <div class = "queueAlert" hidden>
 	<?php 
-			if($message == '')
+			if($messageType == '')
 				echo '';
-			else
-				echo '<div id = "error" class="alert alert-danger ">';
-				echo $message;
-				echo '</div>';
-	?>
+			elseif ($messageType === 'Error') {
+        echo '<div class="alert alert-danger alert-dismissable">';
+        echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+        echo $message;
+        echo '</div>';
+      }
+      elseif ($messageType === 'Success') {
+        echo '<div class="alert alert-success alert-dismissable">';
+        echo '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+        echo $message;
+        echo '</div>';
+      }
 
+	?>
+  </div>
 	<div class="cont">
 	<div class="row">
     	<div class="container" id="formContainer">

@@ -51,6 +51,8 @@
 
 		public function studentIndex($page, $message = '', $messageType = '') {
 			$data['message'] = $message;
+			$data['messageType'] = $messageType;
+
 			$this->load->view('templates/header_view', $data);
 			$this->load->view('student/' . $page, $data);
 			$this->load->view('templates/footer_view');		
@@ -131,12 +133,12 @@
 							}
 							else {
 								//if wala nag subscribe, dretso ra i add sa waiting list
-								$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
+								$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber", 'Success');
 								return;	//end function
 							}
 						}
 						//if id number is in database and cellphone number available
-						$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber");
+						$this->studentIndex('encode_view', "Student Added!!<br>Priority Number: $pnumber", 'Successs');
 					}
 					//if ang student wala pa na serve sa last nya na pila sa waiting list
 					else 
@@ -173,6 +175,7 @@
 
 			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
+
 			$status = $this->cashier->login($cashierId, $password);
 			//var_dump($status);
 			if(! $this->session->userdata('cashierSessionId')) {

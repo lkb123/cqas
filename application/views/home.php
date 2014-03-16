@@ -18,17 +18,17 @@
 	      <img src="<?php echo base_url();?>img/cashier.png" alt="Cashier Image" style="height:128px;">
 	      <div class="caption">
 	        <h3>Cashier</h3>
-	        <p><a class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Start Serving</a></p>
+	        <p><a class="btn btn-primary" data-toggle="modal" data-target="#cashierLogInForm">Start Serving</a></p>
 	      </div>
 	    </div>
 	  </div>
 	</div>
 
 
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div id = "cashierLogInForm" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-sm">
 	    <div style = "padding:20px" class="modal-content">
-	      <form action="<?php echo site_url('mainframe/login');?>"class="form-horizontal" role="form" method="post">
+	      <form  id = "SubmitForm" class="form-horizontal" role="form" action="<?php echo site_url('mainframe/login');?>"  method="post" > <!--action="<?php //echo site_url('mainframe/login');?>"  method="post""-->
 			  <div class="form-group">
 			    <label for="inputtext3" class="col-sm-2 control-label">Username</label>
 			    <div class="col-sm-offset-1 col-sm-9">
@@ -43,7 +43,7 @@
 			  </div>
 			  <div class="form-group">
 			    <div class="col-sm-offset-3 col-sm-10">
-			      <button type="submit" class="btn btn-default">Sign in</button>
+			      <button id = "cashierSubmit" type="submit" class="btn btn-default">Sign in</button>
 			    </div>
 			  </div>
 			</form>

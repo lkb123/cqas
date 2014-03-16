@@ -44,7 +44,21 @@ $(function(){
 	}
 });
 
-$('document').ready(function(){
 
-	$('#error').faidIn('show')
+/*
+$(function(){
+	$('#cashierSubmit').click(funciton(){
+
+		$.ajax({
+			type: 'POST',
+			url: "<?php echo site_url('mainframe/login');?> ",
+			data: $('#SubmitForm').serialize(),
+		});
+
+	});
+});
+*/
+
+$('document').ready(function(){
+	$('.queueAlert').fadeIn('slow')
 });
