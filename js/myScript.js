@@ -58,7 +58,7 @@ $( "#target" ).click(function(e) {
 		
 		$.ajax({
 		type: 'POST',
-		url: "http://localhost/cqas/index.php/mainframe/test",
+		url: "http://localhost/cqas/index.php/mainframe/validateLogin",
 		data: $('#SubmitForm').serialize(),
 		dataType: "json",
 		success: function(status){

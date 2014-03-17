@@ -241,7 +241,7 @@
 		}
 		
 		
-		public function test(){
+		public function validateLogin(){
 			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
 
