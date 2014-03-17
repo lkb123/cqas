@@ -71,5 +71,12 @@ class student_model extends CI_Model {
 		return $query;
 	}
 
+	public function getStudent($idNumber) {
+
+		$query = $this->db->query(" SELECT * FROM student WHERE studid = '$idNumber'");
+		return $query;
+	}
+
+
 }
 

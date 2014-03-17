@@ -67,6 +67,11 @@ class Cashier {
 	 		return FALSE;
 	 	}
 	 }
+
+	 public function retrieveCashier($cashierId) {
+	 	$result = $this->CI->CM->getCashier($cashierId);
+	 	return $result->row_array;
+	 }
 	 
  }
  
