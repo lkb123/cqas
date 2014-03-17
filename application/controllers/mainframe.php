@@ -245,12 +245,15 @@
 			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
 
-			$cashierId = $this->input->post('cashierid');
-			$password = $this->input->post('cashierpass');
+			if(empty($cashierId) || empty($password)){
+				$status = array('data' => 'empty');
+				echo json_encode($status);
+			}
+			else{
 
 			$status['data'] = $this->cashier->login($cashierId, $password);
-			
 			echo json_encode($status);
+			}
 		}
 
 

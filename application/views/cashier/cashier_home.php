@@ -11,7 +11,7 @@
 	<div class="row well">
 		<div class="col-md-2">
     	    <ul class="nav nav-pills nav-stacked well">
-              <li class="active"><a href=<?php echo site_url() . '/mainframe/index' ?>> Home </a></li>
+              <li class="active"><a href=<?php echo site_url()?>> Home </a></li>
               <li><a href=<?php echo site_url() . '/mainframe/cashierIndex/cashier_home' ?>> Cashier Profile</a></li>
               <li><a href=<?php echo site_url() . '/mainframe/cashierServe/cashier_serve_dash' ?>> Serve Student</a></li>
               <li><a href=<?php echo site_url() . '/mainframe/logout' ?>> Logout </a></li>

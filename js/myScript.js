@@ -54,12 +54,11 @@ $(function(){
 			data: $('#SubmitForm').serialize()
 	});*/
 $( "#target" ).click(function(e) {
-	
 		e.preventDefault();
 		
 		$.ajax({
 		type: 'POST',
-		url: "index.php/mainframe/test",
+		url: "http://localhost/cqas/index.php/mainframe/test",
 		data: $('#SubmitForm').serialize(),
 		dataType: "json",
 		success: function(status){
@@ -71,8 +70,11 @@ $( "#target" ).click(function(e) {
 		      item.push(val);
 		    });
 		    
-		    if(item=='true'){
+		    if(item =='true'){
 		    	$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();
+		    }
+		    else if(item =='empty'){
+		    	alert('Both ID and Password must be filled');
 		    }
 		    else{
 		    	alert('Incorrect ID number or Password');
