@@ -178,6 +178,7 @@
 			$password = $this->input->post('cashierpass');
 
 			$status = $this->cashier->login($cashierId, $password);
+			
 			//var_dump($status);
 			if(! $this->session->userdata('cashierSessionId')) {
 				//if no session exist
@@ -243,13 +244,14 @@
 		public function test(){
 			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
+
+			$cashierId = $this->input->post('cashierid');
+			$password = $this->input->post('cashierpass');
+
+			$status['data'] = $this->cashier->login($cashierId, $password);
 			
-			$myArray = array(
-					'cashierId' => $cashierId,
-					'password' => $password
-				);
-
-
-			echo json_encode($myArray);
+			echo json_encode($status);
 		}
+
+
 }

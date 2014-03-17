@@ -62,15 +62,22 @@ $( "#target" ).click(function(e) {
 		url: "index.php/mainframe/test",
 		data: $('#SubmitForm').serialize(),
 		dataType: "json",
-		success: function(myArray){
+		success: function(status){
 
 			
-			var items = [];
-		    $.each(myArray
+			var item = [];
+		    $.each(status
 		    	, function(key, val) {
-		      items.push(key + ' : ' + val + '</br>');
+		      item.push(val);
 		    });
-		    $('body').append(items.join(''));}
+		    
+		    if(item=='true'){
+		    	$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();
+		    }
+		    else{
+		    	alert('Incorrect ID number or Password');
+		    }
+		}
 		});
 		/*
 		alert(result);}
@@ -82,3 +89,20 @@ $( "#target" ).click(function(e) {
 $('document').ready(function(){
 	$('.queueAlert').slideToggle('slow')
 });
+
+
+/* keeping this for reference purposes
+*
+*
+		success: function(status){
+
+			
+			var items = [];
+		    $.each(status
+		    	, function(key, val) {
+		      items.push(key + ' : ' + val + '</br>');
+		    });
+		    $('body').append(items.join(''));}
+		});
+*
+*/
