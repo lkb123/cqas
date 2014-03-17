@@ -61,13 +61,22 @@ $( "#target" ).click(function(e) {
 		type: 'POST',
 		url: "index.php/mainframe/test",
 		data: $('#SubmitForm').serialize(),
-		success: function(data){
-			alert($('#SubmitForm').serialize());
-		}
-		});
+		dataType: "json",
+		success: function(myArray){
 
+			
+			var items = [];
+		    $.each(myArray
+		    	, function(key, val) {
+		      items.push(key + ' : ' + val + '</br>');
+		    });
+		    $('body').append(items.join(''));}
+		});
+		/*
+		alert(result);}
 	/*$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();*/
 });
+
 
 
 $('document').ready(function(){

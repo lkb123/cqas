@@ -238,9 +238,18 @@
 			$this->session->sess_destroy();
 			$this->cashierIndex('cashier_login');
 		}
+		
+		
 		public function test(){
-			$cashierId['data'] = $this->input->post('cashierid');
+			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
-			return $cashierId;
+			
+			$myArray = array(
+					'cashierId' => $cashierId,
+					'password' => $password
+				);
+
+
+			echo json_encode($myArray);
 		}
 }
