@@ -311,15 +311,10 @@
 
 .queueAlert{
 
-width:288px;
-margin:0 auto;
-position:relative;
-z-index:1;
-
--moz-perspective: 800px;
--webkit-perspective: 800px;
-perspective: 800px;
-
+width:100%;
+margin:80px auto;
+position:absolute;
+z-index:111;
 }
 
 /* END OF ALERT QUEUE UI*/

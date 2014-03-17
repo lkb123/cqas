@@ -28,7 +28,7 @@
 	<div id = "cashierLogInForm" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-sm">
 	    <div style = "padding:20px" class="modal-content">
-	      <form  id = "SubmitForm" class="form-horizontal" role="form" action="<?php echo site_url('mainframe/login');?>"  method="post" > <!--action="<?php //echo site_url('mainframe/login');?>"  method="post""-->
+	      <form  id = "SubmitForm" class="form-horizontal" role="form" action="" method="post"> <!--action="<?php //echo site_url('mainframe/login');?>"  method="post""-->
 			  <div class="form-group">
 			    <label for="inputtext3" class="col-sm-2 control-label">Username</label>
 			    <div class="col-sm-offset-1 col-sm-9">
@@ -42,8 +42,8 @@
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <div class="col-sm-offset-3 col-sm-10">
-			      <button id = "cashierSubmit" type="submit" class="btn btn-default">Sign in</button>
+			    <div id = "yes" class="col-sm-offset-3 col-sm-10">
+			      <button  id = "target" class="btn btn-default">Sign in</button>
 			    </div>
 			  </div>
 			</form>

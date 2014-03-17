@@ -45,20 +45,31 @@ $(function(){
 });
 
 
-/*
-$(function(){
-	$('#cashierSubmit').click(funciton(){
 
+
+	/*
 		$.ajax({
 			type: 'POST',
 			url: "<?php echo site_url('mainframe/login');?> ",
-			data: $('#SubmitForm').serialize(),
+			data: $('#SubmitForm').serialize()
+	});*/
+$( "#target" ).click(function(e) {
+	
+		e.preventDefault();
+		
+		$.ajax({
+		type: 'POST',
+		url: "index.php/mainframe/test",
+		data: $('#SubmitForm').serialize(),
+		success: function(data){
+			alert($('#SubmitForm').serialize());
+		}
 		});
 
-	});
+	/*$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();*/
 });
-*/
+
 
 $('document').ready(function(){
-	$('.queueAlert').fadeIn('slow')
+	$('.queueAlert').slideToggle('slow')
 });

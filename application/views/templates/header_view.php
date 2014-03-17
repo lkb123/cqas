@@ -9,9 +9,7 @@
 
 		<link href = "<?php echo base_url();?>css/bootstrap-theme.min.css" 	rel = "stylesheet">	
 		<link href = "<?php echo base_url();?>css/bootstrap.min.css" 		rel = "stylesheet">
-		<link href = "<?php echo base_url();?>css/bootstrap-glyphicons.css" rel = "stylesheet">
 		<link href = "<?php echo base_url();?>css/myStyle.css" rel = "stylesheet">
-		<!--<link href = "<?php echo base_url();?>css/costum.css"	rel = "stylesheet">-->
 
 
 
