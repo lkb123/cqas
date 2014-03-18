@@ -257,4 +257,15 @@
 		}
 
 
+		public function getToBeServedStudents() {
+			$data = $this->waitingList->retrieveFifteenStudents();
+			$pending = array();
+			foreach($data as $row) {
+				$pending[] = $row['studid'];
+			}
+
+			echo json_encode($pending);
+			//var_dump($pending);
+		}
+
 }

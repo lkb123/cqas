@@ -86,6 +86,15 @@ $( "#target" ).click(function(e) {
 	/*$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();*/
 });
 
+$("#serve").click(function(e) {
+	e.preventDefault();
+	$("#list").append("Hello");
+	/*$,ajax({
+		url: "http://localhost/cqas/index.php/mainframe/getToBeServedStudents",
+	});*/
+	
+});
+
 
 
 $('document').ready(function(){

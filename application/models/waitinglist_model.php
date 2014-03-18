@@ -52,7 +52,7 @@
 		}
 
 		public function getFifteenStudents() {
-			$query = $this->db->query("Select * FROM waitinglist WHERE served = false and dateadded = current_date LIMIT 15");
+			$query = $this->db->query("Select * FROM waitinglist WHERE served = false LIMIT 15");
 			return $query;
 		}
 

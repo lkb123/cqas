@@ -12,7 +12,6 @@
 		<link href = "<?php echo base_url();?>css/myStyle.css" rel = "stylesheet">
 
 
-
 	</head>
 	<body>
 	<header>
