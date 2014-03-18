@@ -139,5 +139,17 @@ $('document').ready(function(){
 
 $('#startServing').click(function(){
 
-	$('#cashierLogInForm').addClass('fade').modal('show');
+		$.ajax({
+		url: "http://localhost/cqas/index.php/mainframe/hasSession",
+		success: function(hasSession){
+
+			if(hasSession == 'false'){
+				$('#cashierLogInForm').addClass('fade').modal('show');
+			}
+			else{
+
+				window.location.replace("http://localhost/cqas/index.php/mainframe/cashierIndex/cashier_home");
+			}
+		}
+		});
 });

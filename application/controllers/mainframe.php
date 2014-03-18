@@ -256,6 +256,12 @@
 			}
 		}
 
+		public function hasSession(){
+			$hasSession = $this->session->userdata('cashierSessionId');
+
+			echo json_encode($hasSession);
+		}
+
 
 		public function getToBeServedStudents() {
 			$data = $this->waitingList->retrieveFifteenStudents();
