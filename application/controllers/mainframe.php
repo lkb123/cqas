@@ -138,8 +138,7 @@
 							}
 							else {
 								//if wala nag subscribe, dretso ra i add sa waiting list
-								//$this->studentIndex('encode_view', "Student Added!!", 'Success', $pnumber);
-								echo var_dump($subscribe);
+								$this->studentIndex('encode_view', "Student Added!!", 'Success', $pnumber);
 								return;	//end function
 							}
 						}

@@ -27,7 +27,7 @@
               ?>
       </div>
 
-          <form class="form-signin" id="login" role="form"  action=<?php echo site_url() . '/mainframe/encode' ?> method=post>
+          <form class="form-signin" id="login" role="form"  action=<?php echo site_url() . '/mainframe/encode' ?> method="post">
           	<br />
             <h3 class="form-signin-heading">Fill up form</h3>
             <br />
