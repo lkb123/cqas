@@ -54,6 +54,7 @@ $(function(){
 			data: $('#SubmitForm').serialize()
 	});*/
 $( "#target" ).click(function(e) {
+
 		e.preventDefault();
 		
 		$.ajax({
@@ -102,6 +103,7 @@ $('document').ready(function(){
 });
 
 
+
 /* keeping this for reference purposes
 *
 *
@@ -117,3 +119,8 @@ $('document').ready(function(){
 		});
 *
 */
+
+$('#startServing').click(function(){
+
+	$('#cashierLogInForm').addClass('fade').modal('show');
+});

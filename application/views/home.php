@@ -18,14 +18,14 @@
 	      <img src="<?php echo base_url();?>img/cashier.png" alt="Cashier Image" style="height:128px;">
 	      <div class="caption">
 	        <h3>Cashier</h3>
-	        <p><a class="btn btn-primary" data-toggle="modal" data-target="#cashierLogInForm">Start Serving</a></p>
+	        <p><a id = "startServing" class="btn btn-primary" >Start Serving</a></p> <!-- data-toggle="modal" data-target="#cashierLogInForm" -->
 	      </div>
 	    </div>
 	  </div>
 	</div>
 
 
-	<div id = "cashierLogInForm" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div id = "cashierLogInForm" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-sm">
 	    <div style = "padding:20px" class="modal-content">
 	      <form  id = "SubmitForm" class="form-horizontal" role="form" action="" method="post"> <!--action="<?php //echo site_url('mainframe/login');?>"  method="post""-->
