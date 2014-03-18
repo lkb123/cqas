@@ -31,12 +31,13 @@
           	<br />
             <h3 class="form-signin-heading">Fill up form</h3>
             <br />
-            <input type="text" class="form-control" name="idNumber" id="loginPass" placeholder="ID Number" required>
-            <input type="checkbox"  name="subscribe" id="subscribe"> subscribe to alert system </input>
+            <input type="text" class="form-control" name="idNumber" id="idNum" placeholder="ID Number" required>
+            <div id ="pnum"></div>
+            <input type="checkbox" name="subscribe" id="subscribe" ><small>&nbspsubscribe to alert system</small></input>
             <br />
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Add to Queue</button>
+            <button id = "AddtoQueue" class="btn btn-lg btn-primary btn-block">Add to Queue</button>
           </form>
         </div> <!-- /container -->
-	</div>
+	   </div>
 	</div>
 </div>

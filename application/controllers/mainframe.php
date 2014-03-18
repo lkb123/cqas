@@ -72,7 +72,7 @@
 				if($page === 'cashier_login')
 					$this->load->view('cashier/cashier_home', $data);
 				else
-					$this->load->view('cashier/' . $page, $data); /////************* change something note Dont delete
+					$this->load->view('cashier/' . $page, $data);
 			}
 			$this->load->view('templates/footer_view');		
 		}
@@ -113,30 +113,33 @@
 					if($this->waitingList->studentIsValid($idNumber) == true) { 
 						//check if student is valid to be added to the waiting list
 
-						$subscribe = ($this->input->post('subscribe') == "true") ? true : false;
+						$subscribe = $this->input->post('subscribe');
 						$this->waitingList->append($idNumber);	//append student to waiting list
-						if($subscribe)
-							$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
+						//if($subscribe)
+							//$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
 						$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
 
 						if($query === "") {
 							//if id number in database but no cellphone number
 							if($subscribe) {
 								//if nag subscribe sya, pangayuon ang cellphone number ayha i add sa waiting list
+								/*
 								$stud_cookie = array(
 								'name'   => 'idnumber',
 		                		'value'  => $idNumber,
 		                		'expire' =>  100000,
 		                		'secure' => false
 								);	
-
 								$this->input->set_cookie($stud_cookie);	
 								$this->studentIndex('add_cell_number');
 								return;	//end function
+								*/
+								echo $subscribe;
 							}
 							else {
 								//if wala nag subscribe, dretso ra i add sa waiting list
-								$this->studentIndex('encode_view', "Student Added!!", 'Success', $pnumber);
+								//$this->studentIndex('encode_view', "Student Added!!", 'Success', $pnumber);
+								echo var_dump($subscribe);
 								return;	//end function
 							}
 						}
