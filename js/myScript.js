@@ -96,9 +96,9 @@ $("#serve").click(function(e) {
 		dataType: "json",
 		success: function(pending) {
 			if(pending.length == 0)
-				alert("empty");
+				;	//do nothing
 			else {
-				
+				var display = "";
 				for(var i = 0; i < pending.length; i++) {
 					var student = pending[i];
 					var studid = '<strong>ID Number: </strong>' + student.studid + '<br>';
@@ -111,9 +111,10 @@ $("#serve").click(function(e) {
 					var content = "<div class='media-body'> " + studid + pnumber + studname + phone + "</div>";
 					var serveButton = "<button id='servebutton' class='btn btn-primary'>Serve</button>";
 					var closeDiv = "</div>";
-					$("#list").append(openDiv + img + content + serveButton + closeDiv);
+					//$("#list").append(openDiv + img + content + serveButton + closeDiv);
+					display = display + openDiv + img + content + serveButton + closeDiv;
 				}
-					
+				$("#list").html(display);
 			}
 		}
 	});
