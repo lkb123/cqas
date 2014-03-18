@@ -64,13 +64,13 @@
 			$this->load->view('templates/header_view', $data);
 			if(! $this->session->userdata('cashierSessionId'))
 				//if no session exist, redirect cashier to login page
-				$this->load->view('cashier/cashier_login', $data);
+				$this->load->view('home', $data);
 			else {
 				//if session exist, adto bisag asa gusto sa cashier
 				if($page === 'cashier_login')
 					$this->load->view('cashier/cashier_home', $data);
 				else
-					$this->load->view('cashier/' . $page, $data);
+					$this->load->view('cashier/' . $page, $data); /////************* change something note Dont delete
 			}
 			$this->load->view('templates/footer_view');		
 		}
