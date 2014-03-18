@@ -54,9 +54,11 @@
 			$data['messageType'] = $messageType;
 			$data['pnumber'] = $pnumber;
 
+
 			$this->load->view('templates/header_view', $data);
 			$this->load->view('student/' . $page, $data);
-			$this->load->view('templates/footer_view');		
+			$this->load->view('templates/footer_view');	
+				
 		}
 		
 		public function cashierIndex($page, $message = '', $messageType = '') {

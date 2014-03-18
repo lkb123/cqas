@@ -78,7 +78,7 @@ $( "#target" ).click(function(e) {
 		    	alert('Both ID and Password must be filled');
 		    }
 		    else{
-		    	alert('Incorrect ID number or Password');
+		    	alert('Incorrect ID number or Password');	
 		    }
 		}
 		});
@@ -127,7 +127,8 @@ $("#servebutton").click(function() {
 
 
 $('document').ready(function(){
-	$('.queueAlert').slideToggle('slow')
+	$('.queueAlert').show('slow')
+
 });
 
 
@@ -164,3 +165,5 @@ $('#startServing').click(function(){
 		}
 		});
 });
+
+
