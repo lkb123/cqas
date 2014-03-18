@@ -269,14 +269,7 @@
 			$data = $this->waitingList->retrieveFifteenStudents();
 			$pending = array();
 			foreach($data as $row) {
-				$student = $this->student->retrieveStudent($row['studid']);
-				$tmp = array(
-					'studid' => $row['studid'],
-					'pnumber' => $row['prioritynumber'],
-					'studname' => $student['lastname'] . ', ' . $student['givenname'] . ' ' . $student['middlename'],
-					'phone' => $student['studphone']
-					);
-				$pending[] = $tmp;
+				$pending[] = $row['studid'];
 			}
 
 			echo json_encode($pending);
