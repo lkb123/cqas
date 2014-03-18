@@ -11,7 +11,7 @@
 		<link href = "<?php echo base_url();?>css/bootstrap.min.css" 		rel = "stylesheet">
 		<link href = "<?php echo base_url();?>css/myStyle.css" rel = "stylesheet">
 
-
+		
 	</head>
 	<body>
 	<header>

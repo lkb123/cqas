@@ -88,10 +88,27 @@ $( "#target" ).click(function(e) {
 
 $("#serve").click(function(e) {
 	e.preventDefault();
-	$("#list").append("Hello");
-	/*$,ajax({
+	//$("#list").append("Hello");
+	$.ajax({
+		type: 'POST',
 		url: "http://localhost/cqas/index.php/mainframe/getToBeServedStudents",
-	});*/
+		dataType: "json",
+		success: function(pending) {
+			if(pending.length == 0)
+				alert("empty");
+			else {
+				
+				for(var i = 0; i < pending.length; i++) {
+					var upDiv = "<div class='media'>";
+					var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
+					var content = "<div class='media-body'> <h4>" + pending[i] + "</div>";
+					var closeDiv = "</div>";
+					$("#list").append(upDiv + img + content + closeDiv);
+				}
+					
+			}
+		}
+	});
 	
 });
 
