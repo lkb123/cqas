@@ -72,7 +72,7 @@ $( "#target" ).click(function(e) {
 		    });
 		    
 		    if(item =='true'){
-		    	$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();
+		    	$("#SubmitForm").attr("action", "http://localhost/cqas/index.php/mainframe/login").submit();
 		    }
 		    else if(item =='empty'){
 		    	alert('Both ID and Password must be filled');
