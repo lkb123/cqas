@@ -109,7 +109,7 @@ $("#serve").click(function(e) {
 					var openDiv = "<div class='media'>";
 					var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
 					var content = "<div class='media-body'> " + studid + pnumber + studname + phone + "</div>";
-					var serveButton = "<button class='btn btn-primary'>Serve</button>";
+					var serveButton = "<button id='servebutton' class='btn btn-primary'>Serve</button>";
 					var closeDiv = "</div>";
 					$("#list").append(openDiv + img + content + serveButton + closeDiv);
 				}
@@ -118,6 +118,10 @@ $("#serve").click(function(e) {
 		}
 	});
 	
+});
+
+$("#servebutton").click(function() {
+	alert("Clicked Serve Button!!!");
 });
 
 
