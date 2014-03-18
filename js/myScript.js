@@ -100,11 +100,18 @@ $("#serve").click(function(e) {
 			else {
 				
 				for(var i = 0; i < pending.length; i++) {
-					var upDiv = "<div class='media'>";
+					var student = pending[i];
+					var studid = '<strong>ID Number: </strong>' + student.studid + '<br>';
+					var pnumber = '<strong>Priority Number: </strong>' + student.pnumber + '<br>';
+					var studname = '<strong>Name: </strong>' + student.studname + '<br>';
+					var phone = '<strong>Phone: </strong>' + student.phone + '<br>';
+
+					var openDiv = "<div class='media'>";
 					var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
-					var content = "<div class='media-body'> <h4>" + pending[i] + "</div>";
+					var content = "<div class='media-body'> " + studid + pnumber + studname + phone + "</div>";
+					var serveButton = "<button class='btn btn-primary'>Serve</button>";
 					var closeDiv = "</div>";
-					$("#list").append(upDiv + img + content + closeDiv);
+					$("#list").append(openDiv + img + content + serveButton + closeDiv);
 				}
 					
 			}
