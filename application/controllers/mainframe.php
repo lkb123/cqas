@@ -286,13 +286,16 @@
 		public function serveStudent() {
 			$student = $this->waitingList->getFirstStudentAvailable();
 			$studId = $student['studid'];
-			$this->waitingList->updateServingEntry($studId);
+			$this->waitingList->updateServingEntry($studId, true);
 			$toServe = $this->student->retrieveStudent($studId);
 			echo json_encode($toServe);
 		}
 
 		public function doneServeStudent() {
-			echo 'you are here';
+			$idNumber =  $this->input->get('idnumber');
+			$this->waitingList->updateServedEntry($idNumber);
+			$this->waitingList->updateServingEntry($idNumber, false);
+			$this->cashierIndex('cashier_serve_dash');
 		}
 
 	}

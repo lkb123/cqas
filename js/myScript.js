@@ -95,8 +95,15 @@ $(document).ready(function() {
 		url: "http://localhost/cqas/index.php/mainframe/getToBeServedStudents",
 		dataType: "json",
 		success: function(pending) {
-			if(pending.length == 0)
-				;	//do nothing
+			if(pending.length == 0) {
+				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
+				var openDiv = "<div class='media'>";
+				var img = "<a class='pull-left' href='#'></a>";
+				var content = "<div class='media-body'> No students to be served </div>";
+				var closeDiv = "</div>";
+				display = display + openDiv + img + content + closeDiv;
+				$("#list").html(display);
+			}
 			else {
 				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
 
@@ -152,8 +159,7 @@ $("#servebutton").click(function() {
 });
 
 function doneButton(idNumber) {
-	//alert('asfdgfdg');
-	window.location.href('http://localhost/cqas/index.php/mainframe/doneServeStudent');
+	window.location.assign('http://localhost/cqas/index.php/mainframe/doneServeStudent?idnumber=' + idNumber);
 }
 
 

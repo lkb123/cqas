@@ -65,8 +65,12 @@
 			return $data->row_array();
 		}
 
-		public function updateServingEntry($idNumber) {
-			$this->CI->WM->updateServing($idNumber);
+		public function updateServingEntry($idNumber, $value) {
+			$this->CI->WM->updateServing($idNumber, $value);
+		}
+
+		public function updateServedEntry($idNumber) {
+			$this->CI->WM->updateServed($idNumber);
 		}
 
 		/*
