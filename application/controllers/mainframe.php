@@ -62,6 +62,7 @@
 		}
 		
 		public function cashierIndex($page, $message = '', $messageType = '') {
+			$data = $this->cashier->retrieveCashier($this->session->userdata('cashierSessionId'));
 			$data['message'] = $message;
 			$this->load->view('templates/header_view', $data);
 			if(! $this->session->userdata('cashierSessionId'))

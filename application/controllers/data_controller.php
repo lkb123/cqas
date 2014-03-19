@@ -7,11 +7,13 @@
 
 		private $student;
 		private $cashier;
+		private $waitinglist;
 
 		public function __construct() {
 			parent::__construct();
 			$this->cashier = new Cashier();
 			$this->student = new Student();
+			$this->waitinglist = new Waitinglist();
 		}
 
 		
@@ -21,6 +23,11 @@
 
 		public function getCashierDetails($cashierId) {
 			$result = $this->cashier->retrieveCashier($cashierId);
+		}
+
+		public function getFifteenStudents(){
+			$result = $this->waitingList->retrieveFifteenStudents();
+			echo var_dump($result);
 		}
 
 

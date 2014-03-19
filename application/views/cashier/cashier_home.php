@@ -20,7 +20,7 @@
     <div class="col-md-10">
                 <div class="panel">
                     <img class="pic img-circle" src="<?php echo base_url();?>img/defaultpic.jpg" alt="...">
-                    <div class="name"><small>Sherwin Gwapo</small></div>
+                    <div class="name"><small><?php echo $givenname;?> <?php echo $middlename; ?> <?php echo $lastname; ?></small></div>
                 </div>
     </div>
 
