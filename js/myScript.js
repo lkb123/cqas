@@ -143,28 +143,32 @@ $("#servebutton").click(function() {
 				var openDiv = "<div class = media";
 				var content = "<div class='media-body'> " + studid + name + course + college + "</div>";
 				var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
-				var button = "<button id='donebutton' class='btn btn-primary'>Done</button>";
+				var button = "<button onclick = doneButton('" + toServe.studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
 				var closeDiv = "</div>";
 				display = display + openDiv + img + content + button + closeDiv;
 				$("#list").html(display);
 				$("#servebutton").remove();
 
-				$(document).on('click', '#donebutton', function() {
+				/*$(document).on('click', '#donebutton', function() {
 					//alert(toServe.studid);
 					$.ajax({
 						type: 'POST',
 						url: "http://localhost/cqas/index.php/mainframe/doneServeStudent",
-						data: toServe.studid.val();
+						//data: toServe.studid.val();
 						//dataType: 'json',
 						//success: function() {
 							//do nothing
 						//}
 					});
-				});
+				}); */
 			}
 		}
 	});
 });
+
+function doneButton(idNumber) {
+	alert(idNumber);
+}
 
 
 $(function(){
