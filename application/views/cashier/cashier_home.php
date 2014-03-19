@@ -20,8 +20,24 @@
     <div class="col-md-10">
                 <div class="panel">
                     <img class="pic img-circle" src="<?php echo base_url();?>img/defaultpic.jpg" alt="...">
-                    <div class="name"><small><?php echo $givenname;?> <?php echo $middlename; ?> <?php echo $lastname; ?></small></div>
-                </div>
+                    <div class="container-fluid well span6">
+                       <div class="row-fluid">
+                          <div class="span8">
+                            <h3><?php echo $givenname;?> <?php echo $middlename; ?> <?php echo $lastname; ?></h3>
+                            <h6><b>Username: </b><?php echo $cashierid; ?> </h6>
+                          </div>
+        
+                          <!--<div class="span2">
+                            <div class="btn-group">
+                              <a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#">Action<span class="icon-cog icon-white"></span><span class="caret"></span></a>
+                              <ul class="dropdown-menu">
+                                <li><a href="#"><span class="icon-wrench"></span> Change Password</a></li>
+                              </ul>
+                            </div>
+                          </div>-->
+                        </div>
+                    </div>
+              </div>
     </div>
 
   </div>

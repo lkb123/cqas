@@ -43,14 +43,7 @@
 			return $result;
 		}
 		
-		public function getCurrentlyServedStudent(){
-			//return $this->list[1];
-		}
 		
-		public function getNextWaitingStudent(){
-			//return $this->list[2];
-		}
-
 		public function studentIsValid($idNumber) {
 			$query = $this->CI->WM->getValidity($idNumber);
 			

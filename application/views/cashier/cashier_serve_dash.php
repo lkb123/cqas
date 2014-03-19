@@ -18,9 +18,9 @@
            <div class="col-lg-5" id="list">
                <div class="media">
                     <!-- <a class="pull-left" href="#"> -->
-                      <!-- <img class="media-object dp img-circle" src="http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg" style="width: 100px;height:100px;"> -->
-                    <!-- </a> -->
-                  <!-- <div class="media-body" id="list"> -->
+                     <!-- <img class="media-object dp img-circle" src="http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg" style="width: 100px;height:100px;"> -->
+                     <!-- </a> -->
+                     <!-- <div class="media-body" id="list"> -->
                      <!-- <h4 class="media-heading">Sherwin Gwapo<small> Philippines</small></h4> -->
                      <!-- <h5>College: SCS</h5> -->
                      <!-- <h6>Course: BSCS</h6> -->

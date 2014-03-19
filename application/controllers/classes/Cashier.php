@@ -70,7 +70,7 @@ class Cashier {
 
 	 public function retrieveCashier($cashierId) {
 	 	$result = $this->CI->CM->getCashier($cashierId);
-	 	return $result->row_array;
+	 	return $result->row_array();
 	 }
 	 
  }
