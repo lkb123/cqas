@@ -98,8 +98,6 @@ $(document).ready(function() {
 			if(pending.length == 0)
 				;	//do nothing
 			else {
-
-				//$("#donebutton").hide();
 				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
 
 				for(var i = 0; i < pending.length; i++) {
@@ -148,26 +146,14 @@ $("#servebutton").click(function() {
 				display = display + openDiv + img + content + button + closeDiv;
 				$("#list").html(display);
 				$("#servebutton").remove();
-
-				/*$(document).on('click', '#donebutton', function() {
-					//alert(toServe.studid);
-					$.ajax({
-						type: 'POST',
-						url: "http://localhost/cqas/index.php/mainframe/doneServeStudent",
-						//data: toServe.studid.val();
-						//dataType: 'json',
-						//success: function() {
-							//do nothing
-						//}
-					});
-				}); */
 			}
 		}
 	});
 });
 
 function doneButton(idNumber) {
-	alert(idNumber);
+	//alert('asfdgfdg');
+	window.location.href('http://localhost/cqas/index.php/mainframe/doneServeStudent');
 }
 
 
