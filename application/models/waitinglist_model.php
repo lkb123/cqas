@@ -68,8 +68,24 @@
 			return $query;
 		}
 
-		public function updateServing($idNumber) {
-			$this->db->query("UPDATE waitinglist SET serving = false WHERE studid = '$idNumber'");
+		public function updateServing($idNumber, $value) {
+			if($value){
+				$this->db->query("UPDATE waitinglist SET serving = true WHERE studid = '$idNumber'");
+			}
+			else
+				$this->db->query("UPDATE waitinglist SET serving = false WHERE studid = '$idNumber'");
 		}
+
+		public function updateServed($idNumber) {
+			$this->db->query("UPDATE waitinglist SET served = true WHERE studid = '$idNumber'");
+		}
+
+		public function updateDateServed($idNumber){
+			$this->db->query("UPDATE waitinglist SET dateserved = current_date WHERE studid = '$idNumber'");
+		}
+		 
+		 public function updateTimeServed($idNumber){
+		 	$this->db->query("UPDATE waitinglist SET timeserved = localtime(0) WHERE studid = '$idNumber'");
+		 }
 
 	}
