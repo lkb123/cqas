@@ -15,8 +15,10 @@
         <div class="col-md-10">
                 <div class="panel">
                    <div class="row">
-           <div class="col-lg-5" id="list">
-               <div class="media">
+           <div class="col-lg-5">
+              <button id='servebutton' class='btn btn-primary'>Serve</button>
+               <div class="media" id="list">
+                    
                     <!-- <a class="pull-left" href="#"> -->
                      <!-- <img class="media-object dp img-circle" src="http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg" style="width: 100px;height:100px;"> -->
                      <!-- </a> -->

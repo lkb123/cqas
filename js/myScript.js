@@ -87,8 +87,8 @@ $( "#target" ).click(function(e) {
 	/*$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();*/
 });
 
-$("#serve").click(function(e) {
-	e.preventDefault();
+$(document).ready(function() {
+	//e.preventDefault();
 	//$("#list").append("Hello");
 	$.ajax({
 		type: 'POST',
@@ -98,7 +98,8 @@ $("#serve").click(function(e) {
 			if(pending.length == 0)
 				;	//do nothing
 			else {
-				var display = "";
+				//$("#donebutton").hide();
+				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
 				for(var i = 0; i < pending.length; i++) {
 					var student = pending[i];
 					var studid = '<strong>ID Number: </strong>' + student.studid + '<br>';
@@ -109,10 +110,8 @@ $("#serve").click(function(e) {
 					var openDiv = "<div class='media'>";
 					var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
 					var content = "<div class='media-body'> " + studid + pnumber + studname + phone + "</div>";
-					var serveButton = "<button id='servebutton' class='btn btn-primary'>Serve</button>";
 					var closeDiv = "</div>";
-					//$("#list").append(openDiv + img + content + serveButton + closeDiv);
-					display = display + openDiv + img + content + serveButton + closeDiv;
+					display = display + openDiv + img + content + closeDiv;
 				}
 				$("#list").html(display);
 			}
@@ -120,6 +119,51 @@ $("#serve").click(function(e) {
 	});
 	
 });
+
+$("#servebutton").click(function() {
+	//alert("Hello World");
+	$.ajax({
+		type: 'POST',
+		url: "http://localhost/cqas/index.php/mainframe/serveStudent",
+		dataType: "json",
+		success: function(toServe) {
+			if(toServe.length == 0) {
+				alert("empty");
+			}
+			else {
+				//$.cookie('idnumber', toServe.studid);
+				var studid = '<strong>ID Number: </strong>' + toServe.studid + '<br>';
+				var name = '<strong>Name: </strong>' + toServe.lastname + ', ' + toServe.givenname + ' ' + toServe.middlename + '<br>';
+				var course = '<strong>Course: </strong>' + toServe.course + '<br>';
+				var college = '<strong>College: </strong>' + toServe.college + '<br>';
+
+				var display = "";
+				var openDiv = "<div class = media";
+				var content = "<div class='media-body'> " + studid + name + course + college + "</div>";
+				var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
+				var button = "<button id='donebutton' class='btn btn-primary'>Done</button>";
+				var closeDiv = "</div>";
+				display = display + openDiv + img + content + button + closeDiv;
+				$("#list").html(display);
+				$("#servebutton").remove();
+
+				$(document).on('click', '#donebutton', function() {
+					//alert(toServe.studid);
+					$.ajax({
+						type: 'POST',
+						url: "http://localhost/cqas/index.php/mainframe/doneServeStudent",
+						data: toServe.studid.val();
+						//dataType: 'json',
+						//success: function() {
+							//do nothing
+						//}
+					});
+				});
+			}
+		}
+	});
+});
+
 
 $(function(){
 	$('.queueAlert').show('slow');

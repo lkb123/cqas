@@ -13,31 +13,38 @@
 			return $this->db->query($query);
 		}
 		//count sa na served na for the current date
+		//deprecated
 		public function countUnServedEntries() {
 			$query = "Select COUNT(*) As studentcount From waitinglist Where served = false and dateadded = current_date";
 			return $this->db->query($query)->row_array();
 		}
 		//count sa wala pa na serve for the current date
+		//deprecated
 		public function countServedEntries() {
 			$query = "Select COUNT(*) As studentcount From waitinglist Where served = true and dateadded = current_date";
 			return $this->db->query($query)->row_array();
 		}
+
 		//count sa mga nag queue for the current date
+		//deprecated
 		public function countAllEntries() {
 			$query = "Select COUNT(studid) As studentcount From waitinglist Where dateadded = current_date";
 			return $this->db->query($query)->row_array();
 		}	
 
+		//deprecated
 		public function clearWaitingList() {
 			$query = "Delete From waitinglist";
 			return $this->db->query($query);
 		}
 
+		//check to be deprecated
 		public function getStudent($idNumber) {
-			$query = "Select * From waitinglist Where studid = '$idNumber'";
+			$query = "SELECT * FROM waitinglist WHERE studid = '$idNumber' AND dateadded = current_date AND served = false";
 			return $this->db->query($query);
 		}
 
+		//deprecated
 		public function retrieveNthEntry($n) {
 			$query = "Select studid From waitinglist Where prioritynumber = $n Order By timestampadded";
 			return $this->db->query($query);
@@ -52,8 +59,17 @@
 		}
 
 		public function getFifteenStudents() {
-			$query = $this->db->query("Select * FROM waitinglist WHERE served = false LIMIT 15");
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false LIMIT 15");
 			return $query;
+		}
+
+		public function getFirstAvalableStudent() {
+			$query = $this->db->query("SELECT studid FROM waitinglist WHERE served = false AND serving = false LIMIT 1");
+			return $query;
+		}
+
+		public function updateServing($idNumber) {
+			$this->db->query("UPDATE waitinglist SET serving = false WHERE studid = '$idNumber'");
 		}
 
 	}

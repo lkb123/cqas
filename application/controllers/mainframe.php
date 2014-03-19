@@ -270,6 +270,7 @@
 
 		public function getToBeServedStudents() {
 			$data = $this->waitingList->retrieveFifteenStudents();
+			//$waitingStudents = $this->waitingList->countEntries();
 			$pending = array();
 			foreach($data as $row) {
 				$student = $this->student->retrieveStudent($row['studid']);
@@ -277,7 +278,8 @@
 					'studid' => $row['studid'],
 					'pnumber' => $row['prioritynumber'],
 					'studname' => $student['lastname'] . ', ' . $student['givenname'] . ' ' . $student['middlename'],
-					'phone' => $student['studphone']
+					'phone' => $student['studphone'],
+					//'count' => $waitingStudents;
 					);
 				$pending[] = $tmp;
 			}
@@ -286,4 +288,17 @@
 			//var_dump($pending);
 		}
 
-}
+
+		public function serveStudent() {
+			$student = $this->waitingList->getFirstStudentAvailable();
+			$studId = $student['studid'];
+			$this->waitingList->updateServingEntry($studId);
+			$toServe = $this->student->retrieveStudent($studId);
+			echo json_encode($toServe);
+		}
+
+		public function doneServeStudent() {
+			
+		}
+
+	}

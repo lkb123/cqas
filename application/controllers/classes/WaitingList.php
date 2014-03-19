@@ -20,6 +20,7 @@
 			$this->CI->WM->addStudent($id_number, $pNumber);
 		}
 
+		//deprecated
 		public function countEntries() {
 			$count = $this->CI->WM->countAllEntries();
 			return $count['studentcount'];
@@ -29,12 +30,13 @@
 			$this->CI->WM->clearWaitingList();
 		}
 
+		//deprecated
 		public function retrieveAStudent($idNumber) {
 			$entry = $this->CI->WM->getStudent($idNumber);
 			return $entry->row();
 		}
 		
-
+		//deprecated
 		public function retrieveNthStudent($n) {
 			
 			if($n > $this->countEntries() && $n <= 999)
@@ -42,8 +44,12 @@
 			$result = $this->CI->WM->retrieveNthEntry($n)->row();
 			return $result;
 		}
+<<<<<<< HEAD
 		
 		
+=======
+
+>>>>>>> partial commit
 		public function studentIsValid($idNumber) {
 			$query = $this->CI->WM->getValidity($idNumber);
 			
@@ -57,6 +63,15 @@
 			$data = $this->CI->WM->getFifteenStudents();
 			//echo var_dump($data->result_array());
 			return $data->result_array();
+		}
+
+		public function getFirstStudentAvailable() {
+			$data = $this->CI->WM->getFirstAvalableStudent();
+			return $data->row_array();
+		}
+
+		public function updateServingEntry($idNumber) {
+			$this->CI->WM->updateServing($idNumber);
 		}
 
 		/*
