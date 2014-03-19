@@ -71,6 +71,8 @@
 
 		public function updateServedEntry($idNumber) {
 			$this->CI->WM->updateServed($idNumber);
+			$this->CI->WM->updateDateServed($idNUmber);
+			$this->CI->WM->updateTimeServed($idNUmber);
 		}
 
 		/*

@@ -59,24 +59,33 @@
 		}
 
 		public function getFifteenStudents() {
-			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date LIMIT 15");
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false LIMIT 15");
 			return $query;
 		}
 
 		public function getFirstAvalableStudent() {
-			$query = $this->db->query("SELECT studid FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date LIMIT 1");
+			$query = $this->db->query("SELECT studid FROM waitinglist WHERE served = false AND serving = false LIMIT 1");
 			return $query;
 		}
 
 		public function updateServing($idNumber, $value) {
-			if($value)
-				$this->db->query("UPDATE waitinglist SET serving = true WHERE studid = '$idNumber' AND dateadded = current_date");
+			if($value){
+				$this->db->query("UPDATE waitinglist SET serving = true WHERE studid = '$idNumber'");
+			}
 			else
-				$this->db->query("UPDATE waitinglist SET serving = false WHERE studid = '$idNumber' AND dateadded = current_date");
+				$this->db->query("UPDATE waitinglist SET serving = false WHERE studid = '$idNumber'");
 		}
 
 		public function updateServed($idNumber) {
-			$this->db->query("UPDATE waitinglist SET served = true WHERE studid = '$idNumber' AND dateadded = current_date");
+			$this->db->query("UPDATE waitinglist SET served = true WHERE studid = '$idNumber'");
 		}
+
+		public function updateDateServed($idNumber){
+			$this->db->query("UPDATE waitinglist SET dateserved = current_date WHERE studid = '$idNumber'");
+		}
+		 
+		 public function updateTimeServed($idNumber){
+		 	$this->db->query("UPDATE waitinglist SET timeserved = localtime(0) WHERE studid = '$idNumber'");
+		 }
 
 	}
