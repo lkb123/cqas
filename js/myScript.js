@@ -87,7 +87,7 @@ $( "#target" ).click(function(e) {
 	/*$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();*/
 });
 
-$(document).ready(function() {
+$(document).ready(function executeQuery() {
 	//e.preventDefault();
 	//$("#list").append("Hello");
 	$.ajax({
@@ -96,6 +96,7 @@ $(document).ready(function() {
 		dataType: "json",
 		success: function(pending) {
 			if(pending.length == 0) {
+				$("#servebutton").hide();
 				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
 				var openDiv = "<div class='media'>";
 				var img = "<a class='pull-left' href='#'></a>";
@@ -106,7 +107,7 @@ $(document).ready(function() {
 			}
 			else {
 				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
-
+				$("#servebutton").show();
 				for(var i = 0; i < pending.length; i++) {
 					var student = pending[i];
 					var studid = '<strong>ID Number: </strong>' + student.studid + '<br>';
@@ -122,9 +123,12 @@ $(document).ready(function() {
 				}
 				$("#list").html(display);
 			}
-		}
-	});
-	
+		},
+		complete: function() {
+      		// Schedule the next request when the current one's complete
+      		setTimeout(executeQuery, 1000);
+    	}
+	});	
 });
 
 $("#servebutton").click(function() {
@@ -135,7 +139,7 @@ $("#servebutton").click(function() {
 		dataType: "json",
 		success: function(toServe) {
 			if(toServe.length == 0) {
-				alert("empty");
+				; //do nothing
 			}
 			else {
 				//$.cookie('idnumber', toServe.studid);
@@ -143,23 +147,33 @@ $("#servebutton").click(function() {
 				var name = '<strong>Name: </strong>' + toServe.lastname + ', ' + toServe.givenname + ' ' + toServe.middlename + '<br>';
 				var course = '<strong>Course: </strong>' + toServe.course + '<br>';
 				var college = '<strong>College: </strong>' + toServe.college + '<br>';
+				var button = "<button onclick = doneButton('" + toServe.studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
 
 				var display = "";
 				var openDiv = "<div class = media";
 				var content = "<div class='media-body'> " + studid + name + course + college + "</div>";
 				var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
-				var button = "<button onclick = doneButton('" + toServe.studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
 				var closeDiv = "</div>";
-				display = display + openDiv + img + content + button + closeDiv;
+				display = display + openDiv + img + content + closeDiv;
 				$("#list").html(display);
-				$("#servebutton").remove();
+				$("#servebutton").replaceWith(button);
 			}
 		}
 	});
 });
 
 function doneButton(idNumber) {
-	window.location.assign('http://localhost/cqas/index.php/mainframe/doneServeStudent?idnumber=' + idNumber);
+	//$("#tmp").append("asdf");
+	var answer = confirm("Are you sure you are done serving this student?");
+	if(answer)
+		window.location.assign('http://localhost/cqas/index.php/mainframe/doneServeStudent?idnumber=' + idNumber);
+	else
+		; //do nothing
+	//$("#tmp").append("asdf");
+}
+
+function tmp(pending) {
+
 }
 
 
