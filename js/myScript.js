@@ -98,13 +98,10 @@ $(document).ready(function() {
 			if(pending.length == 0)
 				;	//do nothing
 			else {
-<<<<<<< HEAD
+
 				//$("#donebutton").hide();
 				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
-=======
 
-				
->>>>>>> Commit
 				for(var i = 0; i < pending.length; i++) {
 					var student = pending[i];
 					var studid = '<strong>ID Number: </strong>' + student.studid + '<br>';

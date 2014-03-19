@@ -44,12 +44,7 @@
 			$result = $this->CI->WM->retrieveNthEntry($n)->row();
 			return $result;
 		}
-<<<<<<< HEAD
-		
-		
-=======
 
->>>>>>> partial commit
 		public function studentIsValid($idNumber) {
 			$query = $this->CI->WM->getValidity($idNumber);
 			
