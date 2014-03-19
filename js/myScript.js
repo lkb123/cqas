@@ -98,8 +98,13 @@ $(document).ready(function() {
 			if(pending.length == 0)
 				;	//do nothing
 			else {
+<<<<<<< HEAD
 				//$("#donebutton").hide();
 				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
+=======
+
+				
+>>>>>>> Commit
 				for(var i = 0; i < pending.length; i++) {
 					var student = pending[i];
 					var studid = '<strong>ID Number: </strong>' + student.studid + '<br>';
@@ -168,8 +173,11 @@ $("#servebutton").click(function() {
 $(function(){
 	$('.queueAlert').show('slow');
 
+	$('#register').hide();
+
 });
 
+/* 
 $('#subscribe').click(function(){
 	var checked = $('#subscribe').prop("checked") 
 	if(checked){
@@ -180,6 +188,54 @@ $('#subscribe').click(function(){
 	}
 });
 
+*/
+
+$('#addtoQueue').click(function(e){
+
+	e.preventDefault();
+	var checked = $('#subscribe').prop("checked");
+
+    if(checked){
+    	var idNum = $('#idNum').val();
+    	if(idNum==""){
+    		alert('ID number must be filled');
+    	}else{
+    		$.ajax({
+    			type: 'POST',
+    			url: 'http://localhost/cqas/index.php/mainframe/subscribe',
+    			data: $('#login').serialize(),
+    			dataType: 'json',
+    			success: function(idNumberData){
+    				if(idNumberData=='false'){ //wala sa database
+    					$("#login").attr("action", "http://localhost/cqas/index.php/mainframe/encode").submit();
+    				}else if(idNumberData==''){ //walay phone
+    					$("#idNum").prop('disabled', true);
+    					$("#subscribe").prop('disabled', true);
+    					$("#addtoQueue").hide();
+    					$("#register").show();
+    					var newInput = '<input type="text" class="form-control pnum" name="cellNum" id="cellNum" placeholder="Cellphone Number"/>';
+						$("#pnum").hide().append(newInput).show('slow');
+    				}
+    				else{
+    					$("#idNum").prop('disabled', true);
+    					$("#subscribe").prop('disabled', true);
+    					$("#addtoQueue").hide();
+    					$("#register").show();
+    					var newInput = '<input type="text" class="form-control pnum" name="cellNum" id="cellNum" placeholder="Cellphone Number"/>';
+						$("#pnum").hide().append(newInput).show('slow');
+    				}
+    			}	
+    		});
+    	}
+    }
+    else{
+    	$("#login").attr("action", "http://localhost/cqas/index.php/mainframe/encode").submit();
+    }
+});
+
+
+
+$
 
 
 /* keeping this for reference purposes

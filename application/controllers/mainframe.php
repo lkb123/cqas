@@ -115,6 +115,7 @@
 						//check if student is valid to be added to the waiting list
 
 						$subscribe = $this->input->post('subscribe');
+
 						$this->waitingList->append($idNumber);	//append student to waiting list
 						//if($subscribe)
 							//$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
@@ -123,24 +124,11 @@
 						if($query === "") {
 							//if id number in database but no cellphone number
 							if($subscribe) {
-								//if nag subscribe sya, pangayuon ang cellphone number ayha i add sa waiting list
-								/*
-								$stud_cookie = array(
-								'name'   => 'idnumber',
-		                		'value'  => $idNumber,
-		                		'expire' =>  100000,
-		                		'secure' => false
-								);	
-								$this->input->set_cookie($stud_cookie);	
-								$this->studentIndex('add_cell_number');
-								return;	//end function
-								*/
-								echo $subscribe;
+								//
 							}
 							else {
 								//if wala nag subscribe, dretso ra i add sa waiting list
 								$this->studentIndex('encode_view', "Student Added!!", 'Success', $pnumber);
-								return;	//end function
 							}
 						}
 						//if id number is in database and cellphone number available
@@ -212,6 +200,12 @@
 				//if cookie exist
 				$this->cashierIndex('cashier_home');
 			}
+		}
+
+		public function subscribe(){
+			$idNumber = $this->input->post('idNumber');
+			$idNumberData = $this->cashier->idNumberExist($idNumber);
+			echo json_encode($idNumberData);
 		}
 
 		/*
