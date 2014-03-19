@@ -317,9 +317,15 @@ position:relative;
 z-index:1111;
 }
 
-.successQueue{
+#unsubscribe{
+  margin-left: 52px;
+}
 
-	
+#cellNum{
+  margin-top: 2px;
+}
+#register{
+  margin-top: 2px;
 }
 
 /* END OF ALERT QUEUE UI*/

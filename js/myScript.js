@@ -18,17 +18,7 @@ $(function(){
 		}
 		e.preventDefault();
 	});
-	
-	/*
-	formContainer.find('form').submit(function(e){
-		// Preventing form submissions. If you implement
-		// a backend, you might want to remove this code
-		e.preventDefault();
-	});
-	*/
-	
-	// A helper function that checks for the 
-	// support of the 3D CSS3 transformations.
+
 	function supportsCSS3D() {
 		var props = [
 			'perspectiveProperty', 'WebkitPerspective', 'MozPerspective'
@@ -45,14 +35,6 @@ $(function(){
 });
 
 
-
-
-	/*
-		$.ajax({
-			type: 'POST',
-			url: "<?php echo site_url('mainframe/login');?> ",
-			data: $('#SubmitForm').serialize()
-	});*/
 $( "#target" ).click(function(e) {
 
 		e.preventDefault();
@@ -82,45 +64,8 @@ $( "#target" ).click(function(e) {
 		    }
 		}
 		});
-		/*
-		alert(result);}
-	/*$("#SubmitForm").attr("action", "index.php/mainframe/login").submit();*/
 });
 
-$(document).ready(function() {
-	//e.preventDefault();
-	//$("#list").append("Hello");
-	$.ajax({
-		type: 'POST',
-		url: "http://localhost/cqas/index.php/mainframe/getToBeServedStudents",
-		dataType: "json",
-		success: function(pending) {
-			if(pending.length == 0)
-				;	//do nothing
-			else {
-
-				//$("#donebutton").hide();
-				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
-
-				for(var i = 0; i < pending.length; i++) {
-					var student = pending[i];
-					var studid = '<strong>ID Number: </strong>' + student.studid + '<br>';
-					var pnumber = '<strong>Priority Number: </strong>' + student.pnumber + '<br>';
-					var studname = '<strong>Name: </strong>' + student.studname + '<br>';
-					var phone = '<strong>Phone: </strong>' + student.phone + '<br>';
-
-					var openDiv = "<div class='media'>";
-					var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
-					var content = "<div class='media-body'> " + studid + pnumber + studname + phone + "</div>";
-					var closeDiv = "</div>";
-					display = display + openDiv + img + content + closeDiv;
-				}
-				$("#list").html(display);
-			}
-		}
-	});
-	
-});
 
 $("#servebutton").click(function() {
 	//alert("Hello World");
@@ -154,7 +99,7 @@ $("#servebutton").click(function() {
 					$.ajax({
 						type: 'POST',
 						url: "http://localhost/cqas/index.php/mainframe/doneServeStudent",
-						data: toServe.studid.val();
+						data: toServe.studid.val(),
 						//dataType: 'json',
 						//success: function() {
 							//do nothing
@@ -168,28 +113,25 @@ $("#servebutton").click(function() {
 
 
 $(function(){
-	$('.queueAlert').show('slow');
 
-	$('#register').hide();
+	$('#unsubscribe').hide();
+
+   	$('#cellNum').hide();
+
+   	$('#register').hide();
 
 });
 
-/* 
-$('#subscribe').click(function(){
-	var checked = $('#subscribe').prop("checked") 
-	if(checked){
-		var newInput = '<input type="text" class="form-control pnum" name="cellNum" id="cellNum" placeholder="Cellphone Number"/>';
-		$("#pnum").hide().append(newInput).show('slow');
-	}else{
-		$(".pnum").remove();
-	}
+$('#home').click(function(e){
+
+	window.location.replace("http://localhost/cqas");
+	e.preventDefault
 });
 
-*/
 
 $('#addtoQueue').click(function(e){
 
-	e.preventDefault();
+    e.preventDefault();
 	var checked = $('#subscribe').prop("checked");
 
     if(checked){
@@ -202,54 +144,80 @@ $('#addtoQueue').click(function(e){
     			url: 'http://localhost/cqas/index.php/mainframe/subscribe',
     			data: $('#login').serialize(),
     			dataType: 'json',
-    			success: function(idNumberData){
-    				if(idNumberData=='false'){ //wala sa database
-    					$("#login").attr("action", "http://localhost/cqas/index.php/mainframe/encode").submit();
-    				}else if(idNumberData==''){ //walay phone
+    			success: function(resultData){
+    				if(resultData['idValidFormat']==false){ //wala sa database 
+    					alert('ID not valid');
+    				}else if(resultData['idExist']===false){
+    					alert('Not in database');
+    				}else if(resultData['idValidToQueue']==false){
+    					alert('pending');   				
+    				}else{
     					$("#idNum").prop('disabled', true);
     					$("#subscribe").prop('disabled', true);
     					$("#addtoQueue").hide();
     					$("#register").show();
-    					var newInput = '<input type="text" class="form-control pnum" name="cellNum" id="cellNum" placeholder="Cellphone Number"/>';
-						$("#pnum").hide().append(newInput).show('slow');
-    				}
-    				else{
-    					$("#idNum").prop('disabled', true);
-    					$("#subscribe").prop('disabled', true);
-    					$("#addtoQueue").hide();
-    					$("#register").show();
-    					var newInput = '<input type="text" class="form-control pnum" name="cellNum" id="cellNum" placeholder="Cellphone Number"/>';
-						$("#pnum").hide().append(newInput).show('slow');
+    					$('#unsubscribe').show();
+						$("#cellNum").show('slow').val(resultData['idExist']);
     				}
     			}	
     		});
     	}
     }
     else{
-    	$("#login").attr("action", "http://localhost/cqas/index.php/mainframe/encode").submit();
-    }
+    	$.ajax({
+    		type: 'POST',
+    		url: 'http://localhost/cqas/index.php/mainframe/encode',
+    		data: $('#login').serialize(),
+    		dataType: 'json',
+    		success: function(result){
+    			if(result['flag']){
+    				alert(result['pmessage']+' '+result['pnumber']);
+    			}
+    			else{
+    				alert(result['errormessage']);
+    			}
+    	}
+ 
+		});
+     }  	
 });
 
+$('#unsubscribe').click(function(e){
 
 
-$
+	$("#idNum").prop('disabled', false);
+	$("#subscribe").prop('disabled', false);
+	$("#subscribe").prop("checked", false);
+	$("#addtoQueue").show();
+	$("#register").hide();
+	$('#unsubscribe').hide();
+	$("#register").hide("slow")
+	$("#cellNum").hide("slow")
+	
+	e.preventDefault();
+});
 
+$('#register').click(function(e){
+	
 
-/* keeping this for reference purposes
-*
-*
-		success: function(status){
+	//var cellNum = $('#cellNum').val();
+   		
+    $.ajax({
+		type: 'POST',
+		url: 'http://localhost/cqas/index.php/mainframe/encodeWithNumber',
+		data: $('#login').serialize(),
+		dataType: 'json',
+		success : function(result){
+			if(result['flag']===true){
+				alert(result['pmessage']+" "+result["pnumber"]);
+			}else{
+				alert(result['error']);
+			}
+		}
+	});
 
-			
-			var items = [];
-		    $.each(status
-		    	, function(key, val) {
-		      items.push(key + ' : ' + val + '</br>');
-		    });
-		    $('body').append(items.join(''));}
-		});
-*
-*/
+	e.preventDefault();	
+});
 
 $('#startServing').click(function(){
 

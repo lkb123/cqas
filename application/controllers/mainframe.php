@@ -49,17 +49,7 @@
 			$this->load->view('templates/footer_view');	
 		}
 
-		public function studentIndex($page, $message = '', $messageType = '', $pnumber = '') {
-			$data['message'] = $message;
-			$data['messageType'] = $messageType;
-			$data['pnumber'] = $pnumber;
 
-
-			$this->load->view('templates/header_view', $data);
-			$this->load->view('student/' . $page, $data);
-			$this->load->view('templates/footer_view');	
-				
-		}
 		
 		public function cashierIndex($page, $message = '', $messageType = '') {
 			$data = $this->cashier->retrieveCashier($this->session->userdata('cashierSessionId'));
@@ -93,53 +83,6 @@
 			$this->load->view('templates/header_view', $data);
 			$this->load->view('cashier/' . $page, $data);
 			$this->load->view('templates/footer_view');	
-		}
-
-		/*
-		 * Encoding of the student to the waiting list
-		 */
-		public function encode(){
-			$idNumber = $this->input->post('idNumber', TRUE);
-
-			if(! $this->cashier->validId($idNumber)) {
-				$this->studentIndex('encode_view', 'Error: Please input ID Number again', 'Error');
-			}else{
-				$query = $this->cashier->idNumberExist($idNumber);
-				//var_dump($query);
-				if($query === FALSE){
-					//if id number is not in the database
-					$this->studentIndex('encode_view', 'Error: ID Number not in the database', 'Error');
-				}
-				else {
-					if($this->waitingList->studentIsValid($idNumber) == true) { 
-						//check if student is valid to be added to the waiting list
-
-						$subscribe = $this->input->post('subscribe');
-
-						$this->waitingList->append($idNumber);	//append student to waiting list
-						//if($subscribe)
-							//$this->cashier->subscribeStudent($idNumber);	//subscribe the student if subscribe is true
-						$pnumber = $this->input->cookie('pnumber') + 1;	//get priority number
-
-						if($query === "") {
-							//if id number in database but no cellphone number
-							if($subscribe) {
-								//
-							}
-							else {
-								//if wala nag subscribe, dretso ra i add sa waiting list
-								$this->studentIndex('encode_view', "Student Added!!", 'Success', $pnumber);
-							}
-						}
-						//if id number is in database and cellphone number available
-						$this->studentIndex('encode_view', "Student Added!!", 'Successs', $pnumber);
-					}
-					//if ang student wala pa na serve sa last nya na pila sa waiting list
-					else 
-						$this->studentIndex('encode_view', "Error: Pending transactions to the cashier available", 'Error');
-					
-				}
-			}	
 		}
 
 		/*
@@ -202,11 +145,117 @@
 			}
 		}
 
+
+
+
+
+
+
+
 		public function subscribe(){
 			$idNumber = $this->input->post('idNumber');
-			$idNumberData = $this->cashier->idNumberExist($idNumber);
-			echo json_encode($idNumberData);
+			$result['idExist'] = $this->cashier->idNumberExist($idNumber);
+			$result['idValidToQueue'] = $this->waitingList->studentIsValid($idNumber);
+			$result['idValidFormat'] = $this->cashier->validId($idNumber);
+
+			$idNumberCookie = array (
+			'name'   => 'studentID',
+            'value'  => $idNumber,
+            'expire' =>  100000,
+            'secure' => false
+			);
+
+			$this->input->set_cookie($idNumberCookie);
+			echo json_encode($result);
 		}
+
+		public function studentIndex($page) {
+			$this->load->view('templates/header_view');
+			$this->load->view('student/' . $page);
+			$this->load->view('templates/footer_view');	
+				
+		}
+
+		public function encode(){
+			$idNumber = $this->input->post('idNumber', TRUE);
+
+			if($idNumber==''){
+				$result['flag'] = false;
+				$result['errormessage'] = 'ID number must be filled';
+				echo json_encode($result);
+			}
+			else if(!$this->cashier->validId($idNumber)) {
+				$result['flag'] = false;
+				$result['errormessage'] = 'ID number is invalid';
+				echo json_encode($result);
+			}
+			else{
+				$query = $this->cashier->idNumberExist($idNumber); 
+				//var_dump($query);
+				if($query === FALSE){
+					//if id number is not in the database
+					$result['flag'] = false;
+					$result['errormessage'] = 'ID number not found';
+					echo json_encode($result);
+				}
+				else {
+					$flag = $this->waitingList->studentIsValid($idNumber);
+					if( $flag == true) { //check if student is valid to be added to the waiting list
+						
+						$this->waitingList->append($idNumber, $query);	//append student to waiting list
+						$result['pnumber']= $this->input->cookie('pnumber') + 1;	//get priority number
+						$result['pmessage'] = 'Your priority number is';
+						$result['flag'] = true;
+						echo json_encode($result);
+					}
+					//if ang student wala pa na serve sa last nya na pila sa waiting list
+					else{
+						$result['flag'] = false;
+						$result['errormessage'] = 'ID number has a pending transaction';
+						echo json_encode($result);
+					}
+				}
+			}	
+		}
+
+		public function encodeWithNumber(){
+
+			$studID = $this->input->cookie('studentID');
+			$phoneNumber = $this->input->post('cellNum');
+			$isValidPhone = $this->cashier->validPhoneNumber($phoneNumber);
+			$flag = $this->waitingList->studentIsValid($studID);
+			
+			if($phoneNumber==""){
+				$result['error'] = "Phone number must be filled";
+				echo json_encode($result);				
+			}else if($isValidPhone==true && $flag==true){
+
+				$this->waitingList->append($studID, $phoneNumber);	//append student to waiting list
+				$this->cashier->subscribeStudent($studID);
+				$result['pnumber'] = $this->input->cookie('pnumber') + 1;	//get priority number
+				$result['pmessage'] = 'Your priority number is';
+				$result['flag'] = true;
+				echo json_encode($result);
+
+			}else if($isValidPhone==false){
+				$result['error'] = "Invalid cell number";
+				echo json_encode($result);
+			}else{
+				$result['error'] = "Pending";
+				echo json_encode($result);				
+			}
+
+			
+		}
+
+
+
+
+
+
+
+
+
 
 		/*
 		 * Cashier logout
