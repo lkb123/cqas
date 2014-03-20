@@ -192,9 +192,9 @@
 
 			}else if($isValidPhone==true && $flag==true){
 
-				$this->waitingList->append($studID, $phoneNumber);	//append student to waiting list
+				$this->waitingList->append($studID, $phoneNumber);	
 				$this->cashier->subscribeStudent($studID);
-				$result['pnumber'] = $this->input->cookie('pnumber') + 1;	//get priority number
+				$result['pnumber'] = $this->input->cookie('pnumber') + 1;
 				$result['pmessage'] = 'Your priority number is';
 				$result['flag'] = true;
 				echo json_encode($result);

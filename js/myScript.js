@@ -103,7 +103,6 @@ $("#servebutton").click(function displayToBeServedStudent() {
 				var closeDiv = "</div>";
 				display = display + openDiv + img + content + closeDiv;
 				$("#list").html(display);
-
 				$("#servebutton").replaceWith(button);
 
 				
@@ -162,9 +161,8 @@ function backToHome(e){
 	e.preventDefault
 }
 
+
 function addStudentToQueue(e){
-
-
 	var checked = $('#subscribe').prop("checked");
 
     if(checked){
@@ -251,7 +249,6 @@ function unsubscribe(e){
 }
 
 function cashierLogInToServe(){
-
 		$.ajax({
 		url: "http://localhost/cqas/index.php/mainframe/hasSession",
 		success: function(hasSession){
