@@ -178,6 +178,7 @@ $(function(){
 
 });
 
+<<<<<<< HEAD
 $('#home').click(function(e){
 
 	window.location.replace("http://localhost/cqas");
@@ -185,6 +186,8 @@ $('#home').click(function(e){
 });
 
 
+=======
+>>>>>>> fix
 $('#addtoQueue').click(function(e){
 
     e.preventDefault();
@@ -238,6 +241,7 @@ $('#addtoQueue').click(function(e){
      }  	
 });
 
+<<<<<<< HEAD
 $('#unsubscribe').click(function(e){
 
 
@@ -275,6 +279,8 @@ $('#register').click(function(e){
 	e.preventDefault();	
 });
 
+=======
+>>>>>>> fix
 $('#startServing').click(function(){
 
 		$.ajax({
