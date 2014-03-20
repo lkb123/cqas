@@ -36,14 +36,6 @@
 
 			$this->input->set_cookie($cookie_settings);	
 
-			$cashier_cookie = array (
-					'name'   => 'cashierId',
-		            'value'  => 'false',
-		            'expire' =>  100000,
-		            'secure' => false
-					);
-			$this->input->set_cookie($cashier_cookie);
-
 			$this->load->view('templates/header_view');
 			$this->load->view('home');
 			$this->load->view('templates/footer_view');	
@@ -76,23 +68,6 @@
 					$this->load->view('cashier/' . $page, $data);
 			}
 			$this->load->view('templates/footer_view');		
-		}
-
-		public function cashierServe($page, $studentCount = '', $currentStudent = '') {
-			$count = $this->waitingList->countEntries();
-								
-								$count_cookie = array(
-								'name'   => 'countstudents',
-		                		'value'  => $count,
-		                		'expire' =>  100000,
-		                		'secure' => false
-								);	
-
-			$this->input->set_cookie($count_cookie);	
-			$data['count'] = $this->input->cookie('countstudents');
-			$this->load->view('templates/header_view', $data);
-			$this->load->view('cashier/' . $page, $data);
-			$this->load->view('templates/footer_view');	
 		}
 
 		/*
@@ -162,34 +137,20 @@
 			}
 		}
 
-		/*
-		 * Cashier login
-		 */
 		public function login() {
-
 			$cashierId = $this->input->post('cashierid');
 			$password = $this->input->post('cashierpass');
 
 			$status = $this->cashier->login($cashierId, $password);
 			
-			//var_dump($status);
 			if(! $this->session->userdata('cashierSessionId')) {
 				//if no session exist
 				if($status) {
-					/*$cashier_cookie = array (
-						'name'   => 'cashierId',
-			            'value'  => $cashierId,
-			            'expire' =>  100000,
-			            'secure' => false
+					$cashier_session = array(
+						'cashierSessionId' => $cashierId
 						);
-
-						$this->input->set_cookie($cashier_cookie);
-					*/
-						$cashier_session = array(
-							'cashierSessionId' => $cashierId
-							);
-						$this->session->set_userdata($cashier_session);
-						$this->cashierIndex('cashier_home');
+					$this->session->set_userdata($cashier_session);
+					$this->cashierIndex('cashier_home');
 				}
 				else {
 					//mali either ang cashier id or password
@@ -208,33 +169,7 @@
 			echo json_encode($idNumberData);
 		}
 
-		/*
-		 * Cashier logout
-		 */
 		public function logout() {
-			/*$cashierId = $this->input->cookie('cashierId');
-			$status = $this->cashier->logout($cashierId);
-			if($this->input->cookie('cashierId') != false) {
-				//if cookie exist
-				if($status) {
-					$cashier_cookie = array (
-						'name'   => 'cashierId',
-			            'value'  => 'false',
-			            'expire' =>  100000,
-			            'secure' => false
-						);
-
-						$this->input->set_cookie($cashier_cookie);
-						$this->cashierIndex('cashier_login');
-				}
-				else {
-					$this->cashierIndex('cashier_login');
-				}
-			}
-			else {
-				//if no cookie exist
-				$this->cashierIndex('cashier_login');
-			}*/
 			$this->session->sess_destroy();
 			$this->cashierIndex('cashier_login');
 		}
@@ -301,6 +236,14 @@
 			$this->waitingList->updateServedEntry($idNumber);
 			$this->waitingList->updateServingEntry($idNumber, false);
 			$this->cashierIndex('cashier_serve_dash');
+		}
+
+		private function checkCookie() {
+			if($this->session->usedata('cashierSessionId'))
+				;	//do nothing
+			else
+				$this->load->view('cashier/cashier_home', $data);
+
 		}
 
 	}
