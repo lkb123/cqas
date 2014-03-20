@@ -1,5 +1,5 @@
 $(function(){
-    
+    var timeVar = "";
 	// Checking for CSS 3D transformation support
 	$.support.css3d = supportsCSS3D();
 	
@@ -67,9 +67,7 @@ $( "#target" ).click(function(e) {
 });
 
 
-$(document).ready(function executeQuery() {
-	//e.preventDefault();
-	//$("#list").append("Hello");
+$(document).ready(function displayFifteenStudents() {
 	$.ajax({
 		type: 'POST',
 		url: "http://localhost/cqas/index.php/mainframe/getToBeServedStudents",
@@ -77,13 +75,14 @@ $(document).ready(function executeQuery() {
 		success: function(pending) {
 			if(pending.length == 0) {
 				$("#servebutton").hide();
-				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
+				var display = "<div id='count' class='alert-success'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
 				var openDiv = "<div class='media'>";
 				var img = "<a class='pull-left' href='#'></a>";
-				var content = "<div class='media-body'> No students to be served </div>";
+				var content = "<div class='media-body'> <strong> No students to be served </strong> </div>";
 				var closeDiv = "</div>";
 				display = display + openDiv + img + content + closeDiv;
 				$("#list").html(display);
+				timeVar = setTimeout(displayFifteenStudents, 1000);
 			}
 			else {
 				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
@@ -102,18 +101,15 @@ $(document).ready(function executeQuery() {
 					display = display + openDiv + img + content + closeDiv;
 				}
 				$("#list").html(display);
+				timeVar = setTimeout(displayFifteenStudents, 1000);
 			}
 		},
-		complete: function() {
-      		// Schedule the next request when the current one's complete
-      		setTimeout(executeQuery, 1000);
-    	}
 	});	
 });
 
 
-$("#servebutton").click(function() {
-	//alert("Hello World");
+$("#servebutton").click(function displayToBeServedStudent() {
+	clearTimeout(timeVar);
 	$.ajax({
 		type: 'POST',
 		url: "http://localhost/cqas/index.php/mainframe/serveStudent",
@@ -123,7 +119,6 @@ $("#servebutton").click(function() {
 				; //do nothing
 			}
 			else {
-				//$.cookie('idnumber', toServe.studid);
 				var studid = '<strong>ID Number: </strong>' + toServe.studid + '<br>';
 				var name = '<strong>Name: </strong>' + toServe.lastname + ', ' + toServe.givenname + ' ' + toServe.middlename + '<br>';
 				var course = '<strong>Course: </strong>' + toServe.course + '<br>';
@@ -131,7 +126,7 @@ $("#servebutton").click(function() {
 				var button = "<button onclick = doneButton('" + toServe.studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
 
 				var display = "";
-				var openDiv = "<div class = media";
+				var openDiv = "<div class = 'media'>";
 				var content = "<div class='media-body'> " + studid + name + course + college + "</div>";
 				var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
 				var closeDiv = "</div>";
@@ -147,13 +142,28 @@ $("#servebutton").click(function() {
 });
 
 function doneButton(idNumber) {
-	//$("#tmp").append("asdf");
-	var answer = confirm("Are you sure you are done serving this student?");
-	if(answer)
-		window.location.assign('http://localhost/cqas/index.php/mainframe/doneServeStudent?idnumber=' + idNumber);
-	else
-		; //do nothing
-	//$("#tmp").append("asdf");
+
+	$(document).ready(function() {
+		$("#confirm").slideDown("slow", function() {
+			var display = "";
+			var openDiv = "<div class='container'>";
+			var question = "<div class='alert-info'> <strong> Are you sure you are done serving this student? </strong><br>";
+			var yes = "<button id='yes' class='btn btn-success'> Yes </button>";
+			var no = "<button id='no' class='btn btn-warning'> No </button>";
+			var closeDiv = "</div></div>";
+			var display = display + openDiv + question + yes + no + closeDiv;
+			$("#confirm").html(display);
+
+			$(document).on('click', '#yes', function() {
+				window.location.assign('http://localhost/cqas/index.php/mainframe/doneServeStudent?idnumber=' + idNumber);
+			});
+
+			$(document).on('click', '#no', function() {
+				$("#confirm").slideUp();
+			});
+		});
+	});
+	//naa pa gamay na bug..dili mu slide down on first click
 }
 
 
