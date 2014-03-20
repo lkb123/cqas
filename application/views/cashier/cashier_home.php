@@ -11,10 +11,10 @@
 	<div class="row well">
 		<div class="col-md-2">
     	    <ul class="nav nav-pills nav-stacked well">
-              <li class="active"><a id="tohide" href=<?php echo site_url() . '/mainframe/index' ?>> Home </a></li>
-              <li><a id="tohide" href=<?php echo site_url() . '/mainframe/cashierIndex/cashier_home' ?>> Cashier Profile</a></li>
+              <li class="active"><a href=<?php echo site_url() . '/mainframe/index' ?>> Home </a></li>
+              <li><a href=<?php echo site_url() . '/mainframe/cashierIndex/cashier_home' ?>> Cashier Profile</a></li>
               <li><a href=<?php echo site_url() . '/mainframe/cashierIndex/cashier_serve_dash' ?> id="serve"> Serve Student</a></li>
-              <li><a id="tohide" href=<?php echo site_url() . '/mainframe/logout' ?>> Logout </a></li>
+              <li><a href=<?php echo site_url() . '/mainframe/logout' ?>> Logout </a></li>
           </ul>
     </div>
     <div class="col-md-10">
