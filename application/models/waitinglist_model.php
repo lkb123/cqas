@@ -32,7 +32,6 @@
 			return $this->db->query($query)->row_array();
 		}	
 
-		//deprecated
 		public function clearWaitingList() {
 			$query = "Delete From waitinglist";
 			return $this->db->query($query);
@@ -44,7 +43,7 @@
 			return $this->db->query($query);
 		}
 
-		//deprecated
+		//check to be deprecated
 		public function retrieveNthEntry($n) {
 			$query = "Select studid From waitinglist Where prioritynumber = $n Order By timestampadded";
 			return $this->db->query($query);

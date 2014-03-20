@@ -242,7 +242,6 @@
 
 		public function getToBeServedStudents() {
 			$data = $this->waitingList->retrieveFifteenStudents();
-			//$waitingStudents = $this->waitingList->countEntries();
 			$pending = array();
 			foreach($data as $row) {
 				$student = $this->student->retrieveStudent($row['studid']);
