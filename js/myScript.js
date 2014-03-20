@@ -35,36 +35,7 @@ $(function(){
 });
 
 
-$( "#target" ).click(function(e) {
 
-		e.preventDefault();
-		
-		$.ajax({
-		type: 'POST',
-		url: "http://localhost/cqas/index.php/mainframe/validateLogin",
-		data: $('#SubmitForm').serialize(),
-		dataType: "json",
-		success: function(status){
-
-			
-			var item = [];
-		    $.each(status
-		    	, function(key, val) {
-		      item.push(val);
-		    });
-		    
-		    if(item =='true'){
-		    	$("#SubmitForm").attr("action", "http://localhost/cqas/index.php/mainframe/login").submit();
-		    }
-		    else if(item =='empty'){
-		    	alert('Both ID and Password must be filled');
-		    }
-		    else{
-		    	alert('Incorrect ID number or Password');	
-		    }
-		}
-		});
-});
 
 
 $(document).ready(function displayFifteenStudents() {
@@ -133,7 +104,7 @@ $("#servebutton").click(function displayToBeServedStudent() {
 				display = display + openDiv + img + content + closeDiv;
 				$("#list").html(display);
 
-				$("#servebutton").remove();
+				$("#servebutton").replaceWith(button);
 
 				
 			}
@@ -178,16 +149,22 @@ $(function(){
 
 });
 
-$('#home').click(function(e){
+$('#home').click(backToHome);
+$('#addtoQueue').click(addStudentToQueue);
+$('#unsubscribe').click(unsubscribe);
+$('#register').click(submitAndRegister);
+$('#startServing').click(cashierLogInToServe);
+$('#cashierSignIn').click(signInCashier);
+
+function backToHome(e){
 
 	window.location.replace("http://localhost/cqas");
 	e.preventDefault
-});
+}
+
+function addStudentToQueue(e){
 
 
-$('#addtoQueue').click(function(e){
-
-    e.preventDefault();
 	var checked = $('#subscribe').prop("checked");
 
     if(checked){
@@ -235,29 +212,12 @@ $('#addtoQueue').click(function(e){
     	}
  
 		});
-     }  	
-});
+     }
+     e.preventDefault();  	
+}
 
-$('#unsubscribe').click(function(e){
-
-
-	$("#idNum").prop('disabled', false);
-	$("#subscribe").prop('disabled', false);
-	$("#subscribe").prop("checked", false);
-	$("#addtoQueue").show();
-	$("#register").hide();
-	$('#unsubscribe').hide();
-	$("#register").hide("slow")
-	$("#cellNum").hide("slow")
+function submitAndRegister(e){
 	
-	e.preventDefault();
-});
-
-$('#register').click(function(e){
-	
-
-	//var cellNum = $('#cellNum').val();
-   		
     $.ajax({
 		type: 'POST',
 		url: 'http://localhost/cqas/index.php/mainframe/encodeWithNumber',
@@ -272,10 +232,25 @@ $('#register').click(function(e){
 		}
 	});
 
-	e.preventDefault();	
-});
+	e.preventDefault();
+}
 
-$('#startServing').click(function(){
+function unsubscribe(e){
+
+
+	$("#idNum").prop('disabled', false);
+	$("#subscribe").prop('disabled', false);
+	$("#subscribe").prop("checked", false);
+	$("#addtoQueue").show();
+	$("#register").hide();
+	$('#unsubscribe').hide();
+	$("#register").hide("slow")
+	$("#cellNum").hide("slow")
+	
+	e.preventDefault();
+}
+
+function cashierLogInToServe(){
 
 		$.ajax({
 		url: "http://localhost/cqas/index.php/mainframe/hasSession",
@@ -290,7 +265,38 @@ $('#startServing').click(function(){
 			}
 		}
 		});
-});
+}
+
+function signInCashier(e) {
+
+		e.preventDefault();
+		
+		$.ajax({
+		type: 'POST',
+		url: "http://localhost/cqas/index.php/mainframe/validateLogin",
+		data: $('#SubmitForm').serialize(),
+		dataType: "json",
+		success: function(status){
+
+			
+			var item = [];
+		    $.each(status
+		    	, function(key, val) {
+		      item.push(val);
+		    });
+		    
+		    if(item =='true'){
+		    	$("#SubmitForm").attr("action", "http://localhost/cqas/index.php/mainframe/login").submit();
+		    }
+		    else if(item =='empty'){
+		    	alert('Both ID and Password must be filled');
+		    }
+		    else{
+		    	alert('Incorrect ID number or Password');	
+		    }
+		}
+		});
+}
 
 
 

@@ -20,7 +20,7 @@ class cashier_model extends CI_Model {
 	public function subscribeStudent($idNumber){
 		$this->db->query("UPDATE waitinglist
 						  SET subscribed = TRUE
-						  WHERE studid ='$idNumber'
+						  WHERE studid ='$idNumber' and dateadded = current_date and served = false
 						  ");
 	}
 		
