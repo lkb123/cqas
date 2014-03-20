@@ -274,6 +274,18 @@
 			}
 		}
 
+		public function get10thStudent(){
+			$student = $this->waitingList->retrieveNthStudent(10);
+			return $student;
+
+		}
+
+		public function get50thStudent(){
+			$student = $this->waitingList->retrieveNthStudent(50);
+			return $student;
+			
+		}
+
 		public function doneServeStudent() {
 			$idNumber =  $this->input->get('idnumber');
 			$this->waitingList->updateServedEntry($idNumber);
