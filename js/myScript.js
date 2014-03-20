@@ -1,5 +1,5 @@
 var timeVar = "";
-var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
+var siteloc = "http://localhost/cqas/index.php/mainframe/";
 
 $(function(){
 	
@@ -49,6 +49,7 @@ $(function(){
 
 $(document).ready(displayFifteenStudents);
 $("#servebutton").click(displayToBeServedStudent);
+$("#doneButton").click(sendMessages);
 $('#home').click(backToHome);
 $('#addtoQueue').click(addStudentToQueue);
 $('#unsubscribe').click(unsubscribe);
@@ -111,6 +112,26 @@ function doneButton(idNumber) {
 		});
 	});
 	//naa pa gamay na bug..dili mu slide down on first click
+}
+
+//murag wala'y pulos. wa ko kasabot unsaon pag.gamit ani aron mutawag sa function sa controller
+function sendMessages(){
+	$(function() {
+		$.ajax({
+		url: siteloc + "sendMessages",
+		success: function(count) {
+			if(count >= "10" && count < "50"){
+				alert("1 message will be sent");
+			}
+			else if(count >= "50"){
+				alert("2 messages will be sent");
+			}
+			else{
+				alert("No message will be sent.");
+			}
+		}
+		});
+	});
 }
 
 function displayFifteenStudents() {

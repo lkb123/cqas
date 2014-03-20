@@ -10,6 +10,7 @@
 		private $cashier;
 		private $waitingList;
 		private $alertSms;
+		private $messageClass;
 		private $message;
 		private $student;
 
@@ -21,6 +22,7 @@
 			$this->waitingList = new WaitingList();
 			$this->alertSms = new AlertSms();
 			$this->student = new Student();
+			$this->messageClass = new Message();
 		}
 		
 		public function index(){
@@ -274,18 +276,6 @@
 			}
 		}
 
-		public function get10thStudent(){
-			$student = $this->waitingList->retrieveNthStudent(10);
-			return $student;
-
-		}
-
-		public function get50thStudent(){
-			$student = $this->waitingList->retrieveNthStudent(50);
-			return $student;
-			
-		}
-
 		public function doneServeStudent() {
 			$idNumber =  $this->input->get('idnumber');
 			$this->waitingList->updateServedEntry($idNumber);
@@ -299,6 +289,28 @@
 			else
 				$this->load->view('cashier/cashier_home', $data);
 
+		}
+
+		public function sendMessages(){
+			$students = $this->waitingList->get10thAnd50thStudents();
+			$message1 = $this->messageClass->messageAlertFor10thStudent();
+			$message2 = $this->messageClass->messageAlertFor50thStudent();
+			$count = $this->waitingList->countUnservedEntries()['studentcount'];
+			//echo var_dump($count);
+			if(intval($count) >= 50){
+				//$this->alertSms->sendSmsAlertTo($students[0]['phonenumber'], $message1);
+				//$this->alertSms->sendSmsAlertTo($students[1]['phonenumber'], $message2);
+				echo "send 2 messages";
+			}
+			else if(intval($count) < 50 && intval($count) >= 10){
+				//$this->alertSms->sendSmsAlertTo($students[0]['phonenumber'], $message1);
+				echo "send 1 message";
+			}
+			else{
+				echo "send no message";
+				//do nothing
+			}
+			echo json_encode($count);
 		}
 
 	}

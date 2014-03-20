@@ -49,6 +49,12 @@
 			return $this->db->query($query);
 		}
 
+		public function retrieve10thAnd50thEntry(){
+			//temporary 10 & 11 for testing
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE prioritynumber = 10 OR prioritynumber = 11 ORDER BY prioritynumber");
+			return $query->result_array();
+		}
+
 		public function getValidity($idNumber) {
 			$query = $this->db->query(" SELECT * 
 										FROM waitinglist 

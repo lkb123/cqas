@@ -20,6 +20,15 @@
 			$this->CI->WM->addStudent($id_number, $pNumber, $phoneNum);
 		}
 
+		public function countUnservedEntries(){
+			$count = $this->CI->WM->countUnservedEntries();
+			return $count;
+		}
+
+		public function get10thAnd50thStudents(){
+			return $this->CI->WM->retrieve10thAnd50thEntry();
+		}
+
 		//deprecated
 		public function countEntries() {
 			$count = $this->CI->WM->countAllEntries();
