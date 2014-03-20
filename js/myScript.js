@@ -1,5 +1,8 @@
+var timeVar = "";
+var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
+
 $(function(){
-    var timeVar = "";
+	
 	// Checking for CSS 3D transformation support
 	$.support.css3d = supportsCSS3D();
 	
@@ -41,7 +44,7 @@ $(function(){
 $(document).ready(function displayFifteenStudents() {
 	$.ajax({
 		type: 'POST',
-		url: "http://localhost/cqas/index.php/mainframe/getToBeServedStudents",
+		url: siteloc + "getToBeServedStudents",
 		dataType: "json",
 		success: function(pending) {
 			if(pending.length == 0) {
@@ -83,7 +86,7 @@ $("#servebutton").click(function displayToBeServedStudent() {
 	clearTimeout(timeVar);
 	$.ajax({
 		type: 'POST',
-		url: "http://localhost/cqas/index.php/mainframe/serveStudent",
+		url: siteloc + "serveStudent",
 		dataType: "json",
 		success: function(toServe) {
 			if(toServe.length == 0) {
@@ -125,7 +128,7 @@ function doneButton(idNumber) {
 			$("#confirm").html(display);
 
 			$(document).on('click', '#yes', function() {
-				window.location.assign('http://localhost/cqas/index.php/mainframe/doneServeStudent?idnumber=' + idNumber);
+				window.location.assign(siteloc + 'doneServeStudent?idnumber=' + idNumber);
 			});
 
 			$(document).on('click', '#no', function() {
@@ -157,7 +160,7 @@ $('#cashierSignIn').click(signInCashier);
 
 function backToHome(e){
 
-	window.location.replace("http://localhost/cqas");
+	window.location.replace(siteloc + "cqas");
 	e.preventDefault
 }
 
@@ -172,7 +175,7 @@ function addStudentToQueue(e){
     	}else{
     		$.ajax({
     			type: 'POST',
-    			url: 'http://localhost/cqas/index.php/mainframe/subscribe',
+    			url: siteloc + 'subscribe',
     			data: $('#login').serialize(),
     			dataType: 'json',
     			success: function(resultData){
@@ -197,7 +200,7 @@ function addStudentToQueue(e){
     else{
     	$.ajax({
     		type: 'POST',
-    		url: 'http://localhost/cqas/index.php/mainframe/encode',
+    		url: siteloc + 'encode',
     		data: $('#login').serialize(),
     		dataType: 'json',
     		success: function(result){
@@ -218,7 +221,7 @@ function submitAndRegister(e){
 	
     $.ajax({
 		type: 'POST',
-		url: 'http://localhost/cqas/index.php/mainframe/encodeWithNumber',
+		url: siteloc + 'encodeWithNumber',
 		data: $('#login').serialize(),
 		dataType: 'json',
 		success : function(result){
@@ -250,7 +253,7 @@ function unsubscribe(e){
 
 function cashierLogInToServe(){
 		$.ajax({
-		url: "http://localhost/cqas/index.php/mainframe/hasSession",
+		url: siteloc + "hasSession",
 		success: function(hasSession){
 
 			if(hasSession == 'false'){
@@ -258,7 +261,7 @@ function cashierLogInToServe(){
 			}
 			else{
 
-				window.location.replace("http://localhost/cqas/index.php/mainframe/cashierIndex/cashier_home");
+				window.location.replace(siteloc + "cashierIndex/cashier_home");
 			}
 		}
 		});
@@ -270,7 +273,7 @@ function signInCashier(e) {
 		
 		$.ajax({
 		type: 'POST',
-		url: "http://localhost/cqas/index.php/mainframe/validateLogin",
+		url: siteloc + "validateLogin",
 		data: $('#SubmitForm').serialize(),
 		dataType: "json",
 		success: function(status){
@@ -283,7 +286,7 @@ function signInCashier(e) {
 		    });
 		    
 		    if(item =='true'){
-		    	$("#SubmitForm").attr("action", "http://localhost/cqas/index.php/mainframe/login").submit();
+		    	$("#SubmitForm").attr("action", siteloc + "login").submit();
 		    }
 		    else if(item =='empty'){
 		    	alert('Both ID and Password must be filled');
