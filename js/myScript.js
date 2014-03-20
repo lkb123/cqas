@@ -132,8 +132,7 @@ $("#servebutton").click(function displayToBeServedStudent() {
 				var closeDiv = "</div>";
 				display = display + openDiv + img + content + closeDiv;
 				$("#list").html(display);
-
-				$("#servebutton").remove();
+				$("#servebutton").replaceWith(button);
 
 				
 			}
@@ -178,16 +177,12 @@ $(function(){
 
 });
 
-<<<<<<< HEAD
 $('#home').click(function(e){
 
 	window.location.replace("http://localhost/cqas");
 	e.preventDefault
 });
 
-
-=======
->>>>>>> fix
 $('#addtoQueue').click(function(e){
 
     e.preventDefault();
@@ -241,7 +236,6 @@ $('#addtoQueue').click(function(e){
      }  	
 });
 
-<<<<<<< HEAD
 $('#unsubscribe').click(function(e){
 
 
@@ -279,8 +273,7 @@ $('#register').click(function(e){
 	e.preventDefault();	
 });
 
-=======
->>>>>>> fix
+
 $('#startServing').click(function(){
 
 		$.ajax({
