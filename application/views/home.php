@@ -43,7 +43,7 @@
 			  </div>
 			  <div class="form-group">
 			    <div id = "yes" class="col-sm-offset-3 col-sm-10">
-			      <button  id = "target" typeclass="btn btn-default">Sign in</button>
+			      <button  id = "cashierSignIn" typeclass="btn btn-default">Sign in</button>
 			    </div>
 			  </div>
 			</form>

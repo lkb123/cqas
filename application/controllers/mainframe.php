@@ -188,7 +188,8 @@
 			
 			if($phoneNumber==""){
 				$result['error'] = "Phone number must be filled";
-				echo json_encode($result);				
+				echo json_encode($result);	
+
 			}else if($isValidPhone==true && $flag==true){
 
 				$this->waitingList->append($studID, $phoneNumber);	//append student to waiting list
