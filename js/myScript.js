@@ -37,11 +37,83 @@ $(function(){
 	}
 });
 
+$(function(){
 
+	$('#unsubscribe').hide();
 
+   	$('#cellNum').hide();
 
+   	$('#register').hide();
 
-$(document).ready(function displayFifteenStudents() {
+});
+
+$(document).ready(displayFifteenStudents);
+$("#servebutton").click(displayToBeServedStudent);
+$('#home').click(backToHome);
+$('#addtoQueue').click(addStudentToQueue);
+$('#unsubscribe').click(unsubscribe);
+$('#register').click(submitAndRegister);
+$('#startServing').click(cashierLogInToServe);
+$('#cashierSignIn').click(signInCashier);
+
+function displayToBeServedStudent() {
+	clearTimeout(timeVar);
+	$.ajax({
+		type: 'POST',
+		url: siteloc + "serveStudent",
+		dataType: "json",
+		success: function(toServe) {
+			if(toServe.length == 0) {
+				; //do nothing
+			}
+			else {
+				var studid = '<strong>ID Number: </strong>' + toServe.studid + '<br>';
+				var name = '<strong>Name: </strong>' + toServe.lastname + ', ' + toServe.givenname + ' ' + toServe.middlename + '<br>';
+				var course = '<strong>Course: </strong>' + toServe.course + '<br>';
+				var college = '<strong>College: </strong>' + toServe.college + '<br>';
+				var button = "<button onclick = doneButton('" + toServe.studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
+				var replace = "<div class='col-md-2'><ul class='nav nav-pills nav-stacked well'> <li class='active'><a onclick = return false> Home </a></li> <li><a onclick = return false> Cashier Profile</a></li> <li><a onclick = return false> Serve Student</a></li> <li><a onclick = return false> Logout </a></li> </ul></div>";
+
+				var display = "";
+				var openDiv = "<div class = 'media'>";
+				var content = "<div class='media-body'> " + studid + name + course + college + "</div>";
+				var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
+				var closeDiv = "</div>";
+				display = display + openDiv + img + content + closeDiv;
+				$("#list").html(display);
+				$("#servebutton").replaceWith(button);
+				$(".col-md-2").replaceWith(replace);				
+			}
+		}
+	});
+}
+
+function doneButton(idNumber) {
+
+	$(document).ready(function() {
+		$("#confirm").slideDown("slow", function() {
+			var display = "";
+			var openDiv = "<div class='container'>";
+			var question = "<div class='alert-info'> <strong> Are you sure you are done serving this student? </strong><br>";
+			var yes = "<button id='yes' class='btn btn-success'> Yes </button>";
+			var no = "<button id='no' class='btn btn-warning'> No </button>";
+			var closeDiv = "</div></div>";
+			var display = display + openDiv + question + yes + no + closeDiv;
+			$("#confirm").html(display);
+
+			$(document).on('click', '#yes', function() {
+				window.location.assign(siteloc + 'doneServeStudent?idnumber=' + idNumber);
+			});
+
+			$(document).on('click', '#no', function() {
+				$("#confirm").slideUp();
+			});
+		});
+	});
+	//naa pa gamay na bug..dili mu slide down on first click
+}
+
+function displayFifteenStudents() {
 	$.ajax({
 		type: 'POST',
 		url: siteloc + "getToBeServedStudents",
@@ -79,88 +151,11 @@ $(document).ready(function displayFifteenStudents() {
 			}
 		},
 	});	
-});
-
-
-$("#servebutton").click(function displayToBeServedStudent() {
-	clearTimeout(timeVar);
-	$.ajax({
-		type: 'POST',
-		url: siteloc + "serveStudent",
-		dataType: "json",
-		success: function(toServe) {
-			if(toServe.length == 0) {
-				; //do nothing
-			}
-			else {
-				var studid = '<strong>ID Number: </strong>' + toServe.studid + '<br>';
-				var name = '<strong>Name: </strong>' + toServe.lastname + ', ' + toServe.givenname + ' ' + toServe.middlename + '<br>';
-				var course = '<strong>Course: </strong>' + toServe.course + '<br>';
-				var college = '<strong>College: </strong>' + toServe.college + '<br>';
-				var button = "<button onclick = doneButton('" + toServe.studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
-
-				var display = "";
-				var openDiv = "<div class = 'media'>";
-				var content = "<div class='media-body'> " + studid + name + course + college + "</div>";
-				var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
-				var closeDiv = "</div>";
-				display = display + openDiv + img + content + closeDiv;
-				$("#list").html(display);
-				$("#servebutton").replaceWith(button);
-
-				
-			}
-		}
-	});
-});
-
-function doneButton(idNumber) {
-
-	$(document).ready(function() {
-		$("#confirm").slideDown("slow", function() {
-			var display = "";
-			var openDiv = "<div class='container'>";
-			var question = "<div class='alert-info'> <strong> Are you sure you are done serving this student? </strong><br>";
-			var yes = "<button id='yes' class='btn btn-success'> Yes </button>";
-			var no = "<button id='no' class='btn btn-warning'> No </button>";
-			var closeDiv = "</div></div>";
-			var display = display + openDiv + question + yes + no + closeDiv;
-			$("#confirm").html(display);
-
-			$(document).on('click', '#yes', function() {
-				window.location.assign(siteloc + 'doneServeStudent?idnumber=' + idNumber);
-			});
-
-			$(document).on('click', '#no', function() {
-				$("#confirm").slideUp();
-			});
-		});
-	});
-	//naa pa gamay na bug..dili mu slide down on first click
 }
-
-
-
-$(function(){
-
-	$('#unsubscribe').hide();
-
-   	$('#cellNum').hide();
-
-   	$('#register').hide();
-
-});
-
-$('#home').click(backToHome);
-$('#addtoQueue').click(addStudentToQueue);
-$('#unsubscribe').click(unsubscribe);
-$('#register').click(submitAndRegister);
-$('#startServing').click(cashierLogInToServe);
-$('#cashierSignIn').click(signInCashier);
 
 function backToHome(e){
 
-	window.location.replace(siteloc + "cqas");
+	window.location.replace(siteloc);
 	e.preventDefault
 }
 
