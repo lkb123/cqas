@@ -280,8 +280,7 @@ function submitAndRegister(e){
 }
 
 function unsubscribe(e){
-
-
+	
 	$("#idNum").prop('disabled', false);
 	$("#subscribe").prop('disabled', false);
 	$("#subscribe").prop("checked", false);
@@ -339,4 +338,4 @@ function signInCashier(e) {
 		    }
 		}
 		});
-}
+	}
