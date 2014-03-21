@@ -49,10 +49,23 @@
 			return $this->db->query($query);
 		}
 
-		public function retrieve10thAnd50thEntry(){
-			//temporary 10 & 11 for testing
-			$query = $this->db->query("SELECT * FROM waitinglist WHERE prioritynumber = 10 OR prioritynumber = 11 ORDER BY prioritynumber");
-			return $query->result_array();
+		public function retrieve10thEntry(){
+			//temporary 10
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date LIMIT 1 OFFSET 9");
+			if($query->num_rows() == 0)
+				return false;
+			else
+				return $query->row_array();
+			
+		}
+
+		public function retrieve50thEntry(){
+			//temporary 50
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date LIMIT 1 OFFSET 10");
+			if($query->num_rows() == 0)
+				return false;
+			else
+				return $query->row_array();
 		}
 
 		public function getValidity($idNumber) {

@@ -261,7 +261,11 @@
 			if(count($student) != 0) {
 				$studId = $student['studid'];
 				$this->waitingList->updateServingEntry($studId, true);
-				$toServe = $this->student->retrieveStudent($studId);
+				$toServe['kertStud'] = $this->student->retrieveStudent($studId);
+				$studinfo = $this->sendMessages();
+				//$toServe['studinfo'] = $studinfo['student'];
+				//$toServe['message'] = $studinfo['message'];
+
 				echo json_encode($toServe);
 			}
 			else {
@@ -285,25 +289,29 @@
 		}
 
 		public function sendMessages(){
-			$students = $this->waitingList->get10thAnd50thStudents();
+			$students['stud1'] = $this->waitingList->get10thStudents();
+			$students['stud2'] = $this->waitingList->get50thStudents();
 			$message1 = $this->messageClass->messageAlertFor10thStudent();
 			$message2 = $this->messageClass->messageAlertFor50thStudent();
-			$count = $this->waitingList->countUnservedEntries()['studentcount'];
-			//echo var_dump($count);
-			if(intval($count) >= 50){
-				//$this->alertSms->sendSmsAlertTo($students[0]['phonenumber'], $message1);
-				//$this->alertSms->sendSmsAlertTo($students[1]['phonenumber'], $message2);
-				echo "send 2 messages";
+			$count = $this->waitingList->countUnservedEntries();
+			//$returnVal['student'] = $students;
+			//$returnVal['message'] = "test";
+			
+			if($students['stud1'] != false){
+				if($students['stud1']['subscribed'] == true){
+					$this->alertSms->sendSmsAlertTo($students['stud1']['phonenumber'], $message1);
+					//$returnVal['message'] = $message1;
+				}
 			}
-			else if(intval($count) < 50 && intval($count) >= 10){
-				//$this->alertSms->sendSmsAlertTo($students[0]['phonenumber'], $message1);
-				echo "send 1 message";
+
+			if($students['stud2'] != false){
+				if($students['stud2']['subscribed'] == true){
+					$this->alertSms->sendSmsAlertTo($students['stud2']['phonenumber'], $message2);
+					//$returnVal['message'] = $message2;
+				}
 			}
-			else{
-				echo "send no message";
-				//do nothing
-			}
-			echo json_encode($count);
+
+			//return $returnVal;
 		}
 
 	}
