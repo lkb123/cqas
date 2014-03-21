@@ -29,6 +29,7 @@
 	  <div class="modal-dialog modal-sm">
 	    <div style = "padding:20px" class="modal-content">
 	      <form  id = "SubmitForm" class="form-horizontal" role="form" action="" method="post"> <!--action="<?php //echo site_url('mainframe/login');?>"  method="post""-->
+			  <div id="errors" class = "fontErrors">errors</div>
 			  <div class="form-group">
 			    <label for="inputtext3" class="col-sm-2 control-label">Username</label>
 			    <div class="col-sm-offset-1 col-sm-9">

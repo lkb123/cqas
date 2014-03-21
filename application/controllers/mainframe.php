@@ -108,13 +108,6 @@
 			}
 		}
 
-
-
-
-
-
-
-
 		public function subscribe(){
 			$idNumber = $this->input->post('idNumber');
 			$result['idExist'] = $this->cashier->idNumberExist($idNumber);
@@ -144,12 +137,12 @@
 
 			if($idNumber==''){
 				$result['flag'] = false;
-				$result['errormessage'] = 'ID number must be filled';
+				$result['errormessage'] = 'ID number must be filled!';
 				echo json_encode($result);
 			}
 			else if(!$this->cashier->validId($idNumber)) {
 				$result['flag'] = false;
-				$result['errormessage'] = 'ID number is invalid';
+				$result['errormessage'] = 'ID number is invalid!';
 				echo json_encode($result);
 			}
 			else{
@@ -158,7 +151,7 @@
 				if($query === FALSE){
 					//if id number is not in the database
 					$result['flag'] = false;
-					$result['errormessage'] = 'ID number not found';
+					$result['errormessage'] = 'ID number not in database!';
 					echo json_encode($result);
 				}
 				else {
@@ -174,7 +167,7 @@
 					//if ang student wala pa na serve sa last nya na pila sa waiting list
 					else{
 						$result['flag'] = false;
-						$result['errormessage'] = 'ID number has a pending transaction';
+						$result['errormessage'] = 'ID number has a pending transaction!';
 						echo json_encode($result);
 					}
 				}
@@ -189,7 +182,7 @@
 			$flag = $this->waitingList->studentIsValid($studID);
 			
 			if($phoneNumber==""){
-				$result['error'] = "Phone number must be filled";
+				$result['error'] = "Phone number must be filled!";
 				echo json_encode($result);	
 
 			}else if($isValidPhone==true && $flag==true){
@@ -202,7 +195,7 @@
 				echo json_encode($result);
 
 			}else if($isValidPhone==false){
-				$result['error'] = "Invalid cell number";
+				$result['error'] = "Invalid cell number!";
 				echo json_encode($result);
 			}else{
 				$result['error'] = "Pending";
