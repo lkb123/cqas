@@ -1,5 +1,5 @@
 var timeVar = "";
-var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
+var siteloc = "http://localhost/cqas/index.php/mainframe/";
 
 $(function(){
 
@@ -59,7 +59,8 @@ $('#register').click(submitAndRegister);
 $('#startServing').click(cashierLogInToServe);
 $('#cashierSignIn').click(signInCashier);
 $('#idNum').focus(hideErrors);
-$('#cellNum').focus(hideErrors);
+$('#cashierid').focus(hideErrors);
+$('#cashierpass').focus(hideErrors);
 
 
 function displayToBeServedStudent() {
@@ -236,7 +237,8 @@ function addStudentToQueue(e){
     			if(result['flag']){
     				$('#priorityNumber').text(result['pnumber']);
     				$('#successAlert').addClass('fade').modal('show');
-    				$("#idNum").val("ID number");
+    				$("#idNum").val('');
+    				$("#idNum").attr("placeholder", "ID number");
     			}
     			else{
     				$("#errors").show().text(result['errormessage']);
@@ -268,7 +270,9 @@ function submitAndRegister(e){
 				$('#unsubscribe').hide();
 				$("#register").hide("slow");
 				$("#cellNum").hide("slow");
-				$("#idNum").val("ID number");
+				$("#idNum").val('');
+				$("#idNum").attr("placeholder", "ID number");
+				
 
 			}else{
 				$("#errors").show().text(result['error']);
@@ -331,10 +335,10 @@ function signInCashier(e) {
 		    	$("#SubmitForm").attr("action", siteloc + "login").submit();
 		    }
 		    else if(item =='empty'){
-		    	alert('Both ID and Password must be filled');
+		    	$("#errors").show().text('Both ID and Password must be filled');
 		    }
 		    else{
-		    	alert('Incorrect ID number or Password');	
+		    	$("#errors").show().text('Incorrect ID number or Password');		    		
 		    }
 		}
 		});
