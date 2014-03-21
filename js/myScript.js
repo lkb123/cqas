@@ -1,19 +1,19 @@
 var timeVar = "";
-var siteloc = "http://localhost/cqas/index.php/mainframe/";
+var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
 
 $(function(){
-	
+
 	// Checking for CSS 3D transformation support
 	$.support.css3d = supportsCSS3D();
-	
+
 	var formContainer = $('#formContainer');
-	
+
 	// Listening for clicks on the ribbon links
 	$('.flipLink').click(function(e){
-		
+
 		// Flipping the forms
 		formContainer.toggleClass('flipped');
-		
+
 		// If there is no CSS3 3D support, simply
 		// hide the login form (exposing the recover one)
 		if(!$.support.css3d){
@@ -26,7 +26,7 @@ $(function(){
 		var props = [
 			'perspectiveProperty', 'WebkitPerspective', 'MozPerspective'
 		], testDom = document.createElement('a');
-		  
+
 		for(var i=0; i<props.length; i++){
 			if(props[i] in testDom.style){
 				return true;
@@ -45,6 +45,8 @@ $(function(){
 
    	$('#register').hide();
 
+   	$('#errors').hide();
+
 });
 
 $(document).ready(displayFifteenStudents);
@@ -56,6 +58,9 @@ $('#unsubscribe').click(unsubscribe);
 $('#register').click(submitAndRegister);
 $('#startServing').click(cashierLogInToServe);
 $('#cashierSignIn').click(signInCashier);
+$('#idNum').focus(hideErrors);
+$('#cellNum').focus(hideErrors);
+
 
 function displayToBeServedStudent() {
 	clearTimeout(timeVar);
@@ -174,6 +179,14 @@ function displayFifteenStudents() {
 	});	
 }
 
+function hideErrors(){
+   	$('#errors').hide('slow');
+ }
+
+function showSuccessAlert(){
+	$('#successAlert').addClass('fade').show('modal');
+}
+
 function backToHome(e){
 
 	window.location.replace(siteloc);
@@ -187,7 +200,7 @@ function addStudentToQueue(e){
     if(checked){
     	var idNum = $('#idNum').val();
     	if(idNum==""){
-    		alert('ID number must be filled');
+    		$("#errors").show().text('ID number must be filled!');
     	}else{
     		$.ajax({
     			type: 'POST',
@@ -196,11 +209,11 @@ function addStudentToQueue(e){
     			dataType: 'json',
     			success: function(resultData){
     				if(resultData['idValidFormat']==false){ //wala sa database 
-    					alert('ID not valid');
+    					$("#errors").show().text('ID number is invalid!');
     				}else if(resultData['idExist']===false){
-    					alert('Not in database');
+    					$("#errors").show().text('ID number not in database!');
     				}else if(resultData['idValidToQueue']==false){
-    					alert('pending');   				
+    					$("#errors").show().text('ID number has a pending transaction!');   				
     				}else{
     					$("#idNum").prop('disabled', true);
     					$("#subscribe").prop('disabled', true);
@@ -221,10 +234,12 @@ function addStudentToQueue(e){
     		dataType: 'json',
     		success: function(result){
     			if(result['flag']){
-    				alert(result['pmessage']+' '+result['pnumber']);
+    				$('#priorityNumber').text(result['pnumber']);
+    				$('#successAlert').addClass('fade').modal('show');
+    				$("#idNum").val("ID number");
     			}
     			else{
-    				alert(result['errormessage']);
+    				$("#errors").show().text(result['errormessage']);
     			}
     	}
  
@@ -234,7 +249,7 @@ function addStudentToQueue(e){
 }
 
 function submitAndRegister(e){
-	
+
     $.ajax({
 		type: 'POST',
 		url: siteloc + 'encodeWithNumber',
@@ -242,9 +257,21 @@ function submitAndRegister(e){
 		dataType: 'json',
 		success : function(result){
 			if(result['flag']===true){
-				alert(result['pmessage']+" "+result["pnumber"]);
+				$('#priorityNumber').text(result["pnumber"]);
+    			$('#successAlert').addClass('fade').modal('show');
+
+				$("#idNum").prop('disabled', false);
+				$("#subscribe").prop('disabled', false);
+				$("#subscribe").prop("checked", false);
+				$("#addtoQueue").show();
+				$("#register").hide();
+				$('#unsubscribe').hide();
+				$("#register").hide("slow");
+				$("#cellNum").hide("slow");
+				$("#idNum").val("ID number");
+
 			}else{
-				alert(result['error']);
+				$("#errors").show().text(result['error']);
 			}
 		}
 	});
@@ -261,9 +288,9 @@ function unsubscribe(e){
 	$("#addtoQueue").show();
 	$("#register").hide();
 	$('#unsubscribe').hide();
-	$("#register").hide("slow")
-	$("#cellNum").hide("slow")
-	
+	$("#register").hide("slow");
+	$("#cellNum").hide("slow");
+
 	e.preventDefault();
 }
 
@@ -286,7 +313,7 @@ function cashierLogInToServe(){
 function signInCashier(e) {
 
 		e.preventDefault();
-		
+
 		$.ajax({
 		type: 'POST',
 		url: siteloc + "validateLogin",
@@ -294,13 +321,13 @@ function signInCashier(e) {
 		dataType: "json",
 		success: function(status){
 
-			
+
 			var item = [];
 		    $.each(status
 		    	, function(key, val) {
 		      item.push(val);
 		    });
-		    
+
 		    if(item =='true'){
 		    	$("#SubmitForm").attr("action", siteloc + "login").submit();
 		    }
@@ -313,7 +340,3 @@ function signInCashier(e) {
 		}
 		});
 }
-
-
-
-
