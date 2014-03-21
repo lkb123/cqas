@@ -24,7 +24,7 @@
 		//Test 1.1 if idNumber format is valid return 1
 		public function validID(){
 			$result = $this->cashier->validID('1231-1111');
-			$expected = 1;
+			$expected = True;
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
@@ -32,7 +32,7 @@
 		//Test 1.2 if idNumber format is invalid return 0
 		public function validID1(){
 			$result = $this->cashier->validID('1111-aaaa');
-			$expected = 0;
+			$expected = False;
 			$this->unit->run($result, $expected);
 			$this->load->view('test'); 	
 		}
@@ -58,6 +58,19 @@
 			$expected = TRUE;
 			$this->unit->run($result, $expected);
 			$this->load->view('test'); 		
+		}
+
+		public function idNumberExist2() {
+			$result = $this->cashier->idNumberExist('2006-1555');
+			$val = -1;
+			if($result === "")
+				$val = 1;
+			if($result === false)
+				$val = 0;
+			
+			$expected = 1;
+			$this->unit->run($val, $expected);
+			$this->load->view('test');
 		}
 		
 		//Test 1.5 idNumber is in WaitingList

@@ -30,7 +30,7 @@
 			
 			$cookie_settings = array(
 				'name'   => 'pnumber',
-                'value'  => '0',
+                'value'  => '1',
                 'expire' =>  100000,
                 'secure' => false
 				);			
@@ -159,7 +159,7 @@
 					if( $flag == true) { //check if student is valid to be added to the waiting list
 						
 						$this->waitingList->append($idNumber, $query);	//append student to waiting list
-						$result['pnumber']= $this->input->cookie('pnumber') + 1;	//get priority number
+						$result['pnumber']= $this->input->cookie('pnumber');	//get priority number
 						$result['pmessage'] = 'Your priority number is';
 						$result['flag'] = true;
 						echo json_encode($result);
@@ -189,7 +189,7 @@
 
 				$this->waitingList->append($studID, $phoneNumber);	
 				$this->cashier->subscribeStudent($studID);
-				$result['pnumber'] = $this->input->cookie('pnumber') + 1;
+				$result['pnumber'] = $this->input->cookie('pnumber');
 				$result['pmessage'] = 'Your priority number is';
 				$result['flag'] = true;
 				echo json_encode($result);

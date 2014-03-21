@@ -16,12 +16,26 @@
 		public function init() {
 			$cookie_settings = array(
 				'name'   => 'pnumber',
-                'value'  => '0',
+                'value'  => '1',
                 'expire' =>  100000,
                 'secure' => false
 				);			
 			echo 'done';
 			$this->input->set_cookie($cookie_settings);	
+		}
+
+		public function generatePriorityNumber($currentNumber, $nextNumber) {
+			$cookie_settings = array(
+				'name' => 'pnumber',
+				'value' => "$currentNumber",
+				'expire' =>  100000,
+                'secure' => false
+				);
+				$this->input->set_cookie($cookie_settings);	
+				$pnumber = $this->waitingList->generatePriorityNumber();
+				$this->unit->run($pnumber, $nextNumber);
+				$this->input->set_cookie($cookie_settings);	
+				$this->load->view('test');
 		}
 
 		public function addID($idNumber) {
@@ -30,40 +44,27 @@
 		
 
 		/*
+		 * 	count unserved students in the waiting list
 		 *	refactored:
 		 *	waitingListHasNEntries()
 		 *  waitingListHas0Entries()
 		 */
 		public function countEntriesInWaitingList($expected) {
-			$result = $this->waitingList->countEntries();
+			$result = $this->waitingList->countUnservedEntries();
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
 
-		//deprecated
-		/**
-		 * Test Case 4.1 test
-		 * counts the number of entries in the waiting list
-		 * return N where N is the number of entries
+		/*
+		 *	Get the next student to be served by the cashier
+		 *  Use Case 5
 		 */
-		public function waitingListHasNEntries() {
-			$result = $this->waitingList->countEntries();
-			$expected = 2;
-			$this->unit->run($result, $expected);
-			$this->load->view('test');
-		}
-
-		//deprecated
-		/**
-		 * Test Case 4.2 test
-		 * when the waiting list has no entries
-		 * return 0
-		 */
-		public function waitingListHas0Entries() {
-			$this->waitingList->clearList();	//ensure that waiting list is empty
-			$result = $this->waitingList->countEntries();
-			$expected = 0;
-			$this->unit->run($result, $expected);
+		public function getNextStudentTest($expected = '') {
+			$result = $this->waitingList->getFirstStudentAvailable();
+			if(count($result) == 0)
+				$this->unit->run(true, true);
+			else 
+				$this->unit->run($expected, $result['studid']);
 			$this->load->view('test');
 		}
 
@@ -120,19 +121,12 @@
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
-		
-		public function checkNextWaitingStudent(){
-			//$result = $this->waitingList->getNextWaitingStudent();
-			//$idNum = '2010-1001'
-			//$this->unit->run($result, $expected);
-			//$this->load->view('test');
-		}
 
 		//check if student is Valid to be added in waitingList
-		public function isStudentValidToQueue(){
-			$result = $this->waitingList->studentIsValid('2010-1111');
-			$expected = false;
-			$this->unit->run($result, $expected);
+		public function isStudentValidToQueue($idNumber, $expected){
+			$result = $this->waitingList->studentIsValid($idNumber);
+			$bool = $expected == "true" ? true : false;
+			$this->unit->run($result, $bool);
 			$this->load->view('test');	
 		}
 		

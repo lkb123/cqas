@@ -1,5 +1,5 @@
 <?php
-
+	
 	class WaitingList {
 
 		//private $list;
@@ -22,7 +22,7 @@
 
 		public function countUnservedEntries(){
 			$count = $this->CI->WM->countUnservedEntries();
-			return $count;
+			return $count['studentcount'];
 		}
 
 		public function get10thAnd50thStudents(){
@@ -84,24 +84,21 @@
 			$this->CI->WM->updateTimeServed($idNumber);
 		}
 
-		/*
-		 * Private methods
-		 */
-
-		private function generatePriorityNumber() {
+		public function generatePriorityNumber() {
 			//var_dump($this->CI->input->cookie('pnumber', TRUE));
 			$pnumber = $this->CI->input->cookie('pnumber', TRUE);
 			if($pnumber > 999)
-				$pnumber = 0;
-			$result = $pnumber + 1;
+				$pnumber = $pnumber % 999;
+			$next = $pnumber + 1;
+
 			$cookie_settings = array(
 				'name'   => 'pnumber',
-                'value'  => "$result",
+                'value'  => "$next",
                 'expire' =>  100000,
                 'secure' => false
 				);
 			$this->CI->input->set_cookie($cookie_settings);
-			return $result;
+			return $pnumber;
 		}
 		
 	}

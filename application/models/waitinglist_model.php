@@ -64,12 +64,12 @@
 		}
 
 		public function getFifteenStudents() {
-			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false LIMIT 15");
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false ORDER BY timeadded LIMIT 15");
 			return $query;
 		}
 
 		public function getFirstAvalableStudent() {
-			$query = $this->db->query("SELECT studid FROM waitinglist WHERE served = false AND serving = false LIMIT 1");
+			$query = $this->db->query("SELECT studid FROM waitinglist WHERE served = false AND serving = false ORDER BY timeadded LIMIT 1");
 			return $query;
 		}
 
