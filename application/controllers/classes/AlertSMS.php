@@ -29,7 +29,7 @@
 				103	Invalid Options
 				104	Gateway Down
 		*/
-		
+		/*
 		public function sendSmsAlertTo($number, $message){
 		
 			$fields = array();
@@ -49,8 +49,35 @@
 			curl_close($ch);
 			
 			return $output;
-		}
-		
-	}
+		}*/
 
-?>
+		function sendSmsAlertTo($sms_to,$sms_msg)  
+            {           
+
+                        $query_string = "api.aspx?apiusername=".'wnxhaja'."&apipassword=".'ilovehazel';
+
+                        $query_string .= "&senderid=".rawurlencode('CQAS')."&mobileno=".rawurlencode($sms_to);
+                        $query_string .= "&message=".rawurlencode(stripslashes($sms_msg)) . "&languagetype=1";        
+                        $url = "http://gateway.onewaysms.com.au:10001/".$query_string;       
+                        $fd = @implode ('', file ($url));      
+                        
+                        /*
+                        if ($fd)  
+                        {                       
+					    if ($fd > 0) {
+						Print("MT ID : " . $fd);
+						$ok = "success";
+					    }        
+					    else {
+						print("Please refer to API on Error : " . $fd);
+						$ok = "fail";
+					    }
+		                    }           
+		                    else      
+		                    {                       
+		                                // no contact with gateway                      
+		                                $ok = "fail";       
+		                    }           
+		                    return $ok;  */
+		       }  	
+}

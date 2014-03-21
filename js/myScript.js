@@ -1,5 +1,5 @@
 var timeVar = "";
-var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
+var siteloc = "http://localhost/cqas/index.php/mainframe/";
 
 $(function(){
 
