@@ -261,7 +261,7 @@
 			if(count($student) != 0) {
 				$studId = $student['studid'];
 				$this->waitingList->updateServingEntry($studId, true);
-				$toServe['kertStud'] = $this->student->retrieveStudent($studId);
+				$toServe = $this->student->retrieveStudent($studId);
 				$studinfo = $this->sendMessages();
 				//$toServe['studinfo'] = $studinfo['student'];
 				//$toServe['message'] = $studinfo['message'];
@@ -289,29 +289,29 @@
 		}
 
 		public function sendMessages(){
-			$students['stud1'] = $this->waitingList->get10thStudents();
-			$students['stud2'] = $this->waitingList->get50thStudents();
+			$students['stud1'] = $this->waitingList->get10thStudent();
+			$students['stud2'] = $this->waitingList->get50thStudent();
 			$message1 = $this->messageClass->messageAlertFor10thStudent();
 			$message2 = $this->messageClass->messageAlertFor50thStudent();
 			$count = $this->waitingList->countUnservedEntries();
-			//$returnVal['student'] = $students;
-			//$returnVal['message'] = "test";
+			$returnVal['student'] = $students;
+			$returnVal['message'] = "test";
 			
 			if($students['stud1'] != false){
 				if($students['stud1']['subscribed'] == true){
-					$this->alertSms->sendSmsAlertTo($students['stud1']['phonenumber'], $message1);
-					//$returnVal['message'] = $message1;
+					//$this->alertSms->sendSmsAlertTo($students['stud1']['phonenumber'], $message1);
+					$returnVal['message'] = $message1;
 				}
 			}
 
 			if($students['stud2'] != false){
 				if($students['stud2']['subscribed'] == true){
-					$this->alertSms->sendSmsAlertTo($students['stud2']['phonenumber'], $message2);
-					//$returnVal['message'] = $message2;
+					//$this->alertSms->sendSmsAlertTo($students['stud2']['phonenumber'], $message2);
+					$returnVal['message'] = $message2;
 				}
 			}
 
-			//return $returnVal;
+			return $returnVal;
 		}
 
 	}
