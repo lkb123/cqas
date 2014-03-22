@@ -91,8 +91,8 @@
 		public function generatePriorityNumber() {
 			//var_dump($this->CI->input->cookie('pnumber', TRUE));
 			$pnumber = $this->CI->input->cookie('pnumber', TRUE);
-			if($pnumber > 999)
-				$pnumber = $pnumber % 999;
+			if($pnumber == 1000)
+				$pnumber = 1;
 			$next = $pnumber + 1;
 
 			$cookie_settings = array(

@@ -114,7 +114,7 @@
 		}
 		//test 3.4 if student select not to subscribed, student is not marked as subscribed
 		public function studentIsSubscribed1(){
-			$this->waitinglist->append('2010-4321');
+			$this->waitinglist->append('2008-1474','09059366722');
 			$result = $this->cashier->isSubscribed('2010-4321');
 			$expected = 'f';
 			$this->unit->run($result, $expected);
