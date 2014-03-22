@@ -130,4 +130,34 @@
 			$this->load->view('test');	
 		}
 		
+		//retrieve 10th student in the waiting list
+		public function get10thStudent() {
+			$result = $this->waitingList->get10thStudent();
+			$expected = "2011-1234";
+			$this->unit->run($result['studid'], $expected);
+			$this->load->view('test');
+		}
+
+		public function get10thStudentFail() {
+			$result = $this->waitingList->get10thStudent();
+			$expected = false;
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+
+		//retrieve 50th student, but currently using 11th student due to lack of entries in database
+		public function get50thStudent() {
+			$result = $this->waitingList->get50thStudent();
+			$expected = "2010-3456";
+			$this->unit->run($result['studid'], $expected);
+			$this->load->view('test');
+		}
+
+		public function get50thStudentFail() {
+			$result = $this->waitingList->get50thStudent();
+			$expected = false;
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+
 	}

@@ -60,7 +60,7 @@
 		}
 
 		public function retrieve50thEntry(){
-			//temporary 50
+			//temporary 11
 			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date LIMIT 1 OFFSET 10");
 			if($query->num_rows() == 0)
 				return false;
