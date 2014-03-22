@@ -1,5 +1,4 @@
 <?php
-
 	include(basename(dirname('classes/Message.php')) . '/Message.php');
 
 	class message_test extends CI_Controller {
@@ -24,5 +23,4 @@
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
-		
-	}
+?>
