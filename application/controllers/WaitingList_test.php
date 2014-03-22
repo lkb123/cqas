@@ -148,7 +148,7 @@
 		//retrieve 50th student, but currently using 11th student due to lack of entries in database
 		public function get50thStudent() {
 			$result = $this->waitingList->get50thStudent();
-			$expected = "2010-3456";
+			$expected = "2006-1555";
 			$this->unit->run($result['studid'], $expected);
 			$this->load->view('test');
 		}

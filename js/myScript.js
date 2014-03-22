@@ -1,5 +1,5 @@
 var timeVar = "";
-var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
+var siteloc = "http://localhost/cqas/index.php/mainframe/";
 
 $(function(){
 
@@ -74,11 +74,11 @@ function displayToBeServedStudent() {
 				; //do nothing
 			}
 			else {
-				var studid = '<strong>ID Number: </strong>' + toServe.studid + '<br>';
-				var name = '<strong>Name: </strong>' + toServe.lastname + ', ' + toServe.givenname + ' ' + toServe.middlename + '<br>';
-				var course = '<strong>Course: </strong>' + toServe.course + '<br>';
-				var college = '<strong>College: </strong>' + toServe.college + '<br>';
-				var button = "<button onclick = doneButton('" + toServe.studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
+				var studid = '<strong>ID Number: </strong>' + toServe['kertStud'].studid + '<br>';
+				var name = '<strong>Name: </strong>' + toServe['kertStud'].lastname + ', ' + toServe['kertStud'].givenname + ' ' + toServe['kertStud'].middlename + '<br>';
+				var course = '<strong>Course: </strong>' + toServe['kertStud'].course + '<br>';
+				var college = '<strong>College: </strong>' + toServe['kertStud'].college + '<br>';
+				var button = "<button onclick = doneButton('" + toServe['kertStud'].studid + "') id='donebutton' class='btn btn-primary'>Done</button>";
 				var replace = "<div class='col-md-2'><ul class='nav nav-pills nav-stacked well'> <li class='active'><a onclick = return false> Home </a></li> <li><a onclick = return false> Cashier Profile</a></li> <li><a onclick = return false> Serve Student</a></li> <li><a onclick = return false> Logout </a></li> </ul></div>";
 
 				var display = "";
@@ -89,7 +89,8 @@ function displayToBeServedStudent() {
 				display = display + openDiv + img + content + closeDiv;
 				$("#list").html(display);
 				$("#servebutton").replaceWith(button);
-				$(".col-md-2").replaceWith(replace);				
+				$(".col-md-2").replaceWith(replace);	
+				//alert(toServe['studinfo']['stud1'].studid + "-----" + toServe['studinfo']['stud1'].subscribed + "----" + toServe['message']);			
 			}
 		}
 	});

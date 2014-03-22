@@ -51,7 +51,7 @@
 
 		public function retrieve10thEntry(){
 			//temporary 10
-			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date LIMIT 1 OFFSET 9");
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date ORDER BY timeadded LIMIT 1 OFFSET 3");
 			if($query->num_rows() == 0)
 				return false;
 			else
@@ -61,7 +61,7 @@
 
 		public function retrieve50thEntry(){
 			//temporary 11
-			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date LIMIT 1 OFFSET 10");
+			$query = $this->db->query("SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date ORDER BY timeadded LIMIT 1 OFFSET 8");
 			if($query->num_rows() == 0)
 				return false;
 			else

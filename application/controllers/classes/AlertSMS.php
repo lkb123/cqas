@@ -54,7 +54,7 @@
 		function sendSmsAlertTo($sms_to,$sms_msg)  
             {           
 
-                        $query_string = "api.aspx?apiusername=".'API4XNEUJ3XH5'."&apipassword=".'API4XNEUJ3XH5HNTT3';
+                        $query_string = "api.aspx?apiusername=".'APIOFDL9XOW1T'."&apipassword=".'APIOFDL9XOW1T14K1H';
 
                         $query_string .= "&senderid=".rawurlencode('CQAS')."&mobileno=".rawurlencode($sms_to);
                         $query_string .= "&message=".rawurlencode(stripslashes($sms_msg)) . "&languagetype=1";        
