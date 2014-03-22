@@ -1,5 +1,5 @@
 var timeVar = "";
-var siteloc = "http://localhost/cqas/index.php/mainframe/";
+var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
 
 $(function(){
 
@@ -148,7 +148,7 @@ function displayFifteenStudents() {
 		success: function(pending) {
 			if(pending.length == 0) {
 				$("#servebutton").hide();
-				var display = "<div id='count' class='alert-success'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
+				var display = "<div id='count' class='alert-success'>Number of students to be served: <strong> 0 </strong></div>";
 				var openDiv = "<div class='media'>";
 				var img = "<a class='pull-left' href='#'></a>";
 				var content = "<div class='media-body'> <strong> No students to be served </strong> </div>";
@@ -158,7 +158,7 @@ function displayFifteenStudents() {
 				timeVar = setTimeout(displayFifteenStudents, 1000);
 			}
 			else {
-				var display = "<div id='count'>Number of students to be served: <strong>" + pending.length + "</strong></div>";
+				var display = "<div id='count'>Number of students to be served: <strong>" + pending[0].count.toString() + "</strong></div>";
 				$("#servebutton").show();
 				for(var i = 0; i < pending.length; i++) {
 					var student = pending[i];
