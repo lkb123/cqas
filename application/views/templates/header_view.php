@@ -14,7 +14,8 @@
 		
 	</head>
 	<body >
-	<header class="page-header">
-		<h1>C Q A S</h1>
-		<h5><small>Cashier Queuing Alert System</small></h5>
+	<header id = "header">
+		<br>
+		<br>
+		<h1 style="color:white;">C<small>ashier</small> Q<small>ueuing</small> A<small>lert</small> S<small>ytem</small></h1>
 	</header>

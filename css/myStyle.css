@@ -1,3 +1,27 @@
+body{
+
+  background-image:url('soft.jpg');
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-position:center top; */
+}
+
+.container{
+  padding-top: 20px;
+}
+
+#header{
+  margin-top: -20px;
+  position: relative;
+  height: 140px;
+  width: 100%;
+  background: #222222;
+  text-align: center;
+
+  font-family: 'Yanone Kaffeesatz', 'Arial Narrow', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
+
+}
+
 .form-signin {
   max-width: 330px;
   padding: 15px;
@@ -335,11 +359,6 @@ z-index:1111;
   z-index:1111;
 }
 
-body{
-
-  background-repeat:repeat-y;
-  background-position:left; 
-}
 
 /*
 * ALERT MESSAGES
