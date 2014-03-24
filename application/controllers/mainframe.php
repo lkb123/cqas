@@ -26,7 +26,6 @@
 		}
 		
 		public function index(){
-		
 			
 			$cookie_settings = array(
 				'name'   => 'pnumber',

@@ -1,9 +1,6 @@
 
 <div class = "container">
 	<div class="row text-center" style="width:500px; margin:auto">
-	<div><h1>C Q A S</h1>
-		<h5><small>Cashier Queuing Alert System</small></h5>
-	</div>
 	  <div class="col-sm-6 col-md-4" style="width:250px;padding:5px">
 	    <div class="thumbnail">
 	      <img src="<?php echo base_url();?>img/queue.png" alt="Queuing Image" >

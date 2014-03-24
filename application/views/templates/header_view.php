@@ -14,6 +14,7 @@
 		
 	</head>
 	<body >
-	<header>
-		<br></br>
+	<header class="page-header">
+		<h1>C Q A S</h1>
+		<h5><small>Cashier Queuing Alert System</small></h5>
 	</header>
