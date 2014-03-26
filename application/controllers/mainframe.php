@@ -244,7 +244,8 @@
 					'studid' => $row['studid'],
 					'pnumber' => $row['prioritynumber'],
 					'studname' => $student['lastname'] . ', ' . $student['givenname'] . ' ' . $student['middlename'],
-					'phone' => $student['studphone'],
+					'phone' => $row['phonenumber'],
+					'subscribed' => $row['subscribed'],
 					'count' => $waitingStudents
 					);
 				$pending[] = $tmp;
