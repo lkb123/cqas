@@ -3,7 +3,8 @@ body{
   background-image:url('soft.jpg');
   background-repeat: no-repeat;
   background-attachment:fixed;
-  background-position:center top; */
+  background-size: 1920px 1080px;
+  background-position:center top;
 }
 
 .container{
@@ -19,6 +20,8 @@ body{
   text-align: center;
 
   font-family: 'Yanone Kaffeesatz', 'Arial Narrow', 'Lucida Grande', 'Lucida Sans Unicode', Arial, sans-serif;
+
+  opacity:0.5;
 
 }
 
@@ -364,9 +367,12 @@ z-index:1111;
 * ALERT MESSAGES
 */
 
+.modal{
+  margin-top: 120px;
+}
 .alert-message
 {
-    margin: 20px 0;
+    border-radius: 2px;
     padding: 20px;
     border-left: 3px solid #eee;
 }

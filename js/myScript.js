@@ -167,10 +167,13 @@ function displayFifteenStudents() {
 					var pnumber = '<strong>Priority Number: </strong>' + student.pnumber + '<br>';
 					var studname = '<strong>Name: </strong>' + student.studname + '<br>';
 					var phone = '<strong>Phone: </strong>' + student.phone + '<br>';
-
+					if(student.subscribed==='t')
+						var subscribed = '<strong>Subscribed: </strong>Yes<br>';
+					else
+						var subscribed = '<strong>Subscribed: </strong>No<br>';
 					var openDiv = "<div class='media'>";
 					var img = "<a class='pull-left' href='#'> <img class='media-object dp img-circle' src='http://img2.wikia.nocookie.net/__cb20111231185619/trigun/images/2/2b/Vash1.jpg' style='width: 100px;height:100px;'> </a>";
-					var content = "<div class='media-body'> " + studid + pnumber + studname + phone + "</div>";
+					var content = "<div class='media-body'> " + studid + pnumber + studname + phone + subscribed +"</div>";
 					var closeDiv = "</div>";
 					display = display + openDiv + img + content + closeDiv;
 				}
