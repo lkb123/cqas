@@ -58,15 +58,6 @@
 			return $result;
 		}
 
-		public function studentIsValid($idNumber) {
-			$query = $this->CI->WM->getValidity($idNumber);
-			
-			if($query->num_rows() == 0)
-				return true;
-			else
-				return false;
-		}
-
 		public function retrieveFifteenStudents() {
 			$data = $this->CI->WM->getFifteenStudents();
 			//echo var_dump($data->result_array());
@@ -76,16 +67,6 @@
 		public function getFirstStudentAvailable() {
 			$data = $this->CI->WM->getFirstAvalableStudent();
 			return $data->row_array();
-		}
-
-		public function updateServingEntry($idNumber, $value) {
-			$this->CI->WM->updateServing($idNumber, $value);
-		}
-
-		public function updateServedEntry($idNumber) {
-			$this->CI->WM->updateServed($idNumber);
-			$this->CI->WM->updateDateServed($idNumber);
-			$this->CI->WM->updateTimeServed($idNumber);
 		}
 
 		public function generatePriorityNumber() {
