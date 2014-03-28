@@ -59,9 +59,6 @@
 			$resultdata = $result->row();
 			return $resultdata->subscribed;
 		 }
-		 public function retrieveCashier($cashierId) {
-		 	$result = $this->CI->CM->getCashier($cashierId);
-		 	return $result->row_array();
-		 }	 
+ 
 
 	}
