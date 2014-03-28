@@ -39,7 +39,7 @@ class Cashier {
 		 	$result = $this->CI->CM->getCashier($cashierId);
 		 	return $result->row_array();
 	}	
-
+	
  }
  
  ?>
