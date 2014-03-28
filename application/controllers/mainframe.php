@@ -68,7 +68,7 @@
 			$cellNumber = $this->input->post('cellNumber');
 			$idNumber = $this->input->cookie('idnumber');
 
-			if($this->cashier->validPhoneNumber($cellNumber)) {
+			if($this->student->validPhoneNumber($cellNumber)) {
 				//if valid ang phone number
 				$this->student->updateStudPhone($idNumber, $cellNumber);
 				$pnumber = $this->input->cookie('pnumber');	//get priority number
@@ -109,9 +109,9 @@
 
 		public function subscribe(){
 			$idNumber = $this->input->post('idNumber');
-			$result['idExist'] = $this->cashier->idNumberExist($idNumber);
+			$result['idExist'] = $this->student->idNumberExist($idNumber);
 			$result['idValidToQueue'] = $this->waitingList->studentIsValid($idNumber);
-			$result['idValidFormat'] = $this->cashier->validId($idNumber);
+			$result['idValidFormat'] = $this->student->validId($idNumber);
 
 			$idNumberCookie = array (
 			'name'   => 'studentID',
@@ -139,13 +139,13 @@
 				$result['errormessage'] = 'ID number must be filled!';
 				echo json_encode($result);
 			}
-			else if(!$this->cashier->validId($idNumber)) {
+			else if(!$this->student->validId($idNumber)) {
 				$result['flag'] = false;
 				$result['errormessage'] = 'ID number is invalid!';
 				echo json_encode($result);
 			}
 			else{
-				$query = $this->cashier->idNumberExist($idNumber); 
+				$query = $this->student->idNumberExist($idNumber); 
 				//var_dump($query);
 				if($query === FALSE){
 					//if id number is not in the database
@@ -177,7 +177,7 @@
 
 			$studID = $this->input->cookie('studentID');
 			$phoneNumber = $this->input->post('cellNum');
-			$isValidPhone = $this->cashier->validPhoneNumber($phoneNumber);
+			$isValidPhone = $this->student->validPhoneNumber($phoneNumber);
 			$flag = $this->waitingList->studentIsValid($studID);
 			
 			if($phoneNumber==""){
@@ -187,7 +187,7 @@
 			}else if($isValidPhone==true && $flag==true){
 
 				$this->waitingList->append($studID, $phoneNumber);	
-				$this->cashier->subscribeStudent($studID);
+				$this->student->subscribeStudent($studID);
 				$result['pnumber'] = $this->input->cookie('pnumber');
 				$result['pmessage'] = 'Your priority number is';
 				$result['flag'] = true;
