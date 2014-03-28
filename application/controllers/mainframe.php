@@ -2,14 +2,12 @@
 
 	include(basename(dirname('classes/Cahier.php')) . '/Cashier.php');
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
-	include(basename(dirname('classes/AlertSMS.php')) . '/AlertSMS.php');
 	include(basename(dirname('classes/Message.php')) . '/Message.php');
 	include(basename(dirname('classes/Student.php')) . '/Student.php');
 	
 	class mainframe extends CI_Controller {
 		private $cashier;
 		private $waitingList;
-		private $alertSms;
 		private $messageClass;
 		private $message;
 		private $student;
@@ -20,7 +18,6 @@
 			$this->load->library('session');
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
-			$this->alertSms = new AlertSms();
 			$this->student = new Student();
 			$this->messageClass = new Message();
 		}
@@ -263,8 +260,6 @@
 				$this->waitingList->updateServingEntry($studId, true);
 				$toServe['kertStud'] = $this->student->retrieveStudent($studId);
 				$studinfo = $this->sendMessages();
-				$toServe['studinfo'] = $studinfo['student'];
-				$toServe['message'] = $studinfo['message'];
 
 				echo json_encode($toServe);
 			}
@@ -291,27 +286,23 @@
 		public function sendMessages(){
 			$students['stud1'] = $this->waitingList->get10thStudent();
 			$students['stud2'] = $this->waitingList->get50thStudent();
-			$message1 = $this->messageClass->messageAlertFor10thStudent();
-			$message2 = $this->messageClass->messageAlertFor50thStudent();
 			$count = $this->waitingList->countUnservedEntries();
-			//$returnVal['student'] = $students;
-			//$returnVal['message'] = "test";
 			
 			if($students['stud1'] != false){
 				if($students['stud1']['subscribed'] === 't'){
-					$this->alertSms->sendSmsAlertTo($students['stud1']['phonenumber'], $message1);
-					//$returnVal['message'] = $message1;
+					$this->messageClass->sendSmsAlertTo5thStudent($students['stud1']['phonenumber']);
+					
 				}
 			}
 
 			if($students['stud2'] != false){
 				if($students['stud2']['subscribed'] === 't'){
-					$this->alertSms->sendSmsAlertTo($students['stud2']['phonenumber'], $message2);
-					//$returnVal['message'] = $message2;
+					$this->messageClass->sendSmsAlertTo10thStudent($students['stud2']['phonenumber']);
+				
 				}
 			}
 
-			//return $returnVal;
+			
 		}
 
 	}
