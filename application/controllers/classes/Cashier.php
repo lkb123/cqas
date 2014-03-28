@@ -6,8 +6,9 @@ class Cashier {
 	
 	 public function __construct() {
 		$this->CI =& get_instance();
-		$this->CI->load->model('cashier_model','CM');
-
+		$this->CI->load->model('student_model','SM');
+		$this->CI->load->model('cashier_model', 'CM');
+		$this->CI->load->model('waitinglist_model', 'WM');
 	 }
 
 
@@ -24,13 +25,21 @@ class Cashier {
 	 	}
 	 }
 
+	 public function updateServingEntry($idNumber, $value) {
+			$this->CI->WM->updateServing($idNumber, $value);
+	 }
+
+	 public function updateServedEntry($idNumber) {
+		$this->CI->WM->updateServed($idNumber);
+		$this->CI->WM->updateDateServed($idNumber);
+		$this->CI->WM->updateTimeServed($idNumber);
+	 }
 
 	 public function retrieveCashier($cashierId) {
 		 	$result = $this->CI->CM->getCashier($cashierId);
 		 	return $result->row_array();
 	}	
-
-	 
+	
  }
  
  ?>

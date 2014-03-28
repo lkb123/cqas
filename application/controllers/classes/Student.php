@@ -7,6 +7,8 @@
 		public function __construct() {
 			$this->CI =& get_instance();
 			$this->CI->load->model('student_model','SM');
+			$this->CI->load->model('cashier_model', 'CM');
+			$this->CI->load->model('waitinglist_model', 'WM');
 		}
 
 		public function retrieveStudent($idNumber) {
@@ -59,6 +61,14 @@
 			$resultdata = $result->row();
 			return $resultdata->subscribed;
 		 }
- 
+
+		 public function studentIsValid($idNumber) {
+			$query = $this->CI->WM->getValidity($idNumber);
+			
+			if($query->num_rows() == 0)
+				return true;
+			else
+				return false;
+		}
 
 	}

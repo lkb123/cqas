@@ -107,7 +107,7 @@
 		public function subscribe(){
 			$idNumber = $this->input->post('idNumber');
 			$result['idExist'] = $this->student->idNumberExist($idNumber);
-			$result['idValidToQueue'] = $this->waitingList->studentIsValid($idNumber);
+			$result['idValidToQueue'] = $this->student->studentIsValid($idNumber);
 			$result['idValidFormat'] = $this->student->validId($idNumber);
 
 			$idNumberCookie = array (
@@ -151,7 +151,7 @@
 					echo json_encode($result);
 				}
 				else {
-					$flag = $this->waitingList->studentIsValid($idNumber);
+					$flag = $this->student->studentIsValid($idNumber);
 					if( $flag == true) { //check if student is valid to be added to the waiting list
 						
 						$this->waitingList->append($idNumber, $query);	//append student to waiting list
@@ -175,7 +175,7 @@
 			$studID = $this->input->cookie('studentID');
 			$phoneNumber = $this->input->post('cellNum');
 			$isValidPhone = $this->student->validPhoneNumber($phoneNumber);
-			$flag = $this->waitingList->studentIsValid($studID);
+			$flag = $this->student->studentIsValid($studID);
 			
 			if($phoneNumber==""){
 				$result['error'] = "Phone number must be filled!";
@@ -257,7 +257,7 @@
 			$student = $this->waitingList->getFirstStudentAvailable();
 			if(count($student) != 0) {
 				$studId = $student['studid'];
-				$this->waitingList->updateServingEntry($studId, true);
+				$this->cashier->updateServingEntry($studId, true);
 				$toServe['kertStud'] = $this->student->retrieveStudent($studId);
 				$studinfo = $this->sendMessages();
 
@@ -270,8 +270,8 @@
 
 		public function doneServeStudent() {
 			$idNumber =  $this->input->get('idnumber');
-			$this->waitingList->updateServedEntry($idNumber);
-			$this->waitingList->updateServingEntry($idNumber, false);
+			$this->cashier->updateServedEntry($idNumber);
+			$this->cashier->updateServingEntry($idNumber, false);
 			$this->cashierIndex('cashier_serve_dash');
 		}
 
