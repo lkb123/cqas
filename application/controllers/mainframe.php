@@ -286,18 +286,24 @@
 		public function sendMessages(){
 			$students['stud1'] = $this->waitingList->get10thStudent();
 			$students['stud2'] = $this->waitingList->get50thStudent();
-			$count = $this->waitingList->countUnservedEntries();
+			$message1 = $this->messageClass->getMessage1();
+			$message2 = $this->messageClass->getMessage2();
+			//echo var_dump($students);
 			
 			if($students['stud1'] != false){
+				//echo "flag1";
 				if($students['stud1']['subscribed'] === 't'){
-					$this->messageClass->sendSmsAlertTo5thStudent($students['stud1']['phonenumber']);
+					//echo "flag2";
+					$this->messageClass->sendSmsAlertTo5thStudent($students['stud1']['phonenumber'], $message1);
 					
 				}
 			}
 
 			if($students['stud2'] != false){
+				//echo "flag3";
 				if($students['stud2']['subscribed'] === 't'){
-					$this->messageClass->sendSmsAlertTo10thStudent($students['stud2']['phonenumber']);
+					//echo "flag4";
+					$this->messageClass->sendSmsAlertTo10thStudent($students['stud2']['phonenumber'], $message2);
 				
 				}
 			}
