@@ -284,8 +284,8 @@
 		}
 
 		public function sendMessages(){
-			$students['stud1'] = $this->waitingList->get10thStudent();
-			$students['stud2'] = $this->waitingList->get50thStudent();
+			$students['stud1'] = $this->waitingList->get5thStudent();
+			$students['stud2'] = $this->waitingList->get10thStudent();
 			$message1 = $this->messageClass->getMessage1();
 			$message2 = $this->messageClass->getMessage2();
 			//echo var_dump($students);

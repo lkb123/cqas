@@ -25,11 +25,11 @@
 			return $count['studentcount'];
 		}
 
-		public function get10thStudent(){
+		public function get5thStudent(){
 			return $this->CI->WM->retrieve10thEntry();
 		}
 
-		public function get50thStudent(){
+		public function get10thStudent(){
 			return $this->CI->WM->retrieve50thEntry();
 		}
 		
