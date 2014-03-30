@@ -2,8 +2,8 @@
 
 	class Message{
 
-		private $message1;
-		private $message2;
+		private $messageFor10thStudent = "4 more students and it will be your turn to be served please proceed to the cashier";
+		private $messageFor50thStudent = "9 more students and it will be your turn to be served please proceed to the cashier";
 
 		public function __construct(){
 			
@@ -15,14 +15,12 @@
 				
 		
 
-		public function getMessage1(){
-			$message1 = "4 more students and it will be your turn to be served please proceed to the cashier";
-			return $message1;
+		public function getMessageFor10thStudent(){
+			return $this->messageFor10thStudent;
 		}
 
-		public function getMessage2(){
-			$message2 = "9 more students and it will be your turn to be served please proceed to the cashier";
-			return $message2;
+		public function getMessageFor50thStudent(){
+			return $this->messageFor50thStudent;
 		}
 
 		public function sendSmsAlertTo5thStudent($sms_to, $sms_msg){
