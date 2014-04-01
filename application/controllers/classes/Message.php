@@ -2,19 +2,13 @@
 
 	class Message{
 
-		private $messageFor10thStudent = "4 more students and it will be your turn to be served please proceed to the cashier";
-		private $messageFor50thStudent = "9 more students and it will be your turn to be served please proceed to the cashier";
+		private $messageFor5thStudent = "4 more students and it will be your turn to be served please proceed to the cashier";
+		private $messageFor10thStudent = "9 more students and it will be your turn to be served please proceed to the cashier";
 
 		public function __construct(){
 			
 		}
 		
-		
-		
-		
-				
-		
-
 		public function getMessageFor10thStudent(){
 			return $this->messageFor10thStudent;
 		}

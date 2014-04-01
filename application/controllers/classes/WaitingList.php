@@ -1,16 +1,13 @@
 <?php
 	
 	class WaitingList {
-
-		//private $list;
+		
 		private $CI;
 
 		public function __construct() {
-			//$this->list = array();
 			$this->CI = &get_instance();
 			$this->CI->load->model('waitinglist_model', 'WM');
 			$this->CI->load->helper('cookie');
-			//date_default_timezone_set("Asia/Manila"); dili man tingale ta need mag timezone		
 		}
 
 
@@ -85,5 +82,17 @@
 			$this->CI->input->set_cookie($cookie_settings);
 			return $pnumber;
 		}
+
+		//change student subscribed to TRUE
+		 public function subscribeStudent($idNumber){
+			$this->CI->CM->subscribeStudent($idNumber);
+		 }
+		 
+		 //Return true is student is subscribed
+		 public function isSubscribed($idNumber){
+			$result = $this->CI->CM->isSubscribed($idNumber);
+			$resultdata = $result->row();
+			return $resultdata->subscribed;
+		 }
 		
 	}

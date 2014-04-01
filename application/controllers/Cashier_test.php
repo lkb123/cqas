@@ -13,14 +13,23 @@
 			parent::__construct();
 			$this->load->library('unit_test');	
 			$this->cashier = new Cashier();
-			$this->waitinglist = new WaitingList();
-
+			//$this->waitinglist = new WaitingList();
+			$this->cashier->retrieveCashier('1999-0412');
 		}
 
-		public function index() {
-			//echo 'hello';
+		public function getCashierCredentials() {
+			$expectedLastName = "Pacquiao";
+			$expectedGivenName = "Manny";
+			$expectedMiddleName = "Morales";
+			$expectedPassword = "1234";
+			$this->unit->run($this->cashier->getLastName(), $expectedLastName);
+			$this->unit->run($this->cashier->getGivenName(), $expectedGivenName);
+			$this->unit->run($this->cashier->getMiddleName(), $expectedMiddleName);
+			$this->unit->run($this->cashier->getPassword(), $expectedPassword);
+			$this->load->view('test');
 		}
 		
+		/*
 		//Test 1.1 if idNumber format is valid return 1
 		public function validID(){
 			$result = $this->cashier->validID('1231-1111');
@@ -150,5 +159,5 @@
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
-	
+		*/
 	}

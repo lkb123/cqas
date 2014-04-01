@@ -4,6 +4,7 @@
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
 	include(basename(dirname('classes/Message.php')) . '/Message.php');
 	include(basename(dirname('classes/Student.php')) . '/Student.php');
+	include(basename(dirname('classes/AlertSystem.php')) . '/AlertSystem.php');
 	
 	class mainframe extends CI_Controller {
 		private $cashier;
@@ -11,6 +12,8 @@
 		private $messageClass;
 		private $message;
 		private $student;
+		private $alertSystem;
+
 
 		public function __construct() {
 			parent::__construct();
@@ -20,6 +23,7 @@
 			$this->waitingList = new WaitingList();
 			$this->student = new Student();
 			$this->messageClass = new Message();
+			$this->alertSystem = new AlertSystem();
 		}
 		
 		public function index(){
@@ -273,14 +277,6 @@
 			$this->cashier->updateServedEntry($idNumber);
 			$this->cashier->updateServingEntry($idNumber, false);
 			$this->cashierIndex('cashier_serve_dash');
-		}
-
-		private function checkCookie() {
-			if($this->session->usedata('cashierSessionId'))
-				;	//do nothing
-			else
-				$this->load->view('cashier/cashier_home', $data);
-
 		}
 
 		public function sendMessages(){
