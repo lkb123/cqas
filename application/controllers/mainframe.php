@@ -317,7 +317,7 @@
 		 */
 		 public function idNumberExist($idNumber){
 		 
-			$result = $this->SM>isInDatabase($idNumber);
+			$result = $this->CM>isInDatabase($idNumber);
 			$resultdata = $result->row();
 			
 			if($result->num_rows() == 0)
@@ -334,6 +334,17 @@
 					return True;
 				else
 					return False;
+		 }
+
+		 public function test($value) {
+		 	return $value;
+		 }
+
+		 public function testDriver() {
+		 	if($this->test(true))
+		 		echo 'true';
+		 	else
+		 		echo 'false';
 		 }
 
 	}

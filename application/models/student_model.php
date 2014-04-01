@@ -10,7 +10,7 @@ class student_model extends CI_Model {
 	public function isInDatabase($idNumber)
 	{
 	
-		$query = $this->db->query("	SELECT studid
+		$query = $this->db->query("SELECT studid
 									FROM student
 									WHERE studid = '$idNumber'
 									");
