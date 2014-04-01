@@ -18,14 +18,14 @@
 		}
 
 		public function getCashierCredentials() {
+			$idNumber = '1999-0412';
 			$expectedLastName = "Pacquiao";
 			$expectedGivenName = "Manny";
 			$expectedMiddleName = "Morales";
 			$expectedPassword = "1234";
-			$this->unit->run($this->cashier->getLastName(), $expectedLastName);
-			$this->unit->run($this->cashier->getGivenName(), $expectedGivenName);
-			$this->unit->run($this->cashier->getMiddleName(), $expectedMiddleName);
-			$this->unit->run($this->cashier->getPassword(), $expectedPassword);
+			$this->unit->run($this->cashier->getLastName($idNumber), $expectedLastName);
+			$this->unit->run($this->cashier->getGivenName($idNumber), $expectedGivenName);
+			$this->unit->run($this->cashier->getMiddleName($idNumber), $expectedMiddleName);
 			$this->load->view('test');
 		}
 		
@@ -160,4 +160,13 @@
 			$this->load->view('test');
 		}
 		*/
+
+		public function loginTest() {
+			$cashierId = '1999-0412';
+			$password = '123434';
+			$expected = false;
+			$result = $this->cashier->login($cashierId, $password);
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
 	}

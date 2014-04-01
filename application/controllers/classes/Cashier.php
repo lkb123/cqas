@@ -12,26 +12,18 @@
 			$this->CI->load->model('waitinglist_model', 'WM');
 		 }
 
-		public function getIdNumber() {
-			return $this->cashier['cashierid'];
+		public function getLastName($cashierId) {
+			return $this->retrieveCashier($cashierId)['lastname'];
 		}
 
-		public function getLastName() {
-			return $this->cashier['lastname'];
+		public function getGivenName($cashierId) {
+			return $this->retrieveCashier($cashierId)['givenname'];
 		}
 
-		public function getGivenName() {
-			return $this->cashier['givenname'];
+		public function getMiddleName($cashierId) {
+			return $this->retrieveCashier($cashierId)['middlename'];
 		}
-
-		public function getMiddleName() {
-			return $this->cashier['middlename'];
-		}
-
-		public function getPassword() {
-			return $this->cashier['cashierpass'];
-		}
-
+		
 		//if flag is 1 serving is true, served is false
 		//if flag is 0 serving is false, served is true
 		public function serve($flag, $idNumber) {
@@ -57,8 +49,21 @@
 		}
 
 		public function retrieveCashier($cashierId) {
-			 $this->cashier = $this->CI->CM->getCashier($cashierId)->row_array();	
+			 return $this->CI->CM->getCashier($cashierId)->row_array();	
 		}	
+
+		 public function login($cashierId, $password) {
+		 	$result = $this->retrieveCashier($cashierId);
+		 	if(count($result) == 0)
+		 		return FALSE;
+
+		 	if($result['cashierpass'] == $password) {
+		 		return TRUE;
+		 	}
+		 	else {
+		 		return FALSE;
+		 	}
+		 }
 		
 	 }
  

@@ -4,26 +4,23 @@
 	include(basename(dirname('classes/WaitingList.php')) . '/WaitingList.php');
 	include(basename(dirname('classes/Message.php')) . '/Message.php');
 	include(basename(dirname('classes/Student.php')) . '/Student.php');
-	include(basename(dirname('classes/AlertSystem.php')) . '/AlertSystem.php');
 	
 	class mainframe extends CI_Controller {
 		private $cashier;
 		private $waitingList;
-		private $messageClass;
 		private $message;
 		private $student;
-		private $alertSystem;
-
 
 		public function __construct() {
 			parent::__construct();
 			$this->load->helper(array('url', 'form', 'html', 'cookie'));
+			$this->load->model('cashier_model', 'CM');
+			$this->load->model('student_model', 'SM');
 			$this->load->library('session');
 			$this->cashier = new Cashier();
 			$this->waitingList = new WaitingList();
 			$this->student = new Student();
 			$this->messageClass = new Message();
-			$this->alertSystem = new AlertSystem();
 		}
 		
 		public function index(){
@@ -140,13 +137,13 @@
 				$result['errormessage'] = 'ID number must be filled!';
 				echo json_encode($result);
 			}
-			else if(!$this->student->validId($idNumber)) {
+			else if(!$this->validId($idNumber)) {
 				$result['flag'] = false;
 				$result['errormessage'] = 'ID number is invalid!';
 				echo json_encode($result);
 			}
 			else{
-				$query = $this->student->idNumberExist($idNumber); 
+				$query = $this->idNumberExist($idNumber); 
 				//var_dump($query);
 				if($query === FALSE){
 					//if id number is not in the database
@@ -204,8 +201,6 @@
 
 			
 		}
-
-
 
 		public function logout() {
 			$this->session->sess_destroy();
@@ -306,5 +301,39 @@
 
 			
 		}
+
+
+		public function validID($idNumber){
+			if(preg_match("/^([0-9]{4})-([0-9]{4})$/", $idNumber))
+				return True;
+			else
+				return False;
+	 	}
+
+		 /* check if idnumber in database
+		 *	return false if idnumber not in database
+		 *	return NULL if idnumber is in database but no cell number
+		 *  return student phone number if idnumber is in database and has cell number
+		 */
+		 public function idNumberExist($idNumber){
+		 
+			$result = $this->SM>isInDatabase($idNumber);
+			$resultdata = $result->row();
+			
+			if($result->num_rows() == 0)
+				return FALSE;
+			elseif(empty($resultdata))
+				return NULL;
+			else
+				return $resultdata->studphone;			
+		 }
+		 
+		 //checks if phoneNumber is valid
+		 public function validPhoneNumber($phoneNumber){
+				if(preg_match("/^(09|\+639)(26|15|27|05|16|32)([0-9]{7})$/", $phoneNumber))
+					return True;
+				else
+					return False;
+		 }
 
 	}
