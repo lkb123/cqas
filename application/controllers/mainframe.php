@@ -107,9 +107,9 @@
 
 		public function subscribe(){
 			$idNumber = $this->input->post('idNumber');
-			$result['idExist'] = $this->student->idNumberExist($idNumber);
+			$result['idExist'] = $this->idNumberExist($idNumber);
 			$result['idValidToQueue'] = $this->student->studentIsValid($idNumber);
-			$result['idValidFormat'] = $this->student->validId($idNumber);
+			$result['idValidFormat'] = $this->validId($idNumber);
 
 			$idNumberCookie = array (
 			'name'   => 'studentID',
@@ -175,7 +175,7 @@
 
 			$studID = $this->input->cookie('studentID');
 			$phoneNumber = $this->input->post('cellNum');
-			$isValidPhone = $this->student->validPhoneNumber($phoneNumber);
+			$isValidPhone = $this->validPhoneNumber($phoneNumber);
 			$flag = $this->student->studentIsValid($studID);
 			
 			if($phoneNumber==""){
@@ -185,7 +185,7 @@
 			}else if($isValidPhone==true && $flag==true){
 
 				$this->waitingList->append($studID, $phoneNumber);	
-				$this->student->subscribeStudent($studID);
+				$this->waitingList->subscribeStudent($studID);
 				$result['pnumber'] = $this->input->cookie('pnumber');
 				$result['pmessage'] = 'Your priority number is';
 				$result['flag'] = true;
@@ -256,9 +256,9 @@
 			$student = $this->waitingList->getFirstStudentAvailable();
 			if(count($student) != 0) {
 				$studId = $student['studid'];
-				$this->cashier->updateServingEntry($studId, true);
+				$this->cashier->serve(1, $studId);
 				$toServe['kertStud'] = $this->student->retrieveStudent($studId);
-				$studinfo = $this->sendMessages();
+				//$studinfo = $this->sendMessages();
 
 				echo json_encode($toServe);
 			}
@@ -317,7 +317,7 @@
 		 */
 		 public function idNumberExist($idNumber){
 		 
-			$result = $this->CM>isInDatabase($idNumber);
+			$result = $this->CM->isInDatabase($idNumber);
 			$resultdata = $result->row();
 			
 			if($result->num_rows() == 0)
