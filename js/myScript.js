@@ -1,5 +1,8 @@
 var timeVar = "";
-var siteloc = "http://localhost:1234/cqas/index.php/mainframe/";
+var ip = location.host;
+
+//$(document).ready(function() {alert(ip);});
+var siteloc = "http://" + ip +"/cqas/index.php/mainframe/";
 
 $(function(){
 

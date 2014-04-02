@@ -1,9 +1,10 @@
 <?php
-
+	
+	include_once(APPPATH . 'controllers/classes/Person.php');
+	
 	class Cashier {
 		
 		private $CI;
-		private $cashier;
 		
 		 public function __construct() {
 			$this->CI =& get_instance();
@@ -12,16 +13,20 @@
 			$this->CI->load->model('waitinglist_model', 'WM');
 		 }
 
-		public function getLastName($cashierId) {
-			return $this->retrieveCashier($cashierId)['lastname'];
+		 public function getIdNumber($idNumber) {
+			return $this->retrieveCashier($idNumber)['cashierid'];
 		}
 
-		public function getGivenName($cashierId) {
-			return $this->retrieveCashier($cashierId)['givenname'];
+		public function getLastName($idNumber) {
+			return $this->retrieveCashier($idNumber)['lastname'];
 		}
 
-		public function getMiddleName($cashierId) {
-			return $this->retrieveCashier($cashierId)['middlename'];
+		public function getGivenName($idNumber) {
+			return $this->retrieveCashier($idNumber)['givenname'];
+		}
+
+		public function getMiddleName($idNumber) {
+			return $this->retrieveCashier($idNumber)['middlename'];
 		}
 		
 		//if flag is 1 serving is true, served is false

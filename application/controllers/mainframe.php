@@ -329,7 +329,7 @@
 		 
 		 //checks if phoneNumber is valid
 		 public function validPhoneNumber($phoneNumber){
-				if(preg_match("/^(09|\+639)(26|15|27|05|16|32)([0-9]{7})$/", $phoneNumber))
+				if(preg_match("/^(09|\+639)(26|15|27|05|16|32|17)([0-9]{7})$/", $phoneNumber))
 					return True;
 				else
 					return False;

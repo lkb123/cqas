@@ -5,20 +5,15 @@
 		private $lastName;
 		private $givenName;
 		private $middleName;
-		private $CI;
-		abstract public function getIdNumber();
+	
+		abstract public function getIdNumber($idNumber);
 
-		abstract public function getLastName();
+		abstract public function getLastName($idNumber);
 
-		abstract public function getGivenName();
+		abstract public function getGivenName($idNumber);
 
-		abstract public function getMiddleName();
+		abstract public function getMiddleName($idNumber);
 
-		abstract public function setIdNumber($idNumber);
-
-		abstract public function setLastName($lastName);
-
-		abstract public function setGivenName($givenName);
-
-		abstract public function setMiddleName($middleName);
 	}
+
+?>

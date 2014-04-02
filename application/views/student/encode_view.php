@@ -29,7 +29,7 @@
             <div id = "unsubscribe" class="btn btn-xs btn-info">cancel</div>
             <input type="checkbox" name="subscribe" id="subscribe" ><small>&nbspsubscribe to alert system</small></input>
             <br />
-            <input type="text" class="form-control" name="cellNum" id="cellNum" placeholder="Cellphone Number" required>
+            <input type="text" class="form-control" name="cellNum" id="cellNum" placeholder="Cellphone Number" maxlength = "13" required>
             <div id = "addtoQueue" class="btn btn-primary btn-block">Add to Queue</div>
             <div id = "register" class="btn btn-primary btn-block">Add and Register</div>
           </form>

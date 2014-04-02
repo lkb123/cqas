@@ -1,11 +1,10 @@
 <?php
 	
-	//require 'Person.php';
+	include_once(APPPATH . 'controllers/classes/Person.php');
 	
-	class Student {
+	class Student extends Person {
 	
 		private $CI;
-		private $student;
 		
 		public function __construct() {
 			//parent::__construct();
@@ -13,6 +12,10 @@
 			$this->CI->load->model('student_model','SM');
 			$this->CI->load->model('cashier_model', 'CM');
 			$this->CI->load->model('waitinglist_model', 'WM');
+		}
+
+		public function getIdNumber($idNumber) {
+			return $this->retrieveStudent($idNumber)['studid'];
 		}
 
 		public function getLastName($idNumber) {

@@ -37,4 +37,4 @@
                         $fd = @implode ('', file ($url));          
 		}
 	}
-
+?>
