@@ -8,8 +8,8 @@
 	class mainframe extends CI_Controller {
 		private $cashier;
 		private $waitingList;
-		private $message;
 		private $student;
+		private $messageClass;
 
 		public function __construct() {
 			parent::__construct();
@@ -258,7 +258,7 @@
 				$studId = $student['studid'];
 				$this->cashier->serve(1, $studId);
 				$toServe['kertStud'] = $this->student->retrieveStudent($studId);
-				//$studinfo = $this->sendMessages();
+				$studinfo = $this->sendMessages();
 
 				echo json_encode($toServe);
 			}
@@ -276,8 +276,8 @@
 		public function sendMessages(){
 			$students['stud1'] = $this->waitingList->get5thStudent();
 			$students['stud2'] = $this->waitingList->get10thStudent();
-			$message1 = $this->messageClass->getMessageFor10thStudent();
-			$message2 = $this->messageClass->getMessageFor50thStudent();
+			$message1 = $this->messageClass->getMessageFor5thStudent();
+			$message2 = $this->messageClass->getMessageFor10thStudent();
 			//echo var_dump($students);
 			
 			if($students['stud1'] != false){
@@ -333,17 +333,6 @@
 					return True;
 				else
 					return False;
-		 }
-
-		 public function test($value) {
-		 	return $value;
-		 }
-
-		 public function testDriver() {
-		 	if($this->test(true))
-		 		echo 'true';
-		 	else
-		 		echo 'false';
 		 }
 
 	}
