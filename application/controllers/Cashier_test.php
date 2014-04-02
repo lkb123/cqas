@@ -13,12 +13,10 @@
 			parent::__construct();
 			$this->load->library('unit_test');	
 			$this->cashier = new Cashier();
-			//$this->waitinglist = new WaitingList();
-			$this->cashier->retrieveCashier('1999-0412');
+			$this->waitingList = new WaitingList();
 		}
 
-		public function getCashierCredentials() {
-			$idNumber = '1999-0412';
+		public function getCashierCredentials($idNumber) {
 			$expectedLastName = "Pacquiao";
 			$expectedGivenName = "Manny";
 			$expectedMiddleName = "Morales";
@@ -163,10 +161,22 @@
 
 		public function loginTest() {
 			$cashierId = '1999-0412';
-			$password = '123434';
-			$expected = false;
+			$password = '1234';
+			$expected = true;
 			$result = $this->cashier->login($cashierId, $password);
 			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+
+		public function serveTest($idNumber) {
+			$this->cashier->serve(1, $idNumber);
+			$student = $this->waitingList->retrieveAStudent($idNumber);
+			$this->unit->run($student->serving, true);
+			$this->unit->run($student->served, "f");
+			$this->cashier->serve(0, $idNumber);
+			$student = $this->waitingList->retrieveAStudent($idNumber);
+			$this->unit->run($student->serving, "f");
+			$this->unit->run($student->served, true);
 			$this->load->view('test');
 		}
 	}

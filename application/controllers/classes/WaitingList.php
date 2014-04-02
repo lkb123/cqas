@@ -7,6 +7,7 @@
 		public function __construct() {
 			$this->CI = &get_instance();
 			$this->CI->load->model('waitinglist_model', 'WM');
+			$this->CI->load->model('cashier_model', 'CM');
 			$this->CI->load->helper('cookie');
 		}
 
@@ -40,7 +41,7 @@
 			$this->CI->WM->clearWaitingList();
 		}
 
-		//deprecated
+		//used in cashier_test
 		public function retrieveAStudent($idNumber) {
 			$entry = $this->CI->WM->getStudent($idNumber);
 			return $entry->row();

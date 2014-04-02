@@ -14,20 +14,26 @@
 			$this->load->library('unit_test');
 			//$this->cashier = new Cashier();
 			$this->student = new Student();
-			$this->student->retrieveStudent('2010-1730');
 		}
 
-		public function getStudentCredentials() {
+		public function getStudentCredentials($idNumber) {
 			$expectedLastName = "Basay";
 			$expectedGivenName = "Louie Kert";
 			$expectedMiddleName = "Suan";
 			$expectedCourse = "Bachelor in Science in Computer Science";
 			$expectedCollege = "School of Computer Studies";
-			$this->unit->run($this->student->getLastName(), $expectedLastName);
-			$this->unit->run($this->student->getGivenName(), $expectedGivenName);
-			$this->unit->run($this->student->getMiddleName(), $expectedMiddleName);
-			$this->unit->run($this->student->getCourse(), $expectedCourse);
-			$this->unit->run($this->student->getCollege(), $expectedCollege);
+			$this->unit->run($this->student->getLastName($idNumber), $expectedLastName);
+			$this->unit->run($this->student->getGivenName($idNumber), $expectedGivenName);
+			$this->unit->run($this->student->getMiddleName($idNumber), $expectedMiddleName);
+			$this->unit->run($this->student->getCourse($idNumber), $expectedCourse);
+			$this->unit->run($this->student->getCollege($idNumber), $expectedCollege);
+			$this->load->view('test');
+		}
+
+		public function studentValidityTest($idNumber, $expected) {
+			$validity = ($expected == "t" ? true : false);
+			$result = $this->student->studentIsValid($idNumber);
+			$this->unit->run($result, $validity);
 			$this->load->view('test');
 		}
 		

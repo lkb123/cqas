@@ -160,4 +160,18 @@
 			$this->load->view('test');
 		}
 
+
+		public function subscribtionTest($idNumber) {
+			$this->waitingList->subscribeStudent($idNumber);
+			$result = $this->waitingList->isSubscribed($idNumber);
+			$this->unit->run($result, "t");
+			$this->load->view('test');
+		}
+
+		public function isSubscribedTest($idNumber, $expected) {
+			$result = $this->waitingList->isSubscribed($idNumber);
+			$this->unit->run($result, $expected);
+			$this->load->view('test');
+		}
+
 	}

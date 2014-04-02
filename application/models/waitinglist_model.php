@@ -37,9 +37,9 @@
 			return $this->db->query($query);
 		}
 
-		//check to be deprecated
+		//used in cashier_test through retrieveAStudent
 		public function getStudent($idNumber) {
-			$query = "SELECT * FROM waitinglist WHERE studid = '$idNumber' AND dateadded = current_date AND served = false";
+			$query = "SELECT * FROM waitinglist WHERE served = false AND serving = false AND dateadded = current_date ORDER BY timeadded";
 			return $this->db->query($query);
 		}
 

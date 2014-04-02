@@ -10,16 +10,16 @@
 			$this->message = new Message();
 		}
 		
-		public function messageAler1Test() {
-			$expected = "9 more students and it will be your turn to be served please proceed to the cashier";
-			$result = $this->message->messageAlertFor10thStudent();
+		public function messageAlert1Test() {
+			$expected = "4 more students and it will be your turn to be served please proceed to the cashier";
+			$result = $this->message->getMessageFor5thStudent();
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}
 
-		public function messageAler2Test() {
-			$expected = "49 more students and it will be your turn to be served please proceed to the cashier";
-			$result = $this->message->messageAlertFor50thStudent();
+		public function messageAlert2Test() {
+			$expected = "9 more students and it will be your turn to be served please proceed to the cashier";
+			$result = $this->message->getMessageFor10thStudent();
 			$this->unit->run($result, $expected);
 			$this->load->view('test');
 		}

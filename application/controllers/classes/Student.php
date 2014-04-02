@@ -15,24 +15,24 @@
 			$this->CI->load->model('waitinglist_model', 'WM');
 		}
 
-		public function getLastName() {
-			return $this->retrieveStudent()['lastname'];
+		public function getLastName($idNumber) {
+			return $this->retrieveStudent($idNumber)['lastname'];
 		}
 
-		public function getGivenName() {
-			return $this->retrieveStudent()['givenname'];
+		public function getGivenName($idNumber) {
+			return $this->retrieveStudent($idNumber)['givenname'];
 		}
 
-		public function getMiddleName() {
-			return $this->retrieveStudent()['middlename'];
+		public function getMiddleName($idNumber) {
+			return $this->retrieveStudent($idNumber)['middlename'];
 		}
 
-		public function getCourse() {
-			return $this->retrieveStudent()['course'];
+		public function getCourse($idNumber) {
+			return $this->retrieveStudent($idNumber)['course'];
 		}
 
-		public function getCollege() {
-			return $this->retrieveStudent()['college'];
+		public function getCollege($idNumber) {
+			return $this->retrieveStudent($idNumber)['college'];
 		}
 
 		public function retrieveStudent($idNumber) {
