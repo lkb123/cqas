@@ -269,8 +269,7 @@
 
 		public function doneServeStudent() {
 			$idNumber =  $this->input->get('idnumber');
-			$this->cashier->updateServedEntry($idNumber);
-			$this->cashier->updateServingEntry($idNumber, false);
+			$this->cashier->serve(0, $idNumber);
 			$this->cashierIndex('cashier_serve_dash');
 		}
 

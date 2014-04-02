@@ -33,7 +33,7 @@
 				}
 				else if($flag == 0) {
 					$this->updateServingEntry($idNumber, false);
-					$this->updateServedEntry();
+					$this->updateServedEntry($idNumber);
 				}
 			}
 		}
