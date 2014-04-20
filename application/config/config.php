@@ -15,8 +15,9 @@
 |
 */
 
-$config['base_url'] = "http://".  $_SERVER['SERVER_ADDR'] . ":" . $_SERVER['SERVER_PORT'] . "/cqas/";
+$config['base_url'] = "http://".  $_SERVER['HTTP_HOST'] . "/cqas/";
 
+//$config['base_url'] = "http://localhost/cqas/";
 /*
 |--------------------------------------------------------------------------
 | Index File
